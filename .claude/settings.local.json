@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem \"C:\\\\Users\\\\rugin\\\\Documents\\\\wrktd\" -Force)",
+      "Bash(Select-Object Name, LastWriteTime)",
+      "Bash(git -C \"C:\\\\Users\\\\rugin\\\\Documents\\\\wrktd\" log --oneline -5)",
+      "Bash(git -C \"C:\\\\Users\\\\rugin\\\\Documents\\\\wrktd\" branch -a)",
+      "Bash(git checkout *)",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --yes)",
+      "Read(//c/tmp/**)",
+      "Bash(npx create-next-app@latest wrktd-scaffold --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --yes)",
+      "Bash(npm run *)",
+      "Bash(git add *)"
+    ]
+  }
+}
