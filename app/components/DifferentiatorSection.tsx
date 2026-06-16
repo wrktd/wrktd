@@ -1,52 +1,75 @@
 const POINTS = [
   {
-    label: "Done-for-you",
-    description:
-      "Most POD platforms are still largely DIY. Even when bulk tools exist, the seller is responsible for product setup, artwork placement, listings, SKUs, and fulfillment configuration. WRKTD is done-for-you and batch-oriented.",
-    icon: "✦",
+    glyph: "I",
+    title: "Done-for-you, not DIY",
+    body: "Most POD platforms are still largely DIY. Even when bulk tools exist, the seller is responsible for product setup, artwork placement, listings, SKUs, and fulfillment configuration. WRKTD is done-for-you and batch-oriented.",
   },
   {
-    label: "File accuracy guaranteed",
-    description:
-      "Manufacturing partners don't review artwork before printing — if a file is wrong, the product prints wrong and ships to your customer. WRKTD adapts and prepares every file correctly before it ever reaches manufacturing.",
-    icon: "✓",
+    glyph: "II",
+    title: "File accuracy, guaranteed",
+    body: "Manufacturing partners don't review artwork before printing — if a file is wrong, the product prints wrong and ships to your customer. WRKTD adapts and prepares every file correctly before it ever reaches manufacturing.",
   },
   {
-    label: "Monitored, not abandoned",
-    description:
-      "Your fulfillment pipeline is designed to run automatically after setup, with WRKTD monitoring the system and handling routing issues — not just hosting it and hoping nothing breaks.",
-    icon: "◎",
+    glyph: "III",
+    title: "Monitored, not abandoned",
+    body: "Your fulfillment pipeline is designed to run automatically after setup, with WRKTD monitoring the system and handling routing issues — not just hosting it and hoping nothing breaks.",
   },
   {
-    label: "Batch-first from day one",
-    description:
-      "One design becomes a full product family in a single batch. The more designs you have, the faster your catalog grows — without doing each product one at a time.",
-    icon: "≡",
+    glyph: "IV",
+    title: "Batch-first from day one",
+    body: "One design becomes a full product family in a single batch. Ten designs, five product types, three sizes — 150 SKUs in 1–3 days. Scale your catalog without doing each product one at a time.",
   },
 ];
 
 export default function DifferentiatorSection() {
   return (
-    <section className="py-24 px-6 bg-stone-900 text-white">
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-4xl font-black mb-4">
-            Why WRKTD is different
+    <section className="py-28 px-6 bg-cream">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="flex items-center gap-3 mb-5">
+          <div className="h-px w-8 bg-gold" />
+          <span className="label text-gold">Why WRKTD</span>
+        </div>
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-20 gap-6">
+          <h2
+            className="font-display font-light text-ink leading-[0.92]"
+            style={{ fontSize: "clamp(2.4rem, 5vw, 4rem)" }}
+          >
+            A different kind
+            <br />
+            <em className="not-italic text-ink/50">of home decor partner.</em>
           </h2>
-          <p className="text-lg text-stone-400 max-w-xl mx-auto">
-            There are other ways to put designs on products. Here&apos;s what sets WRKTD apart.
+          <p className="text-sm text-ink-muted max-w-xs leading-relaxed">
+            There are other ways to put designs on products. Here's what separates WRKTD.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          {POINTS.map((point) => (
+        {/* Points grid */}
+        <div className="grid md:grid-cols-2 gap-px bg-ink/[0.06]">
+          {POINTS.map((p, i) => (
             <div
-              key={point.label}
-              className="bg-stone-800 border border-stone-700 rounded-2xl p-7"
+              key={p.title}
+              className="bg-cream p-10 flex flex-col gap-6"
+              style={{ minHeight: 280 }}
             >
-              <div className="text-amber-400 text-2xl font-black mb-3">{point.icon}</div>
-              <h3 className="text-lg font-black text-white mb-2">{point.label}</h3>
-              <p className="text-stone-400 leading-relaxed text-sm">{point.description}</p>
+              <div className="flex items-start justify-between">
+                <span
+                  className="font-display font-light"
+                  style={{ fontSize: "3.5rem", lineHeight: 1, color: "rgba(184,154,78,0.25)" }}
+                >
+                  {p.glyph}
+                </span>
+                <span className="label text-ink-muted/40">{String(i + 1).padStart(2, "0")}</span>
+              </div>
+              <div>
+                <h3
+                  className="font-display font-medium text-ink mb-3"
+                  style={{ fontSize: "clamp(1.3rem, 2vw, 1.7rem)" }}
+                >
+                  {p.title}
+                </h3>
+                <p className="text-sm text-ink-muted leading-relaxed">{p.body}</p>
+              </div>
             </div>
           ))}
         </div>

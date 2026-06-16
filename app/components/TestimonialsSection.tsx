@@ -1,45 +1,116 @@
 export default function TestimonialsSection() {
   return (
-    <section className="py-24 px-6 bg-stone-50">
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-4xl font-black text-stone-900 mb-4">
-            Real results
-          </h2>
-          <p className="text-lg text-stone-500 max-w-xl mx-auto">
-            Here&apos;s what happens when an existing brand puts its designs on the right products.
-          </p>
+    <section className="grain py-28 px-6 bg-ink overflow-hidden">
+      <div className="relative z-10 max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="flex items-center gap-3 mb-5">
+          <div className="h-px w-8 bg-gold" />
+          <span className="label text-gold">Proof</span>
         </div>
+        <h2
+          className="font-display font-light text-cream leading-[0.92] mb-20"
+          style={{ fontSize: "clamp(2.4rem, 5vw, 4rem)" }}
+        >
+          Real designs.
+          <br />
+          <em className="not-italic" style={{ color: "rgba(250,247,242,0.35)" }}>
+            Real results.
+          </em>
+        </h2>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-10">
-          <div className="bg-white border border-stone-100 rounded-2xl p-8 shadow-sm">
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-amber-100 flex items-center justify-center flex-shrink-0">
-                <span className="text-xl">🥋</span>
+        <div className="grid lg:grid-cols-2 gap-8">
+          {/* Main case study */}
+          <div
+            className="p-10 flex flex-col gap-10"
+            style={{ border: "1px solid rgba(184,154,78,0.18)" }}
+          >
+            {/* Client tag */}
+            <div className="flex items-center gap-4">
+              <div
+                className="w-12 h-12 flex items-center justify-center flex-shrink-0 text-2xl"
+                style={{ background: "rgba(184,154,78,0.1)", border: "1px solid rgba(184,154,78,0.2)" }}
+              >
+                🥋
               </div>
               <div>
-                <div className="text-xs font-semibold uppercase tracking-widest text-stone-400 mb-1">Founding client</div>
-                <h3 className="font-black text-stone-900 text-lg">Martial arts clothing brand</h3>
+                <p className="label text-gold/60 mb-1">Founding client</p>
+                <p className="text-sm font-semibold text-cream">Martial arts clothing brand</p>
               </div>
             </div>
-            <div className="mt-6 p-5 bg-amber-50 rounded-xl border border-amber-100">
-              <p className="text-3xl font-black text-amber-700">$20K–$30K</p>
-              <p className="text-amber-600 text-sm font-medium mt-1">in sales — first month, rugs only</p>
+
+            {/* Stat */}
+            <div style={{ borderLeft: "2px solid #B89A4E", paddingLeft: "1.5rem" }}>
+              <p
+                className="font-display font-light text-gold leading-none"
+                style={{ fontSize: "clamp(3rem, 7vw, 5.5rem)" }}
+              >
+                $25K
+              </p>
+              <p className="label text-gold/50 mt-2">avg. first-month revenue · rugs only</p>
             </div>
-            <p className="text-stone-500 text-sm leading-relaxed mt-5">
-              Provided one design. WRKTD turned it into a rug, set up the full fulfillment pipeline, and connected their Shopify store. Orders manufactured and shipped automatically from day one.
+
+            {/* Story */}
+            <p className="text-sm leading-relaxed" style={{ color: "rgba(250,247,242,0.4)" }}>
+              Provided one design. WRKTD turned it into a rug, built the full
+              fulfillment pipeline — OrderDesk, manufacturing partner, Shopify connection,
+              shipping configuration — and confirmed with a test order. From that point,
+              every order manufactured and shipped automatically.
             </p>
+
+            <div
+              className="flex flex-col gap-3 pt-4"
+              style={{ borderTop: "1px solid rgba(250,247,242,0.06)" }}
+            >
+              {[
+                "One design provided by the client",
+                "WRKTD handled file prep, mockups, and store connection",
+                "Orders automated from day one",
+              ].map((item) => (
+                <div key={item} className="flex items-start gap-3">
+                  <div className="w-1 h-1 rounded-full bg-gold mt-2 flex-shrink-0" />
+                  <p className="text-xs" style={{ color: "rgba(250,247,242,0.35)" }}>{item}</p>
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div className="bg-white border border-stone-100 rounded-2xl p-8 shadow-sm flex flex-col justify-center text-center">
-            <div className="w-16 h-16 rounded-full bg-stone-100 flex items-center justify-center mx-auto mb-5">
-              <span className="text-2xl">🚀</span>
+          {/* Coming soon */}
+          <div
+            className="p-10 flex flex-col justify-between gap-10"
+            style={{ border: "1px solid rgba(250,247,242,0.06)" }}
+          >
+            <div>
+              <p className="label text-cream/25 mb-8">Currently onboarding</p>
+              <p
+                className="font-display font-light text-cream/40 leading-snug"
+                style={{ fontSize: "clamp(1.8rem, 3.5vw, 3rem)" }}
+              >
+                More founding clients are going live now. Case studies will follow.
+              </p>
             </div>
-            <div className="text-xs font-semibold uppercase tracking-widest text-stone-400 mb-3">Coming soon</div>
-            <h3 className="font-black text-stone-900 text-xl mb-3">Currently onboarding founding clients</h3>
-            <p className="text-stone-400 text-sm leading-relaxed">
-              More case studies coming as our founding cohort goes live. Interested in being featured? Results speak for themselves once your catalog is built.
-            </p>
+
+            {/* Mini proof points */}
+            <div className="flex flex-col gap-4">
+              {[
+                { label: "Product types launched",       val: "7" },
+                { label: "Days from upload to live",     val: "5–7" },
+                { label: "Days per order (mfg + ship)",  val: "5–10" },
+              ].map((item) => (
+                <div
+                  key={item.label}
+                  className="flex items-center justify-between py-4"
+                  style={{ borderBottom: "1px solid rgba(250,247,242,0.06)" }}
+                >
+                  <p className="text-xs" style={{ color: "rgba(250,247,242,0.28)" }}>{item.label}</p>
+                  <p
+                    className="font-display font-light"
+                    style={{ fontSize: "1.6rem", color: "rgba(250,247,242,0.5)" }}
+                  >
+                    {item.val}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

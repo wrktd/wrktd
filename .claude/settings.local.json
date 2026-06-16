@@ -10,7 +10,11 @@
       "Read(//c/tmp/**)",
       "Bash(npx create-next-app@latest wrktd-scaffold --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --yes)",
       "Bash(npm run *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git config *)",
+      "Bash(git commit *)",
+      "Bash(git push *)"
     ]
   }
 }

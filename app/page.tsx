@@ -15,23 +15,14 @@ export default function Home() {
     <>
       <Nav />
       <main>
-        {/* Section 1 — Headline */}
         <HeroSection />
-        {/* Section 2 — Instant Preview Tool */}
         <PreviewTool />
-        {/* Section 3 — One design, many products */}
         <ProductLineSection />
-        {/* Section 4 — How it works */}
         <HowItWorksSection />
-        {/* Section 5 — How WRKTD is different */}
         <DifferentiatorSection />
-        {/* Section 6 — Pricing */}
         <PricingSection />
-        {/* Section 7 — Proof / testimonials */}
         <TestimonialsSection />
-        {/* Section 8 — FAQ */}
         <FAQSection />
-        {/* Section 9 — Final CTA (repeat of upload tool) */}
         <FinalCTA />
       </main>
       <Footer />

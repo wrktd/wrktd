@@ -1,14 +1,24 @@
 export default function Footer() {
   return (
-    <footer className="bg-stone-900 text-stone-400 py-12 px-6">
-      <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+    <footer
+      className="py-16 px-6 md:px-10"
+      style={{ background: "#0A0807", borderTop: "1px solid rgba(250,247,242,0.05)" }}
+    >
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
         <div>
-          <p className="font-black text-white text-lg tracking-tight">WRKTD</p>
-          <p className="text-sm mt-1">Done-for-you home decor products for brands, creators, and artists.</p>
+          <p className="font-display font-medium tracking-[0.18em] text-cream text-2xl mb-3">WRKTD</p>
+          <p className="text-xs leading-relaxed max-w-xs" style={{ color: "rgba(250,247,242,0.25)" }}>
+            Done-for-you home decor products for brands, creators, and artists with existing designs and audiences.
+          </p>
         </div>
-        <div className="text-sm text-center md:text-right">
-          <p>© {new Date().getFullYear()} WRKTD LLC. All rights reserved.</p>
-          <p className="mt-1 text-stone-600">Questions? Reach out and we&apos;ll get back to you.</p>
+
+        <div className="flex flex-col items-start md:items-end gap-3">
+          <p className="text-xs" style={{ color: "rgba(250,247,242,0.2)" }}>
+            © {new Date().getFullYear()} WRKTD LLC. All rights reserved.
+          </p>
+          <p className="text-xs" style={{ color: "rgba(250,247,242,0.14)" }}>
+            WRKTD LLC is a Nevada entity, separate from Rugolution LLC.
+          </p>
         </div>
       </div>
     </footer>

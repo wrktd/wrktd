@@ -1,93 +1,116 @@
 "use client";
 import { useState, useRef, useCallback, useEffect } from "react";
 
-const PRODUCTS = [
+type ProductDef = {
+  id: string;
+  label: string;
+  size: string;
+  aspect: number;
+  bg: string;
+  weaveBg?: string;
+  radius: string;
+  shadow?: string;
+};
+
+const PRODUCTS: ProductDef[] = [
   {
     id: "rug",
     label: "Area Rug",
-    aspect: "4/3",
-    bgColor: "#e8e4de",
-    shape: "rounded-2xl",
-    description: "5×7 ft",
+    size: "5×7 ft",
+    aspect: 4 / 3,
+    bg: "#C8B89A",
+    weaveBg: `repeating-linear-gradient(0deg,rgba(0,0,0,0.045) 0px,rgba(0,0,0,0.045) 1px,transparent 1px,transparent 5px),
+              repeating-linear-gradient(90deg,rgba(0,0,0,0.045) 0px,rgba(0,0,0,0.045) 1px,transparent 1px,transparent 5px),
+              #C8B89A`,
+    radius: "10px",
+    shadow: "0 8px 32px rgba(0,0,0,0.18)",
   },
   {
     id: "pillow",
     label: "Woven Pillow",
-    aspect: "1/1",
-    bgColor: "#dde8e4",
-    shape: "rounded-xl",
-    description: '18"×18"',
+    size: '18"×18"',
+    aspect: 1,
+    bg: "#B8C4B0",
+    weaveBg: `repeating-linear-gradient(0deg,rgba(0,0,0,0.04) 0px,rgba(0,0,0,0.04) 1px,transparent 1px,transparent 5px),
+              repeating-linear-gradient(90deg,rgba(0,0,0,0.04) 0px,rgba(0,0,0,0.04) 1px,transparent 1px,transparent 5px),
+              #B8C4B0`,
+    radius: "26px",
+    shadow:
+      "0 12px 36px rgba(0,0,0,0.18), inset 0 -4px 12px rgba(0,0,0,0.14), inset 0 4px 8px rgba(255,255,255,0.08)",
   },
   {
     id: "tapestry",
     label: "Wall Tapestry",
-    aspect: "3/4",
-    bgColor: "#e4dde8",
-    shape: "rounded-lg",
-    description: "36×48 in",
+    size: "36×48 in",
+    aspect: 3 / 4,
+    bg: "#ABABBC",
+    radius: "3px",
+    shadow: "0 4px 24px rgba(0,0,0,0.22), 0 0 0 2px #9A9BAC",
   },
   {
     id: "blanket",
     label: "Woven Blanket",
-    aspect: "4/3",
-    bgColor: "#e8e4d0",
-    shape: "rounded-2xl",
-    description: '50"×60"',
+    size: '50"×60"',
+    aspect: 5 / 4,
+    bg: "#C4AE92",
+    weaveBg: `repeating-linear-gradient(0deg,rgba(0,0,0,0.05) 0px,rgba(0,0,0,0.05) 1px,transparent 1px,transparent 6px),
+              repeating-linear-gradient(90deg,rgba(0,0,0,0.03) 0px,rgba(0,0,0,0.03) 1px,transparent 1px,transparent 6px),
+              #C4AE92`,
+    radius: "8px",
+    shadow: "0 8px 28px rgba(0,0,0,0.16)",
   },
 ];
 
-function ProductMockup({
+function ProductCard({
   product,
   imageUrl,
+  loading,
 }: {
-  product: (typeof PRODUCTS)[0];
+  product: ProductDef;
   imageUrl: string | null;
+  loading: boolean;
 }) {
+  const padBottom = `${(1 / product.aspect) * 100}%`;
+
   return (
-    <div className="flex flex-col items-center gap-2">
-      <div
-        className={`relative overflow-hidden ${product.shape} shadow-lg border border-white/50`}
-        style={{
-          aspectRatio: product.aspect,
-          width: "100%",
-          background: product.bgColor,
-        }}
-      >
-        {imageUrl ? (
-          <>
+    <div className="flex flex-col gap-3">
+      <div className="relative w-full" style={{ paddingBottom: padBottom }}>
+        <div
+          className="absolute inset-0 overflow-hidden"
+          style={{
+            background: product.weaveBg ?? product.bg,
+            borderRadius: product.radius,
+            boxShadow: product.shadow,
+          }}
+        >
+          {loading && (
             <div
-              className="absolute inset-0 opacity-10"
+              className="absolute inset-0"
               style={{
-                backgroundImage: `repeating-linear-gradient(
-                  0deg,
-                  transparent,
-                  transparent 3px,
-                  rgba(0,0,0,0.08) 3px,
-                  rgba(0,0,0,0.08) 4px
-                ), repeating-linear-gradient(
-                  90deg,
-                  transparent,
-                  transparent 3px,
-                  rgba(0,0,0,0.08) 3px,
-                  rgba(0,0,0,0.08) 4px
-                )`,
+                background:
+                  "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%)",
+                backgroundSize: "400px 100%",
+                animation: "shimmer 1.2s infinite linear",
               }}
             />
+          )}
+          {imageUrl && !loading && (
             <img
               src={imageUrl}
               alt={product.label}
-              className="absolute inset-0 w-full h-full object-cover mix-blend-multiply opacity-90"
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{
+                mixBlendMode: "multiply",
+                opacity: 0.87,
+                borderRadius: product.radius,
+              }}
             />
-          </>
-        ) : (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-xs text-stone-400 font-medium">{product.label}</span>
-          </div>
-        )}
+          )}
+        </div>
       </div>
-      <div className="text-center">
-        <p className="text-sm font-semibold text-stone-700">{product.label}</p>
-        <p className="text-xs text-stone-400">{product.description}</p>
+      <div>
+        <p className="text-xs font-semibold text-ink tracking-wide">{product.label}</p>
+        <p className="text-xs text-ink-muted mt-0.5">{product.size}</p>
       </div>
     </div>
   );
@@ -95,125 +118,178 @@ function ProductMockup({
 
 export default function PreviewTool() {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [isProcessing, setIsProcessing] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [dragging, setDragging] = useState(false);
   const [fileName, setFileName] = useState<string | null>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
+  const prevUrl = useRef<string | null>(null);
 
   const handleFile = useCallback((file: File) => {
-    if (!file) return;
-    const accepted = ["image/jpeg", "image/png", "image/svg+xml", "image/webp"];
-    if (!accepted.includes(file.type) && !file.name.match(/\.(jpg|jpeg|png|svg|ai|psd)$/i)) {
-      alert("Please upload a JPG, PNG, or SVG file.");
+    const accepted = /\.(jpe?g|png|svg|ai|psd|webp)$/i;
+    if (!accepted.test(file.name) && !file.type.startsWith("image/")) {
+      alert("Please upload a JPG, PNG, SVG, AI, or PSD file.");
       return;
     }
-    setIsProcessing(true);
+    if (prevUrl.current) URL.revokeObjectURL(prevUrl.current);
+    setLoading(true);
     setFileName(file.name);
     const url = URL.createObjectURL(file);
+    prevUrl.current = url;
     setTimeout(() => {
       setImageUrl(url);
-      setIsProcessing(false);
-    }, 800);
+      setLoading(false);
+    }, 900);
   }, []);
 
   const onDrop = useCallback(
     (e: React.DragEvent) => {
       e.preventDefault();
-      setIsDragging(false);
-      const file = e.dataTransfer.files[0];
-      if (file) handleFile(file);
+      setDragging(false);
+      const f = e.dataTransfer.files[0];
+      if (f) handleFile(f);
     },
     [handleFile]
   );
 
-  const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) handleFile(file);
-  };
+  useEffect(() => () => { if (prevUrl.current) URL.revokeObjectURL(prevUrl.current); }, []);
 
-  useEffect(() => {
-    return () => {
-      if (imageUrl) URL.revokeObjectURL(imageUrl);
-    };
-  }, [imageUrl]);
+  const showProducts = imageUrl || loading;
 
   return (
-    <section id="preview" className="py-24 px-6 bg-white">
+    <section id="preview" className="py-28 px-6 bg-cream">
       <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-black text-stone-900 mb-4">
-            See your design on real products — instantly.
+        {/* Header */}
+        <div className="mb-16">
+          <div className="flex items-center gap-3 mb-5">
+            <div className="h-px w-8 bg-gold" />
+            <span className="label text-gold">Instant preview</span>
+          </div>
+          <h2
+            className="font-display font-light text-ink leading-[0.92] mb-5"
+            style={{ fontSize: "clamp(2.4rem, 5vw, 4rem)" }}
+          >
+            See your design on real
+            <br />
+            <em className="not-italic text-ink/60">products in seconds.</em>
           </h2>
-          <p className="text-lg text-stone-500 max-w-xl mx-auto">
-            Upload any design file. No account, no payment, no signup. See your design on rugs, pillows, tapestries, and blankets in seconds.
+          <p className="text-base text-ink-muted max-w-md leading-relaxed">
+            No account. No payment. No signup. Drop in any design file and
+            see it placed on rugs, pillows, tapestries, and blankets
+            instantly.
           </p>
         </div>
 
+        {/* Drop zone */}
         <div
-          className={`border-2 border-dashed rounded-2xl p-10 text-center cursor-pointer transition-all mb-12 ${
-            isDragging
-              ? "border-amber-400 bg-amber-50"
-              : "border-stone-200 bg-stone-50 hover:border-stone-400 hover:bg-stone-100"
-          }`}
-          onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
-          onDragLeave={() => setIsDragging(false)}
+          role="button"
+          tabIndex={0}
+          onClick={() => fileRef.current?.click()}
+          onKeyDown={(e) => e.key === "Enter" && fileRef.current?.click()}
+          onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
+          onDragLeave={() => setDragging(false)}
           onDrop={onDrop}
-          onClick={() => fileInputRef.current?.click()}
+          className="relative mb-14 cursor-pointer select-none transition-all duration-300"
+          style={{
+            border: `1px solid ${dragging ? "#B89A4E" : "rgba(12,10,9,0.12)"}`,
+            background: dragging ? "rgba(184,154,78,0.04)" : "rgba(12,10,9,0.02)",
+            padding: "3.5rem 2rem",
+            textAlign: "center",
+          }}
         >
+          {/* Corner accents */}
+          {(["tl","tr","bl","br"] as const).map((c) => (
+            <span
+              key={c}
+              className="absolute"
+              style={{
+                top:    c.startsWith("t") ? 8 : "auto",
+                bottom: c.startsWith("b") ? 8 : "auto",
+                left:   c.endsWith("l")   ? 8 : "auto",
+                right:  c.endsWith("r")   ? 8 : "auto",
+                width: 14, height: 14,
+                borderTop:    c.startsWith("t") ? `1.5px solid #B89A4E` : "none",
+                borderBottom: c.startsWith("b") ? `1.5px solid #B89A4E` : "none",
+                borderLeft:   c.endsWith("l")   ? `1.5px solid #B89A4E` : "none",
+                borderRight:  c.endsWith("r")   ? `1.5px solid #B89A4E` : "none",
+              }}
+            />
+          ))}
+
           <input
-            ref={fileInputRef}
+            ref={fileRef}
             type="file"
-            accept=".jpg,.jpeg,.png,.svg,.ai,.psd"
+            accept=".jpg,.jpeg,.png,.svg,.ai,.psd,.webp"
             className="hidden"
-            onChange={onFileChange}
+            onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFile(f); }}
           />
-          {isProcessing ? (
-            <div className="flex flex-col items-center gap-3">
-              <div className="w-10 h-10 border-4 border-stone-300 border-t-stone-700 rounded-full animate-spin" />
-              <p className="text-stone-500 font-medium">Placing your design on products…</p>
+
+          {loading ? (
+            <div className="flex flex-col items-center gap-4">
+              <div
+                className="w-9 h-9 rounded-full border-2 border-gold-pale"
+                style={{ borderTopColor: "#B89A4E", animation: "spin 0.9s linear infinite" }}
+              />
+              <p className="label text-gold">Placing your design on products…</p>
             </div>
           ) : imageUrl ? (
             <div className="flex flex-col items-center gap-2">
-              <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
-                <svg className="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              <div className="w-9 h-9 rounded-full bg-gold/10 flex items-center justify-center">
+                <svg className="w-4 h-4 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <p className="text-stone-700 font-semibold">{fileName}</p>
-              <p className="text-stone-400 text-sm">Click or drag to try a different design</p>
+              <p className="text-sm font-medium text-ink mt-1">{fileName}</p>
+              <p className="label text-ink-muted">Drop a new file to try another design</p>
             </div>
           ) : (
-            <div className="flex flex-col items-center gap-3">
-              <div className="w-14 h-14 rounded-2xl bg-stone-200 flex items-center justify-center">
-                <svg className="w-7 h-7 text-stone-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            <div className="flex flex-col items-center gap-4">
+              <div
+                className="w-14 h-14 flex items-center justify-center"
+                style={{ background: "rgba(184,154,78,0.08)" }}
+              >
+                <svg className="w-6 h-6 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
                 </svg>
               </div>
               <div>
-                <p className="text-stone-700 font-semibold text-lg">Drop your design here</p>
-                <p className="text-stone-400 text-sm mt-1">or click to browse — JPG, PNG, SVG, AI, PSD</p>
+                <p className="font-semibold text-ink text-base mb-1">Drop your design here</p>
+                <p className="label text-ink-muted">or click to browse — JPG · PNG · SVG · AI · PSD</p>
               </div>
             </div>
           )}
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
-          {PRODUCTS.map((product) => (
-            <ProductMockup key={product.id} product={product} imageUrl={imageUrl} />
+        {/* Product grid */}
+        <div
+          className="grid gap-8 mb-10"
+          style={{ gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))" }}
+        >
+          {PRODUCTS.map((p) => (
+            <ProductCard
+              key={p.id}
+              product={p}
+              imageUrl={showProducts ? imageUrl : null}
+              loading={loading}
+            />
           ))}
         </div>
 
+        {/* Post-preview nudge */}
         {imageUrl && (
-          <div className="text-center p-8 bg-stone-50 rounded-2xl border border-stone-100">
-            <p className="text-stone-500 text-sm mb-1">
-              This is a quick preview. A real batch includes every angle, size variation, and a print-ready file for each product.
+          <div
+            className="p-8 text-center"
+            style={{ background: "rgba(184,154,78,0.06)", border: "1px solid rgba(184,154,78,0.2)" }}
+          >
+            <p className="text-sm text-ink-muted mb-1">
+              This is a quick preview. A real batch includes every angle, size
+              variation, and a print-ready manufacturing file per product.
             </p>
-            <p className="font-semibold text-stone-700 mb-6">
+            <p className="font-semibold text-ink text-base mb-6">
               Ready to turn this into a real catalog?
             </p>
             <a
               href="#pricing"
-              className="inline-block bg-stone-900 text-white px-8 py-3 rounded-xl font-semibold hover:bg-stone-700 transition-colors"
+              className="label inline-block bg-gold hover:bg-gold-light text-ink px-8 py-4 transition-colors"
             >
               See pricing and get started
             </a>

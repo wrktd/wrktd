@@ -1,108 +1,171 @@
-const BATCH_TIERS = [
-  { volume: "1–2 items", fee: "Free" },
-  { volume: "3–25 items", fee: "$1.50 / item" },
-  { volume: "26–100 items", fee: "$1.25 / item" },
-  { volume: "101–500 items", fee: "$1.00 / item" },
-  { volume: "501–1,000 items", fee: "$0.75 / item" },
-  { volume: "1,000+ items", fee: "Custom quote" },
+const BATCH = [
+  { vol: "1–2 items",       fee: "Free",      free: true },
+  { vol: "3–25 items",      fee: "$1.50 / item" },
+  { vol: "26–100 items",    fee: "$1.25 / item" },
+  { vol: "101–500 items",   fee: "$1.00 / item" },
+  { vol: "501–1,000 items", fee: "$0.75 / item" },
+  { vol: "1,000+ items",    fee: "Custom quote" },
 ];
 
-const MONTHLY_PLANS = [
-  { plan: "Starter", catalog: "Up to 25 products", fee: "TBD" },
-  { plan: "Growth", catalog: "Up to 100 products", fee: "TBD" },
-  { plan: "Scale", catalog: "Up to 500 products", fee: "TBD" },
-  { plan: "Enterprise", catalog: "500+ products", fee: "Custom" },
+const PLANS = [
+  { name: "Starter",    size: "Up to 25 products",  fee: "TBD" },
+  { name: "Growth",     size: "Up to 100 products", fee: "TBD" },
+  { name: "Scale",      size: "Up to 500 products", fee: "TBD" },
+  { name: "Enterprise", size: "500+ products",       fee: "Custom" },
 ];
 
 export default function PricingSection() {
   return (
-    <section id="pricing" className="py-24 px-6 bg-white">
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-4xl font-black text-stone-900 mb-4">
-            Simple, transparent pricing
+    <section id="pricing" className="py-28 px-6 bg-cream-warm">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="flex items-center gap-3 mb-5">
+          <div className="h-px w-8 bg-gold" />
+          <span className="label text-gold">Pricing</span>
+        </div>
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-20 gap-6">
+          <h2
+            className="font-display font-light text-ink leading-[0.92]"
+            style={{ fontSize: "clamp(2.4rem, 5vw, 4rem)" }}
+          >
+            Simple, transparent
+            <br />
+            <em className="not-italic text-ink/50">pricing.</em>
           </h2>
-          <p className="text-lg text-stone-500 max-w-xl mx-auto">
-            A one-time batch fee to build your catalog, a monthly fee to keep everything running, and a per-order manufacturing cost when sales come in.
+          <p className="text-sm text-ink-muted max-w-xs leading-relaxed">
+            A one-time batch fee to build your catalog, a monthly fee to keep
+            everything running, and a per-order manufacturing cost when sales come in.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-10">
-          {/* Batch Fee */}
-          <div className="border border-stone-100 rounded-2xl overflow-hidden shadow-sm">
-            <div className="bg-stone-900 text-white p-6">
-              <div className="text-xs font-semibold uppercase tracking-widest text-stone-400 mb-1">One-time</div>
-              <h3 className="text-xl font-black">Mockup Batch Fee</h3>
-              <p className="text-stone-400 text-sm mt-2">
-                We build your designs into full product mockups and print-ready files. First 1–2 items are free so you can see the quality before committing.
+        <div className="grid lg:grid-cols-2 gap-8 mb-8">
+          {/* Batch fee */}
+          <div style={{ border: "1px solid rgba(12,10,9,0.08)" }}>
+            <div
+              className="px-8 py-7"
+              style={{ borderBottom: "1px solid rgba(12,10,9,0.08)", background: "rgba(12,10,9,0.03)" }}
+            >
+              <span className="label text-gold block mb-2">One-time</span>
+              <h3
+                className="font-display font-light text-ink"
+                style={{ fontSize: "1.9rem" }}
+              >
+                Mockup Batch Fee
+              </h3>
+              <p className="text-xs text-ink-muted mt-2 leading-relaxed">
+                We build your designs into full product mockups and print-ready files.
+                First 1–2 items are free.
               </p>
             </div>
             <table className="w-full text-sm">
-              <thead className="bg-stone-50">
-                <tr>
-                  <th className="text-left px-5 py-3 text-stone-500 font-semibold text-xs uppercase tracking-wide">Volume</th>
-                  <th className="text-right px-5 py-3 text-stone-500 font-semibold text-xs uppercase tracking-wide">Fee</th>
+              <thead>
+                <tr style={{ borderBottom: "1px solid rgba(12,10,9,0.06)" }}>
+                  <th className="text-left px-8 py-3 label text-ink-muted">Volume</th>
+                  <th className="text-right px-8 py-3 label text-ink-muted">Fee</th>
                 </tr>
               </thead>
               <tbody>
-                {BATCH_TIERS.map((tier, i) => (
-                  <tr key={tier.volume} className={i % 2 === 0 ? "bg-white" : "bg-stone-50"}>
-                    <td className="px-5 py-3 text-stone-700">{tier.volume}</td>
-                    <td className={`px-5 py-3 text-right font-semibold ${tier.fee === "Free" ? "text-green-600" : "text-stone-900"}`}>{tier.fee}</td>
+                {BATCH.map((row, i) => (
+                  <tr
+                    key={row.vol}
+                    style={{
+                      borderBottom: i < BATCH.length - 1 ? "1px solid rgba(12,10,9,0.05)" : "none",
+                    }}
+                  >
+                    <td className="px-8 py-3 text-ink text-xs">{row.vol}</td>
+                    <td
+                      className="px-8 py-3 text-right text-xs font-semibold"
+                      style={{ color: row.free ? "#5A8A5A" : "#0C0A09" }}
+                    >
+                      {row.fee}
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
-            <div className="p-5 border-t border-stone-100 bg-amber-50">
-              <p className="text-xs text-amber-800 font-medium">
-                + $30 per custom template if you need a presentation style not in our existing library.
+            <div
+              className="px-8 py-4 flex items-start gap-3"
+              style={{ borderTop: "1px solid rgba(184,154,78,0.2)", background: "rgba(184,154,78,0.05)" }}
+            >
+              <span className="text-gold mt-0.5 flex-shrink-0">+</span>
+              <p className="text-xs text-ink-muted leading-relaxed">
+                $30 per custom template if you need a presentation style not in our existing blank library. Batch fee applies on top.
               </p>
             </div>
           </div>
 
           {/* Monthly + Manufacturing */}
-          <div className="flex flex-col gap-6">
-            <div className="border border-stone-100 rounded-2xl overflow-hidden shadow-sm flex-1">
-              <div className="bg-stone-800 text-white p-6">
-                <div className="text-xs font-semibold uppercase tracking-widest text-stone-400 mb-1">Monthly</div>
-                <h3 className="text-xl font-black">Hosting + OrderDesk Management</h3>
-                <p className="text-stone-400 text-sm mt-2">
-                  Covers hosting, daily fulfillment monitoring, MWW connection maintenance, and WRKTD actively watching for and fixing issues.
+          <div className="flex flex-col gap-8">
+            <div style={{ border: "1px solid rgba(12,10,9,0.08)" }}>
+              <div
+                className="px-8 py-7"
+                style={{ borderBottom: "1px solid rgba(12,10,9,0.08)", background: "rgba(12,10,9,0.03)" }}
+              >
+                <span className="label text-gold block mb-2">Monthly recurring</span>
+                <h3
+                  className="font-display font-light text-ink"
+                  style={{ fontSize: "1.9rem" }}
+                >
+                  Hosting + Management
+                </h3>
+                <p className="text-xs text-ink-muted mt-2 leading-relaxed">
+                  Covers hosting, daily fulfillment monitoring, MWW connection maintenance,
+                  and WRKTD actively resolving issues.
                 </p>
               </div>
               <table className="w-full text-sm">
-                <thead className="bg-stone-50">
-                  <tr>
-                    <th className="text-left px-5 py-3 text-stone-500 font-semibold text-xs uppercase tracking-wide">Plan</th>
-                    <th className="text-left px-5 py-3 text-stone-500 font-semibold text-xs uppercase tracking-wide">Catalog size</th>
-                    <th className="text-right px-5 py-3 text-stone-500 font-semibold text-xs uppercase tracking-wide">/mo</th>
+                <thead>
+                  <tr style={{ borderBottom: "1px solid rgba(12,10,9,0.06)" }}>
+                    <th className="text-left px-8 py-3 label text-ink-muted">Plan</th>
+                    <th className="text-left px-8 py-3 label text-ink-muted">Catalog size</th>
+                    <th className="text-right px-8 py-3 label text-ink-muted">/ mo</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {MONTHLY_PLANS.map((plan, i) => (
-                    <tr key={plan.plan} className={i % 2 === 0 ? "bg-white" : "bg-stone-50"}>
-                      <td className="px-5 py-3 font-semibold text-stone-800">{plan.plan}</td>
-                      <td className="px-5 py-3 text-stone-500 text-xs">{plan.catalog}</td>
-                      <td className="px-5 py-3 text-right text-stone-400 font-medium text-xs">{plan.fee}</td>
+                  {PLANS.map((row, i) => (
+                    <tr
+                      key={row.name}
+                      style={{
+                        borderBottom: i < PLANS.length - 1 ? "1px solid rgba(12,10,9,0.05)" : "none",
+                      }}
+                    >
+                      <td className="px-8 py-3 text-xs font-semibold text-ink">{row.name}</td>
+                      <td className="px-8 py-3 text-xs text-ink-muted">{row.size}</td>
+                      <td className="px-8 py-3 text-right text-xs text-ink-muted">{row.fee}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
 
-            <div className="border border-stone-100 rounded-2xl p-6 bg-stone-50 shadow-sm">
-              <div className="text-xs font-semibold uppercase tracking-widest text-stone-400 mb-1">Per order</div>
-              <h3 className="text-lg font-black text-stone-900 mb-2">Manufacturing Cost</h3>
-              <p className="text-stone-500 text-sm leading-relaxed">
-                A single bundled manufacturing cost per product is billed automatically when an order ships. No hidden fees — the cost is included in your product pricing setup during onboarding.
+            {/* Manufacturing cost card */}
+            <div
+              className="px-8 py-7 flex flex-col gap-3"
+              style={{ border: "1px solid rgba(12,10,9,0.08)", background: "rgba(12,10,9,0.02)" }}
+            >
+              <span className="label text-gold">Per order</span>
+              <h3
+                className="font-display font-light text-ink"
+                style={{ fontSize: "1.9rem" }}
+              >
+                Manufacturing Cost
+              </h3>
+              <p className="text-xs text-ink-muted leading-relaxed">
+                A single bundled manufacturing cost per product is billed automatically when an order ships. Included in your product pricing setup during onboarding — no surprises.
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6 text-center">
-          <p className="text-blue-800 text-sm leading-relaxed max-w-2xl mx-auto">
-            <span className="font-semibold">Payment on file required.</span> To keep your orders shipping automatically, you&apos;ll keep a valid card on file or maintain a prepaid balance. If a payment issue comes up, we flag it and reach out before anything is delayed.
+        {/* Payment-on-file notice */}
+        <div
+          className="px-8 py-6 flex items-start gap-4"
+          style={{ border: "1px solid rgba(12,10,9,0.08)", background: "rgba(12,10,9,0.02)" }}
+        >
+          <div className="w-1.5 h-1.5 rounded-full bg-gold mt-1.5 flex-shrink-0" />
+          <p className="text-xs text-ink-muted leading-relaxed">
+            <span className="font-semibold text-ink">Payment on file required.</span>{" "}
+            To keep your orders shipping automatically, you'll keep a valid card on file or maintain a prepaid balance. If a payment issue comes up, we flag it and reach out before anything is delayed.
           </p>
         </div>
       </div>

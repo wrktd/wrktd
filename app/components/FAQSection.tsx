@@ -4,7 +4,7 @@ import { useState } from "react";
 const FAQS = [
   {
     q: "How long does it take to go live?",
-    a: "About 5–7 days from your first upload. The first 1–3 days cover building your mockups and print files. The store connection, OrderDesk setup, and test order run in parallel. After that, orders ship in 5–10 days — automatically.",
+    a: "About 5–7 days from your first upload. File production (mockups and print files) and store setup run in parallel — so you're not waiting on one before the other starts. After that, orders ship in 5–10 days automatically.",
   },
   {
     q: "What file formats do you accept?",
@@ -12,11 +12,11 @@ const FAQS = [
   },
   {
     q: "What if I already have a Shopify store?",
-    a: "Perfect — that's the most common setup. We connect directly to your existing store. Your customers never know anything changed on the backend.",
+    a: "That's the most common setup. We connect directly to your existing store. Your customers never know anything changed on the backend — they just buy, and the order routes automatically.",
   },
   {
     q: "Do I need to rename my files a specific way?",
-    a: "No. Upload with whatever filenames you have. Our system renames and organizes everything automatically based on your store name and the products you select.",
+    a: "No. Upload with whatever filenames you have. Our system renames and organizes everything automatically based on your store name and the products you select for each design.",
   },
   {
     q: "What happens if an order fails or gets stuck?",
@@ -24,53 +24,82 @@ const FAQS = [
   },
   {
     q: "Do I need to keep a card on file?",
-    a: "Yes. To keep orders shipping automatically, you need a valid payment method on file or a prepaid fulfillment balance. If a payment issue comes up, we flag it and reach out before anything is delayed — no orders go to manufacturing without cleared funds.",
+    a: "Yes. To keep orders shipping automatically, you need a valid payment method on file or a prepaid fulfillment balance. No orders route to manufacturing without cleared funds — if a payment issue comes up, we flag it and reach out before anything is delayed.",
   },
   {
-    q: "Can I keep selling on Etsy, Redbubble, or other marketplaces too?",
-    a: "Yes. WRKTD doesn't require exclusivity. Surface pattern designers and artists often keep their existing marketplace income and add a separate, higher-margin owned catalog through WRKTD.",
+    q: "Can I keep selling on Etsy, Redbubble, or other marketplaces?",
+    a: "Yes — WRKTD doesn't require exclusivity. Surface pattern designers and artists often keep their existing marketplace income and add a separate, higher-margin owned catalog through WRKTD alongside it.",
   },
   {
-    q: "What if the colors don't match exactly what I see on screen?",
-    a: "WRKTD prepares files to manufacturer specifications, but exact color matching and screen-to-product reproduction depend on the manufacturing process, substrate, and equipment — factors outside our control. We'll do a test order before your catalog goes live so you can see the real output.",
+    q: "What if the colors don't match my screen exactly?",
+    a: "WRKTD prepares files to manufacturer specifications, but exact color matching depends on the manufacturing process, substrate, and equipment — factors outside our control. We do a test order before your catalog goes live so you can see real output before any customer does.",
   },
 ];
 
-function FAQItem({ q, a }: { q: string; a: string }) {
+function Item({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border-b border-stone-100 last:border-0">
+    <div style={{ borderBottom: "1px solid rgba(12,10,9,0.07)" }}>
       <button
-        className="w-full text-left py-5 flex items-start justify-between gap-4"
+        className="w-full text-left py-6 flex items-start justify-between gap-6"
         onClick={() => setOpen(!open)}
       >
-        <span className="font-semibold text-stone-800 text-base leading-snug">{q}</span>
-        <span className={`text-stone-400 flex-shrink-0 transition-transform ${open ? "rotate-45" : ""}`}>
-          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+        <span
+          className="font-display font-medium text-ink leading-snug"
+          style={{ fontSize: "1.15rem" }}
+        >
+          {q}
+        </span>
+        <span
+          className="flex-shrink-0 mt-1 transition-transform duration-300"
+          style={{
+            transform: open ? "rotate(45deg)" : "rotate(0deg)",
+            color: "#B89A4E",
+          }}
+        >
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
           </svg>
         </span>
       </button>
-      {open && (
-        <p className="pb-5 text-stone-500 leading-relaxed text-sm">{a}</p>
-      )}
+      <div
+        className="overflow-hidden transition-all duration-300"
+        style={{ maxHeight: open ? 400 : 0 }}
+      >
+        <p className="pb-6 text-sm text-ink-muted leading-relaxed pr-8">{a}</p>
+      </div>
     </div>
   );
 }
 
 export default function FAQSection() {
   return (
-    <section id="faq" className="py-24 px-6 bg-white">
-      <div className="max-w-3xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-black text-stone-900 mb-4">
-            Frequently asked questions
-          </h2>
+    <section id="faq" className="py-28 px-6 bg-cream">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex items-center gap-3 mb-5">
+          <div className="h-px w-8 bg-gold" />
+          <span className="label text-gold">FAQ</span>
         </div>
-        <div className="bg-stone-50 rounded-2xl border border-stone-100 px-8">
-          {FAQS.map((faq) => (
-            <FAQItem key={faq.q} q={faq.q} a={faq.a} />
-          ))}
+
+        <div className="grid lg:grid-cols-[1fr_2fr] gap-16 items-start">
+          <div>
+            <h2
+              className="font-display font-light text-ink leading-[0.92]"
+              style={{ fontSize: "clamp(2.4rem, 4vw, 3.5rem)" }}
+            >
+              Frequently
+              <br />
+              asked
+              <br />
+              <em className="not-italic text-ink/45">questions.</em>
+            </h2>
+          </div>
+
+          <div>
+            {FAQS.map((faq) => (
+              <Item key={faq.q} q={faq.q} a={faq.a} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
