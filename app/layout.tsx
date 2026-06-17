@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Syne, Inter } from "next/font/google";
+import ClientLayout from "./ClientLayout";
 import "./globals.css";
 
-const cormorant = Cormorant_Garamond({
+const syne = Syne({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  style: ["normal", "italic"],
-  variable: "--font-cormorant",
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-syne",
 });
 
 const inter = Inter({
@@ -25,11 +25,10 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      className={`${cormorant.variable} ${inter.variable} h-full`}
-    >
-      <body className="min-h-full">{children}</body>
+    <html lang="en" className={`${syne.variable} ${inter.variable} h-full`}>
+      <body className="min-h-full bg-black">
+        <ClientLayout>{children}</ClientLayout>
+      </body>
     </html>
   );
 }
