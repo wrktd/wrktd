@@ -60,9 +60,9 @@ void main() {
   float bx6 = 0.35 + 0.11*cos(t*0.10 + 3.0);
   float by6 = 0.28 + 0.30*sin(t*0.07 + 2.8);
 
-  /* softness: 0.006 = tight focused blobs (was 0.025 = too spread) */
-  float soft = 0.006;
-  float str  = 0.022;
+  /* soft=0.012 keeps blobs smooth; str=0.006 keeps them small pools */
+  float soft = 0.012;
+  float str  = 0.006;
 
   float field = 0.0;
   vec2 dv; float d2;
@@ -75,16 +75,16 @@ void main() {
   dv = uv - vec2(bx5, by5); d2=dot(dv,dv); field += 0.66*str/(d2+soft*1.1);
   dv = uv - vec2(bx6, by6); d2=dot(dv,dv); field += 0.71*str/(d2+soft*0.9);
 
-  /* ── Mouse influence ─────────────────────────────────────────── */
+  /* ── Mouse influence — small local glow, not a flashlight ─── */
   dv = uv - mouse; d2 = dot(dv,dv);
-  field += 0.048 / (d2 + 0.0035);
-  field += u_speed * 0.07 / (d2 + 0.010);
+  field += 0.008 / (d2 + 0.006);
+  field += u_speed * 0.012 / (d2 + 0.018);
 
   /* ── Organic surface distortion ─────────────────────────────── */
   float n1 = fbm(uv*3.5 + vec2(t*0.022, t*0.016));
   float n2 = fbm(uv*7.5 - vec2(t*0.014, t*0.028));
-  field += n1 * 0.055;
-  field += n2 * 0.018;
+  field += n1 * 0.030;
+  field += n2 * 0.010;
 
   /* ── Click ripples ──────────────────────────────────────────── */
   for(int i=0;i<8;i++){
@@ -124,12 +124,16 @@ void main() {
   vec3 higl_c  = vec3(0.870, 0.910, 0.970);   /* bright highlight      */
   vec3 spec_c  = vec3(0.970, 0.980, 1.000);   /* pure specular         */
 
-  if      (f < 0.12) col = mix(void_c, shad_c, f/0.12);
-  else if (f < 0.28) col = mix(shad_c, dksl_c, (f-0.12)/0.16);
-  else if (f < 0.50) col = mix(dksl_c, silv_c, (f-0.28)/0.22);
-  else if (f < 0.68) col = mix(silv_c, ltsl_c, (f-0.50)/0.18);
-  else if (f < 0.84) col = mix(ltsl_c, higl_c, (f-0.68)/0.16);
-  else               col = mix(higl_c, spec_c,  (f-0.84)/0.16);
+  /* remap so the typical 0–0.5 field range uses the full dark→silver range */
+  float fr = f * 2.2;
+  fr = clamp(fr, 0.0, 1.0);
+
+  if      (fr < 0.12) col = mix(void_c, shad_c, fr/0.12);
+  else if (fr < 0.30) col = mix(shad_c, dksl_c, (fr-0.12)/0.18);
+  else if (fr < 0.54) col = mix(dksl_c, silv_c, (fr-0.30)/0.24);
+  else if (fr < 0.74) col = mix(silv_c, ltsl_c, (fr-0.54)/0.20);
+  else if (fr < 0.90) col = mix(ltsl_c, higl_c, (fr-0.74)/0.16);
+  else                col = mix(higl_c, spec_c,  (fr-0.90)/0.10);
 
   /* micro-surface liquid shimmer */
   float shimmer = fbm(uv*10.0 + t*0.08) * 0.05;
