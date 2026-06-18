@@ -6,10 +6,10 @@ attribute vec2 a_pos;
 void main() { gl_Position = vec4(a_pos, 0.0, 1.0); }
 `;
 
-/* ── Shader: Gaussian color blobs — zero hardness everywhere ──────
-   Each blob uses exp(-d²/σ²) falloff — pure bell curve, no edges.
-   Background stays dark; blobs additively tint it with muted silver/
-   blue/purple tones. Mouse is a huge, barely-visible brightening.    */
+/* ── Shader: chrome Gaussian blobs — neutral silver tones ─────────
+   Pure Gaussian falloff, no hard edges anywhere.
+   Base is neutral near-black (no blue tint). Blobs are silver-gray
+   with very slight warm/cool variation — liquid chrome, not navy.   */
 const FRAG = `
 precision mediump float;
 
@@ -23,8 +23,8 @@ void main() {
   vec2 mouse = vec2(u_mouse.x / u_res.x, 1.0 - u_mouse.y / u_res.y);
   float t    = u_time;
 
-  /* ── dark base ──────────────────────────────────────────────── */
-  vec3 col = vec3(0.028, 0.030, 0.042);
+  /* ── neutral dark base — no blue tint ──────────────────────── */
+  vec3 col = vec3(0.030, 0.030, 0.030);
 
   /* ── lava-lamp blob positions ───────────────────────────────
      Very slow speeds: 0.045 – 0.085. Large vertical swing.      */
@@ -38,18 +38,18 @@ void main() {
   float s2 = 2.0 * 0.24 * 0.24;
   vec2 dv;
 
-  /* muted chrome colors: desaturated blue-grays and purple-grays */
-  dv = uv - p0; col += vec3(0.16, 0.22, 0.38) * exp(-dot(dv,dv)/s2) * 0.55;
-  dv = uv - p1; col += vec3(0.24, 0.18, 0.34) * exp(-dot(dv,dv)/(s2*0.9)) * 0.50;
-  dv = uv - p2; col += vec3(0.20, 0.26, 0.40) * exp(-dot(dv,dv)/(s2*0.8)) * 0.48;
-  dv = uv - p3; col += vec3(0.28, 0.20, 0.32) * exp(-dot(dv,dv)/(s2*1.1)) * 0.44;
-  dv = uv - p4; col += vec3(0.18, 0.24, 0.36) * exp(-dot(dv,dv)/s2) * 0.47;
+  /* chrome silver tones: neutral grays with very slight warm/cool variation */
+  dv = uv - p0; col += vec3(0.38, 0.38, 0.40) * exp(-dot(dv,dv)/s2) * 0.48;
+  dv = uv - p1; col += vec3(0.32, 0.31, 0.33) * exp(-dot(dv,dv)/(s2*0.9)) * 0.44;
+  dv = uv - p2; col += vec3(0.42, 0.41, 0.42) * exp(-dot(dv,dv)/(s2*0.8)) * 0.40;
+  dv = uv - p3; col += vec3(0.30, 0.30, 0.31) * exp(-dot(dv,dv)/(s2*1.1)) * 0.38;
+  dv = uv - p4; col += vec3(0.36, 0.35, 0.36) * exp(-dot(dv,dv)/s2) * 0.42;
 
-  /* ── mouse: huge (σ=0.28) barely-visible brightening ─────── */
+  /* ── mouse: wide soft silver brightening ────────────────────── */
   float ms2 = 2.0 * 0.28 * 0.28;
   dv = uv - mouse;
-  float mw = exp(-dot(dv,dv)/ms2) * 0.22;
-  col = col + col * mw + vec3(0.06, 0.08, 0.12) * mw;
+  float mw = exp(-dot(dv,dv)/ms2) * 0.20;
+  col = col + col * mw + vec3(0.10, 0.10, 0.11) * mw;
 
   /* ── click: small soft glow at cursor, no ring, no hard edge ─ */
   for(int i=0;i<8;i++){
@@ -61,7 +61,7 @@ void main() {
         dv = uv - cp;
         /* σ = 0.032 — small, purely Gaussian, zero hardness */
         float glow = exp(-dot(dv,dv)/(2.0*0.032*0.032));
-        col += vec3(0.14, 0.18, 0.26) * glow * fade * 0.75;
+        col += vec3(0.22, 0.22, 0.24) * glow * fade * 0.75;
       }
     }
   }

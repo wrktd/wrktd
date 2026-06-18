@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Syne, Inter } from "next/font/google";
+import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import ClientLayout from "./ClientLayout";
 import "./globals.css";
 
-const syne = Syne({
+const syne = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
   variable: "--font-syne",

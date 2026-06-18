@@ -23,7 +23,7 @@ export default function StatStrip() {
             >
               {value}
             </p>
-            <p className="label mt-3" style={{ color: "rgba(255,255,255,0.22)" }}>{label}</p>
+            <p className="label mt-3" style={{ color: "rgba(255,255,255,0.50)" }}>{label}</p>
           </div>
         ))}
       </div>

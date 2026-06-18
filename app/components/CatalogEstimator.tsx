@@ -9,7 +9,7 @@ export default function CatalogEstimator() {
   const [designs, setDesigns] = useState(20);
 
   const products = designs * 5;
-  const weeks    = Math.max(1, Math.round(designs * 0.4));
+  const weeksNum = Math.max(1, Math.round(designs * 0.4));
 
   return (
     <section id="estimator" className="glass-mid py-28 px-6">
@@ -27,7 +27,7 @@ export default function CatalogEstimator() {
           <span style={{ color: "rgba(255,255,255,0.22)" }}>do you have?</span>
         </h2>
 
-        <p className="text-base mb-14 leading-relaxed" style={{ color: "rgba(255,255,255,0.3)", maxWidth: "28rem" }}>
+        <p className="text-base mb-14 leading-relaxed" style={{ color: "rgba(255,255,255,0.55)", maxWidth: "28rem" }}>
           See how quickly existing artwork turns into a product catalog — and how much manual work it skips.
         </p>
 
@@ -63,24 +63,24 @@ export default function CatalogEstimator() {
             <p className="font-display font-bold text-white mb-1" style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 1 }}>
               {fmt(products)}
             </p>
-            <p className="label" style={{ color: "rgba(255,255,255,0.28)" }}>potential products</p>
-            <p className="text-xs mt-2" style={{ color: "rgba(255,255,255,0.15)" }}>
+            <p className="label" style={{ color: "rgba(255,255,255,0.55)" }}>potential products</p>
+            <p className="text-xs mt-2" style={{ color: "rgba(255,255,255,0.40)" }}>
               {designs} designs × 5 product types
             </p>
           </div>
 
           <div className="p-6" style={{ border: "1px solid rgba(255,255,255,0.07)", background: "rgba(255,255,255,0.02)" }}>
             <p className="font-display font-bold text-white mb-1" style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 1 }}>
-              {weeks}w
+              {weeksNum} {weeksNum === 1 ? "week" : "weeks"}
             </p>
-            <p className="label" style={{ color: "rgba(255,255,255,0.28)" }}>of manual work avoided</p>
-            <p className="text-xs mt-2" style={{ color: "rgba(255,255,255,0.15)" }}>
+            <p className="label" style={{ color: "rgba(255,255,255,0.55)" }}>of manual work avoided</p>
+            <p className="text-xs mt-2" style={{ color: "rgba(255,255,255,0.40)" }}>
               estimated vs. one product at a time
             </p>
           </div>
         </div>
 
-        <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.18)" }}>
+        <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.45)" }}>
           Most sellers build product by product, manually configuring each SKU. WRKTD processes everything as one batch — designs in, catalog out.
         </p>
       </div>

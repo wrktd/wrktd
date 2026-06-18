@@ -8,10 +8,10 @@ const BATCH = [
 ];
 
 const PLANS = [
-  { name: "Starter",    size: "Up to 25 products",  fee: "TBD" },
-  { name: "Growth",     size: "Up to 100 products", fee: "TBD" },
-  { name: "Scale",      size: "Up to 500 products", fee: "TBD" },
-  { name: "Enterprise", size: "500+ products",       fee: "Custom" },
+  { name: "Starter",    size: "Up to 25 products",  fee: "Founding rate" },
+  { name: "Growth",     size: "Up to 100 products", fee: "Founding rate" },
+  { name: "Scale",      size: "Up to 500 products", fee: "Founding rate" },
+  { name: "Enterprise", size: "500+ products",       fee: "Custom"        },
 ];
 
 const borderMid = "1px solid rgba(255,255,255,0.05)";
@@ -31,8 +31,8 @@ export default function PricingSection() {
             Simple, transparent<br />
             <span style={{ color: "rgba(255,255,255,0.2)" }}>pricing.</span>
           </h2>
-          <p className="text-sm max-w-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.25)" }}>
-            A one-time batch fee to build your catalog, a monthly fee to keep everything running, and a per-order manufacturing cost when sales come in.
+          <p className="text-sm max-w-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
+            A one-time batch fee to build your catalog, a monthly fee to keep everything running, and a per-order product cost when sales come in.
           </p>
         </div>
 
@@ -78,7 +78,7 @@ export default function PricingSection() {
                 <span className="label text-gold block mb-2">Monthly recurring</span>
                 <h3 className="font-display font-bold text-white" style={{ fontSize: "1.9rem" }}>Hosting + Management</h3>
                 <p className="text-xs mt-2 leading-relaxed" style={{ color: "rgba(255,255,255,0.28)" }}>
-                  Covers hosting, daily fulfillment monitoring, MWW connection maintenance, and WRKTD actively resolving issues.
+                  Covers hosting, daily fulfillment monitoring, fulfillment connection maintenance, and WRKTD actively resolving issues.
                 </p>
               </div>
               <table className="w-full text-sm">

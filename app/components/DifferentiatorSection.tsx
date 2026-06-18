@@ -4,8 +4,8 @@ const POINTS = [
     body: "Most POD platforms are still largely DIY. Even when bulk tools exist, the seller is responsible for product setup, artwork placement, listings, SKUs, and fulfillment configuration. WRKTD is done-for-you and batch-oriented.",
   },
   {
-    glyph: "II", title: "File accuracy, guaranteed",
-    body: "Manufacturing partners don't review artwork before printing — if a file is wrong, the product prints wrong and ships to your customer. WRKTD adapts and prepares every file correctly before it ever reaches manufacturing.",
+    glyph: "II", title: "Preflighted before production",
+    body: "Manufacturing partners don't review artwork before printing — if a file is wrong, the product prints wrong and ships to your customer. WRKTD adapts and prepares every file before it ever reaches manufacturing.",
   },
   {
     glyph: "III", title: "Monitored, not abandoned",
@@ -31,7 +31,7 @@ export default function DifferentiatorSection() {
             A different kind<br />
             <span style={{ color: "rgba(255,255,255,0.2)" }}>of home decor partner.</span>
           </h2>
-          <p className="text-sm max-w-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.25)" }}>
+          <p className="text-sm max-w-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
             There are other ways to put designs on products. Here's what separates WRKTD.
           </p>
         </div>
@@ -52,7 +52,7 @@ export default function DifferentiatorSection() {
                   style={{ fontSize: "clamp(1.3rem, 2vw, 1.7rem)" }}>
                   {p.title}
                 </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.28)" }}>{p.body}</p>
+                <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.58)" }}>{p.body}</p>
               </div>
             </div>
           ))}

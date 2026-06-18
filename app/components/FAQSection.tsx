@@ -12,8 +12,8 @@ const FAQS = [
   { q: "What if the colors don't match my screen exactly?", a: "WRKTD prepares files to manufacturer specifications, but exact color matching depends on the manufacturing process, substrate, and equipment — factors outside our control. We do a test order before your catalog goes live so you can see real output before any customer does." },
 ];
 
-function Item({ q, a }: { q: string; a: string }) {
-  const [open, setOpen] = useState(false);
+function Item({ q, a, defaultOpen = false }: { q: string; a: string; defaultOpen?: boolean }) {
+  const [open, setOpen] = useState(defaultOpen);
   return (
     <div style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
       <button className="w-full text-left py-6 flex items-start justify-between gap-6"
@@ -27,7 +27,7 @@ function Item({ q, a }: { q: string; a: string }) {
         </span>
       </button>
       <div className="overflow-hidden transition-all duration-300" style={{ maxHeight: open ? 400 : 0 }}>
-        <p className="pb-6 text-sm leading-relaxed pr-8" style={{ color: "rgba(255,255,255,0.3)" }}>{a}</p>
+        <p className="pb-6 text-sm leading-relaxed pr-8" style={{ color: "rgba(255,255,255,0.58)" }}>{a}</p>
       </div>
     </div>
   );
@@ -51,7 +51,7 @@ export default function FAQSection() {
             </h2>
           </div>
           <div>
-            {FAQS.map((faq) => <Item key={faq.q} q={faq.q} a={faq.a} />)}
+            {FAQS.map((faq, i) => <Item key={faq.q} q={faq.q} a={faq.a} defaultOpen={i === 0} />)}
           </div>
         </div>
       </div>

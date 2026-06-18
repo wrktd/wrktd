@@ -97,7 +97,8 @@ export default function HeroSection() {
 
   useEffect(() => () => { if (prevUrl.current) URL.revokeObjectURL(prevUrl.current); }, []);
 
-  const showProducts = imageUrl || loading;
+  const showProducts = true; // always show products — sample design before upload, real design after
+  const displayUrl = imageUrl || "/sample-design.svg";
 
   return (
     <section id="preview" className="relative min-h-screen flex flex-col justify-center overflow-hidden">
@@ -118,14 +119,14 @@ export default function HeroSection() {
             >
               What if your designs<br />
               were already selling<br />
-              <span style={{ color: "rgba(255,255,255,0.22)" }}>home decor?</span>
+              <span style={{ color: "rgba(255,255,255,0.35)" }}>home decor?</span>
             </h1>
 
             <p
               className="text-base md:text-lg font-light leading-relaxed mb-10"
-              style={{ color: "rgba(255,255,255,0.38)", maxWidth: "26rem" }}
+              style={{ color: "rgba(255,255,255,0.60)", maxWidth: "26rem" }}
             >
-              Drop a design below. See it on real products in seconds — free, no signup. If you like what you see, WRKTD builds the catalog behind it.
+              Drop one design. See it on rugs, pillows, blankets, and wall decor in seconds — free, no signup. If it looks good, WRKTD turns it into products your audience can actually buy.
             </p>
 
             {/* Upload box */}
@@ -174,7 +175,7 @@ export default function HeroSection() {
                     </svg>
                   </div>
                   <p className="text-sm font-medium text-white mt-1">{fileName}</p>
-                  <p className="label" style={{ color: "rgba(255,255,255,0.2)" }}>Drop a new file to try another</p>
+                  <p className="label" style={{ color: "rgba(255,255,255,0.45)" }}>Drop a new file to try another</p>
                 </div>
               ) : (
                 <div className="flex flex-col items-center gap-3">
@@ -191,7 +192,7 @@ export default function HeroSection() {
               )}
             </div>
 
-            <p className="text-xs mt-4" style={{ color: "rgba(255,255,255,0.14)" }}>
+            <p className="text-xs mt-4" style={{ color: "rgba(255,255,255,0.35)" }}>
               No account. No payment. No commitment.
             </p>
 
@@ -212,7 +213,7 @@ export default function HeroSection() {
           {/* Right column — product cards */}
           <div className="grid grid-cols-2 gap-5 pt-4 lg:pt-20">
             {PRODUCTS.map((p) => (
-              <ProductCard key={p.id} product={p} imageUrl={showProducts ? imageUrl : null} loading={loading} />
+              <ProductCard key={p.id} product={p} imageUrl={loading ? null : displayUrl} loading={loading} />
             ))}
           </div>
         </div>

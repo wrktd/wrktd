@@ -55,11 +55,11 @@ export default function ProfitCalculator() {
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-14 gap-4">
           <h2 className="font-display font-extrabold text-white leading-[0.88]"
             style={{ fontSize: "clamp(2.4rem, 5vw, 4rem)" }}>
-            Calculate your<br />
-            <span style={{ color: "rgba(255,255,255,0.2)" }}>monthly profit.</span>
+            Estimate what a<br />
+            <span style={{ color: "rgba(255,255,255,0.35)" }}>product line could add.</span>
           </h2>
-          <p className="text-sm max-w-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.25)" }}>
-            Pick a product, set your selling price, estimate your monthly orders — see what you could earn.
+          <p className="text-sm max-w-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
+            Pick a product, set your selling price, estimate monthly orders — see a rough revenue potential.
           </p>
         </div>
 
@@ -86,8 +86,8 @@ export default function ProfitCalculator() {
               </div>
               <div className="flex items-center justify-between px-4 py-3"
                 style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.05)" }}>
-                <span className="text-xs" style={{ color: "rgba(255,255,255,0.3)" }}>Manufacturing cost</span>
-                <span className="text-sm font-semibold" style={{ color: "rgba(255,255,255,0.4)" }}>{formatDollar(product.cost)}</span>
+                <span className="text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>Product &amp; fulfillment cost</span>
+                <span className="text-sm font-semibold" style={{ color: "rgba(255,255,255,0.55)" }}>quoted at onboarding</span>
               </div>
             </div>
 
@@ -111,14 +111,13 @@ export default function ProfitCalculator() {
           <div className="p-8 md:p-12 flex flex-col justify-between gap-12"
             style={{ background: "rgba(6,6,6,0.85)" }}>
             <div>
-              <p className="label mb-6" style={{ color: "rgba(255,255,255,0.2)" }}>Your monthly profit</p>
+              <p className="label mb-6" style={{ color: "rgba(255,255,255,0.45)" }}>Estimated monthly revenue potential</p>
               <p className="font-display font-bold text-gold leading-none"
                 style={{ fontSize: "clamp(3.5rem, 8vw, 6rem)" }}>
                 {formatDollar(profit)}
               </p>
-              <p className="text-sm mt-4 leading-relaxed" style={{ color: "rgba(255,255,255,0.25)" }}>
-                Based on {orders} {product.label.toLowerCase()}{orders !== 1 ? "s" : ""} at {formatDollar(price)} each,
-                after a {formatDollar(product.cost)} manufacturing cost per unit.
+              <p className="text-sm mt-4 leading-relaxed" style={{ color: "rgba(255,255,255,0.50)" }}>
+                Based on {orders} {product.label.toLowerCase()}{orders !== 1 ? "s" : ""} at {formatDollar(price)} each. Actual margin depends on your product cost, set during onboarding.
               </p>
             </div>
 

@@ -33,7 +33,7 @@ export default function ProofStory() {
               <span style={{ color: "rgba(255,255,255,0.22)" }}>sitting unused for home decor.</span>
             </h2>
 
-            <p className="text-base leading-relaxed mb-10" style={{ color: "rgba(255,255,255,0.35)" }}>
+            <p className="text-base leading-relaxed mb-10" style={{ color: "rgba(255,255,255,0.60)" }}>
               We turned their existing artwork into rugs and pillows, connected their store to automatic fulfillment, and launched without any inventory on their end.
             </p>
 
@@ -59,11 +59,11 @@ export default function ProofStory() {
                 style={{ border: "1px solid rgba(255,255,255,0.06)", background: "rgba(255,255,255,0.015)" }}
               >
                 <p className="text-sm font-semibold text-white mb-2">{title}</p>
-                <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.28)" }}>{desc}</p>
+                <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>{desc}</p>
               </div>
             ))}
 
-            <p className="text-xs mt-2 leading-relaxed" style={{ color: "rgba(255,255,255,0.14)" }}>
+            <p className="text-xs mt-2 leading-relaxed" style={{ color: "rgba(255,255,255,0.40)" }}>
               More founding clients are going live now. Case studies will follow.
             </p>
           </div>
