@@ -1,15 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-
-function WLogo({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 54 42" fill="currentColor" className={className} aria-hidden="true">
-      <path d="M0 2 L14 40 L27 14 L40 40 L54 2 L47 2 L40 32 L27 8 L14 32 L7 2 Z" />
-      <circle cx="27" cy="15" r="6" fill="#060606" />
-      <circle cx="27" cy="15" r="2.5" fill="currentColor" opacity="0.7" />
-    </svg>
-  );
-}
+import Image from "next/image";
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -34,31 +25,26 @@ export default function Nav() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-10 h-20 flex items-center justify-between">
-        {/* Logo mark + wordmark */}
-        <a href="#" className="flex items-center gap-3 group">
-          <WLogo className="h-7 w-auto text-white group-hover:text-gold transition-colors" />
-          <span
-            className="font-display font-bold text-white tracking-[0.12em] text-lg"
-          >
-            WRKTD
-          </span>
+        {/* Real logo */}
+        <a href="#" className="flex items-center">
+          <Image
+            src="/logo.png"
+            alt="WRKTD"
+            height={28}
+            width={160}
+            style={{ height: 28, width: "auto" }}
+            priority
+          />
         </a>
 
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-10">
           {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="label text-white/35 hover:text-white/80 transition-colors"
-            >
+            <a key={l.href} href={l.href} className="label text-white/35 hover:text-white/80 transition-colors">
               {l.label}
             </a>
           ))}
-          <a
-            href="#preview"
-            className="label px-6 py-3 bg-white text-black hover:bg-gold hover:text-black transition-colors"
-          >
+          <a href="#preview" className="label px-6 py-3 bg-white text-black hover:bg-gold hover:text-black transition-colors">
             Try it free
           </a>
         </div>

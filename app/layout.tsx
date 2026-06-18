@@ -19,6 +19,10 @@ export const metadata: Metadata = {
   title: "WRKTD — Turn Your Designs Into Real Products",
   description:
     "You already have designs and people who like your brand. We turn those designs into real home decor products — and when your fans buy something, it ships itself.",
+  icons: {
+    icon: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
