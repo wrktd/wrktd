@@ -12,7 +12,9 @@
   --color-gold-lt: #CCAF6A;
 }
 
-html { scroll-behavior: smooth; color-scheme: dark; }
+html { scroll-behavior: smooth; color-scheme: dark; scroll-snap-type: y proximity; }
+
+section { scroll-snap-align: start; }
 
 body {
   background: #060606;
