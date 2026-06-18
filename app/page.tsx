@@ -1,13 +1,13 @@
 import Nav from "./components/Nav";
 import HeroSection from "./components/HeroSection";
-import DesignVisualizer from "./components/DesignVisualizer";
-import PreviewTool from "./components/PreviewTool";
+import ProofStory from "./components/ProofStory";
+import StatStrip from "./components/StatStrip";
 import ProductLineSection from "./components/ProductLineSection";
+import CatalogEstimator from "./components/CatalogEstimator";
 import HowItWorksSection from "./components/HowItWorksSection";
 import DifferentiatorSection from "./components/DifferentiatorSection";
 import ProfitCalculator from "./components/ProfitCalculator";
 import PricingSection from "./components/PricingSection";
-import TestimonialsSection from "./components/TestimonialsSection";
 import FAQSection from "./components/FAQSection";
 import FinalCTA from "./components/FinalCTA";
 import Footer from "./components/Footer";
@@ -17,24 +17,24 @@ export default function Home() {
     <>
       <Nav />
       <main>
-        {/* 1 — Headline */}
+        {/* 1 — Hero + instant design preview (upload visible above fold) */}
         <HeroSection />
-        {/* 2 — Instant design visualizer (pick a pattern, see it on a product) */}
-        <DesignVisualizer />
-        {/* 3 — Upload your own design preview */}
-        <PreviewTool />
+        {/* 2 — Proof story: real result, moved directly after the preview */}
+        <ProofStory />
+        {/* 3 — Quiet supporting numbers */}
+        <StatStrip />
         {/* 4 — One design → many products */}
         <ProductLineSection />
-        {/* 5 — How it works */}
+        {/* 5 — Catalog estimator (interactive slider) */}
+        <CatalogEstimator />
+        {/* 6 — How it works */}
         <HowItWorksSection />
-        {/* 6 — How WRKTD is different */}
+        {/* 7 — How WRKTD is different */}
         <DifferentiatorSection />
-        {/* 7 — Profit calculator */}
+        {/* 8 — Profit calculator */}
         <ProfitCalculator />
-        {/* 8 — Pricing */}
+        {/* 9 — Pricing */}
         <PricingSection />
-        {/* 9 — Proof / testimonials */}
-        <TestimonialsSection />
         {/* 10 — FAQ */}
         <FAQSection />
         {/* 11 — Final CTA (repeat upload) */}
