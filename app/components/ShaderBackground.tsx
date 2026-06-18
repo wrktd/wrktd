@@ -51,21 +51,17 @@ void main() {
   float mw = exp(-dot(dv,dv)/ms2) * 0.22;
   col = col + col * mw + vec3(0.06, 0.08, 0.12) * mw;
 
-  /* ── click: expanding Gaussian ring — smooth, no hard edge ─ */
+  /* ── click: small soft glow at cursor, no ring, no hard edge ─ */
   for(int i=0;i<8;i++){
     if(u_clicks[i].w > 0.5){
       float age = t - u_clicks[i].z;
-      if(age >= 0.0 && age < 2.2){
-        vec2 cp  = vec2(u_clicks[i].x/u_res.x, 1.0 - u_clicks[i].y/u_res.y);
-        float d  = length(uv - cp);
-        float r  = age * 0.28;
-        float dr = d - r;
-        /* Gaussian ring: soft at edges, no smoothstep */
-        float ring = exp(-(dr*dr) / (2.0*0.018*0.018));
-        float fade = max(0.0, 1.0 - age/2.2);
-        /* immediate center bloom */
-        float bloom = exp(-dot(uv-cp,uv-cp)/(2.0*0.10*0.10)) * max(0.0, 1.0 - age*4.0);
-        col += vec3(0.30, 0.38, 0.55) * (ring * 0.35 + bloom * 0.60) * fade;
+      if(age >= 0.0 && age < 0.9){
+        vec2 cp = vec2(u_clicks[i].x/u_res.x, 1.0 - u_clicks[i].y/u_res.y);
+        float fade = max(0.0, 1.0 - age/0.9);
+        dv = uv - cp;
+        /* σ = 0.032 — small, purely Gaussian, zero hardness */
+        float glow = exp(-dot(dv,dv)/(2.0*0.032*0.032));
+        col += vec3(0.14, 0.18, 0.26) * glow * fade * 0.75;
       }
     }
   }
