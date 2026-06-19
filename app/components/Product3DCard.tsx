@@ -295,7 +295,7 @@ export default function Product3DCard({ type, label, size, imageUrl }: Product3D
             enableZoom={false}
             enablePan={false}
             autoRotate
-            autoRotateSpeed={1.4}
+            autoRotateSpeed={0.45}
             minPolarAngle={Math.PI / 5}
             maxPolarAngle={Math.PI / 1.9}
           />
