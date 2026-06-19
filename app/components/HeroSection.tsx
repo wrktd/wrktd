@@ -1,71 +1,21 @@
 "use client";
 import { useState, useRef, useCallback, useEffect } from "react";
+import dynamic from "next/dynamic";
+import type { Product3DType } from "./Product3DCard";
 
-type ProductDef = {
-  id: string; label: string; size: string; aspect: number;
-  bg: string; weaveBg?: string; radius: string; shadow?: string;
-};
+/* Dynamic import — Three.js must not run on the server */
+const Product3DCard = dynamic(() => import("./Product3DCard"), {
+  ssr: false,
+  loading: () => <div style={{ aspectRatio: "1/1", background: "rgba(255,255,255,0.02)" }} />,
+});
 
-const PRODUCTS: ProductDef[] = [
-  {
-    id: "rug", label: "Area Rug", size: "5×7 ft", aspect: 4 / 3,
-    bg: "#1A1A1A",
-    weaveBg: `repeating-linear-gradient(0deg,rgba(255,255,255,0.04) 0px,rgba(255,255,255,0.04) 1px,transparent 1px,transparent 5px),repeating-linear-gradient(90deg,rgba(255,255,255,0.04) 0px,rgba(255,255,255,0.04) 1px,transparent 1px,transparent 5px),#1A1A1A`,
-    radius: "10px", shadow: "0 16px 64px rgba(0,0,0,0.8)",
-  },
-  {
-    id: "pillow", label: "Woven Pillow", size: '18"×18"', aspect: 1,
-    bg: "#141414",
-    weaveBg: `repeating-linear-gradient(0deg,rgba(255,255,255,0.04) 0px,rgba(255,255,255,0.04) 1px,transparent 1px,transparent 5px),repeating-linear-gradient(90deg,rgba(255,255,255,0.04) 0px,rgba(255,255,255,0.04) 1px,transparent 1px,transparent 5px),#141414`,
-    radius: "26px", shadow: "0 20px 72px rgba(0,0,0,0.8), inset 0 -4px 16px rgba(0,0,0,0.4)",
-  },
-  {
-    id: "tapestry", label: "Wall Tapestry", size: "36×48 in", aspect: 3 / 4,
-    bg: "#181818", radius: "3px",
-    shadow: "0 8px 40px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.06)",
-  },
-  {
-    id: "blanket", label: "Woven Blanket", size: '50"×60"', aspect: 5 / 4,
-    bg: "#161616",
-    weaveBg: `repeating-linear-gradient(0deg,rgba(255,255,255,0.05) 0px,rgba(255,255,255,0.05) 1px,transparent 1px,transparent 6px),repeating-linear-gradient(90deg,rgba(255,255,255,0.03) 0px,rgba(255,255,255,0.03) 1px,transparent 1px,transparent 6px),#161616`,
-    radius: "8px", shadow: "0 12px 48px rgba(0,0,0,0.7)",
-  },
+const PRODUCTS: { type: Product3DType; label: string; size: string }[] = [
+  { type: "pillow",   label: "Woven Pillow",      size: '18"×18"'  },
+  { type: "rug",      label: "Area Rug",           size: "5×7 ft"   },
+  { type: "canvas",   label: "Canvas Art",         size: "24×30 in" },
+  { type: "metal",    label: "Metal Art Print",    size: "16×16 in" },
+  { type: "tapestry", label: "Wall Tapestry",      size: "36×48 in" },
 ];
-
-function ProductCard({
-  product, imageUrl, loading,
-}: { product: ProductDef; imageUrl: string | null; loading: boolean }) {
-  return (
-    <div className="flex flex-col gap-2.5">
-      <div className="relative w-full" style={{ paddingBottom: `${(1 / product.aspect) * 100}%` }}>
-        <div
-          className="absolute inset-0 overflow-hidden"
-          style={{ background: product.weaveBg ?? product.bg, borderRadius: product.radius, boxShadow: product.shadow }}
-        >
-          {loading && (
-            <div className="absolute inset-0" style={{
-              background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.06) 50%, transparent 100%)",
-              backgroundSize: "400px 100%", animation: "shimmer 1.2s infinite linear",
-            }} />
-          )}
-          {imageUrl && !loading && (
-            <img
-              src={imageUrl} alt={product.label}
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{ mixBlendMode: "screen", opacity: 0.72, borderRadius: product.radius }}
-            />
-          )}
-          <div className="absolute inset-0 pointer-events-none"
-            style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 50%, rgba(0,0,0,0.18) 100%)" }} />
-        </div>
-      </div>
-      <div>
-        <p className="text-xs font-semibold tracking-wide" style={{ color: "rgba(255,255,255,0.55)" }}>{product.label}</p>
-        <p className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.2)" }}>{product.size}</p>
-      </div>
-    </div>
-  );
-}
 
 export default function HeroSection() {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
@@ -97,7 +47,7 @@ export default function HeroSection() {
 
   useEffect(() => () => { if (prevUrl.current) URL.revokeObjectURL(prevUrl.current); }, []);
 
-  const showProducts = true; // always show products — sample design before upload, real design after
+  /* Show sample design before upload, real design after */
   const displayUrl = imageUrl || "/sample-design.svg";
 
   return (
@@ -106,7 +56,7 @@ export default function HeroSection() {
 
         <div className="grid lg:grid-cols-[1fr_1fr] gap-16 lg:gap-20 items-start">
 
-          {/* Left column — headline + upload */}
+          {/* ── Left column: headline + upload ── */}
           <div>
             <div className="flex items-center gap-4 mb-10">
               <div className="h-px w-8 bg-gold" />
@@ -126,7 +76,7 @@ export default function HeroSection() {
               className="text-base md:text-lg font-light leading-relaxed mb-10"
               style={{ color: "rgba(255,255,255,0.60)", maxWidth: "26rem" }}
             >
-              Drop one design. See it on rugs, pillows, blankets, and wall decor in seconds — free, no signup. If it looks good, WRKTD turns it into products your audience can actually buy.
+              Drop one design. See it on rugs, pillows, canvas, metal, and wall tapestries in seconds — free, no signup. If it looks good, WRKTD turns it into products your audience can actually buy.
             </p>
 
             {/* Upload box */}
@@ -186,7 +136,7 @@ export default function HeroSection() {
                   </div>
                   <div>
                     <p className="font-semibold text-white text-sm mb-1">Drop your design here</p>
-                    <p className="label" style={{ color: "rgba(255,255,255,0.22)" }}>or click to browse — JPG · PNG · SVG · AI · PSD</p>
+                    <p className="label" style={{ color: "rgba(255,255,255,0.45)" }}>or click to browse — JPG · PNG · SVG · AI · PSD</p>
                   </div>
                 </div>
               )}
@@ -199,7 +149,7 @@ export default function HeroSection() {
             {/* "Make this real" — appears after upload */}
             {imageUrl && (
               <div className="mt-8 p-6" style={{ border: "1px solid rgba(184,154,78,0.2)", background: "rgba(184,154,78,0.05)" }}>
-                <p className="text-sm mb-1" style={{ color: "rgba(255,255,255,0.3)" }}>
+                <p className="text-sm mb-1" style={{ color: "rgba(255,255,255,0.50)" }}>
                   A real batch includes every angle, size variation, and a print-ready file per product.
                 </p>
                 <p className="font-semibold text-white text-sm mb-5">Ready to turn this into a real catalog?</p>
@@ -210,12 +160,31 @@ export default function HeroSection() {
             )}
           </div>
 
-          {/* Right column — product cards */}
-          <div className="grid grid-cols-2 gap-5 pt-4 lg:pt-20">
-            {PRODUCTS.map((p) => (
-              <ProductCard key={p.id} product={p} imageUrl={loading ? null : displayUrl} loading={loading} />
-            ))}
+          {/* ── Right column: 3D product grid ── */}
+          <div className="pt-4 lg:pt-16">
+            {/* 2-column grid for first 4 products */}
+            <div className="grid grid-cols-2 gap-4 mb-4">
+              {PRODUCTS.filter((p) => p.type !== "tapestry").map((p) => (
+                <Product3DCard
+                  key={p.type}
+                  type={p.type}
+                  label={p.label}
+                  size={p.size}
+                  imageUrl={loading ? null : displayUrl}
+                />
+              ))}
+            </div>
+            {/* Tapestry centered below */}
+            <div style={{ maxWidth: "52%", margin: "0 auto" }}>
+              <Product3DCard
+                type="tapestry"
+                label="Wall Tapestry"
+                size='36"×48"'
+                imageUrl={loading ? null : displayUrl}
+              />
+            </div>
           </div>
+
         </div>
       </div>
     </section>
