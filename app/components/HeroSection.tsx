@@ -1,29 +1,72 @@
 "use client";
 import { useState, useRef, useCallback, useEffect } from "react";
-import dynamic from "next/dynamic";
-import type { Product3DType } from "./Product3DCard";
 
-/* Dynamic import — Three.js must not run on the server */
-const Product3DCard = dynamic(() => import("./Product3DCard"), {
-  ssr: false,
-  loading: () => <div style={{ aspectRatio: "1/1", background: "rgba(255,255,255,0.02)" }} />,
-});
-
-const PRODUCTS: { type: Product3DType; label: string; size: string }[] = [
-  { type: "pillow",   label: "Woven Pillow",      size: '18"×18"'  },
-  { type: "rug",      label: "Area Rug",           size: "5×7 ft"   },
-  { type: "canvas",   label: "Canvas Art",         size: "24×30 in" },
-  { type: "metal",    label: "Metal Art Print",    size: "16×16 in" },
-  { type: "tapestry", label: "Wall Tapestry",      size: "36×48 in" },
+const PRODUCTS: {
+  type: string;
+  label: string;
+  size: string;
+  bg: string;
+  designScale: number;
+  inner?: React.CSSProperties;
+}[] = [
+  { type: "rug",      label: "Area Rug",      size: "5×7 ft",    bg: "#ede8de", designScale: 0.78 },
+  { type: "pillow",   label: "Woven Pillow",  size: '18"×18"',   bg: "#f4f2ef", designScale: 0.66, inner: { borderRadius: "6px" } },
+  { type: "canvas",   label: "Canvas Art",    size: "24×30 in",  bg: "#f9f9f9", designScale: 0.74, inner: { border: "9px solid #2a1f14", boxSizing: "border-box" as const } },
+  { type: "metal",    label: "Metal Print",   size: "16×16 in",  bg: "#1c1c1c", designScale: 0.84 },
+  { type: "tapestry", label: "Wall Tapestry", size: '36"×48"',   bg: "#ede8de", designScale: 0.68 },
 ];
+
+function ProductCard({ product, imageUrl }: { product: typeof PRODUCTS[0]; imageUrl: string | null }) {
+  const src = imageUrl || "/sample-design.svg";
+  const dim  = `${product.designScale * 100}%`;
+
+  return (
+    <div className="flex flex-col gap-2">
+      <div
+        style={{
+          aspectRatio: "1 / 1",
+          background: product.bg,
+          position: "relative",
+          overflow: "hidden",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        {/* Tapestry wood rod */}
+        {product.type === "tapestry" && (
+          <div style={{
+            position: "absolute", top: "10%", left: "11%", right: "11%",
+            height: 6, background: "#7a4a1e", borderRadius: 3, zIndex: 2,
+          }} />
+        )}
+
+        <div style={{ position: "relative", width: dim, height: dim, flexShrink: 0, ...product.inner }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={src} alt={product.label} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+        </div>
+
+        {/* Metal gloss sheen */}
+        {product.type === "metal" && (
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(255,255,255,0.07) 0%, transparent 55%)", pointerEvents: "none" }} />
+        )}
+      </div>
+
+      <div>
+        <p className="text-xs font-semibold tracking-wide" style={{ color: "rgba(255,255,255,0.55)" }}>{product.label}</p>
+        <p className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.28)" }}>{product.size}</p>
+      </div>
+    </div>
+  );
+}
 
 export default function HeroSection() {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading,  setLoading]  = useState(false);
   const [dragging, setDragging] = useState(false);
   const [fileName, setFileName] = useState<string | null>(null);
-  const fileRef = useRef<HTMLInputElement>(null);
-  const prevUrl = useRef<string | null>(null);
+  const fileRef  = useRef<HTMLInputElement>(null);
+  const prevUrl  = useRef<string | null>(null);
 
   const handleFile = useCallback((file: File) => {
     if (!(/\.(jpe?g|png|svg|ai|psd|webp)$/i.test(file.name)) && !file.type.startsWith("image/")) {
@@ -35,28 +78,24 @@ export default function HeroSection() {
     setFileName(file.name);
     const url = URL.createObjectURL(file);
     prevUrl.current = url;
-    setTimeout(() => { setImageUrl(url); setLoading(false); }, 900);
+    setTimeout(() => { setImageUrl(url); setLoading(false); }, 600);
   }, []);
 
   const onDrop = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    setDragging(false);
-    const f = e.dataTransfer.files[0];
-    if (f) handleFile(f);
+    e.preventDefault(); setDragging(false);
+    const f = e.dataTransfer.files[0]; if (f) handleFile(f);
   }, [handleFile]);
 
   useEffect(() => () => { if (prevUrl.current) URL.revokeObjectURL(prevUrl.current); }, []);
 
-  /* Show sample design before upload, real design after */
-  const displayUrl = imageUrl || "/sample-design.svg";
+  const displayUrl = imageUrl;
 
   return (
     <section id="preview" className="relative min-h-screen flex flex-col justify-center overflow-hidden">
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 w-full pt-32 pb-24">
-
         <div className="grid lg:grid-cols-[1fr_1fr] gap-16 lg:gap-20 items-start">
 
-          {/* ── Left column: headline + upload ── */}
+          {/* ── Left: headline + upload ── */}
           <div>
             <div className="flex items-center gap-4 mb-10">
               <div className="h-px w-8 bg-gold" />
@@ -72,11 +111,9 @@ export default function HeroSection() {
               <span style={{ color: "rgba(255,255,255,0.35)" }}>home decor?</span>
             </h1>
 
-            <p
-              className="text-base md:text-lg font-light leading-relaxed mb-10"
-              style={{ color: "rgba(255,255,255,0.60)", maxWidth: "26rem" }}
-            >
-              Drop one design. See it on rugs, pillows, canvas, metal, and wall tapestries in seconds — free, no signup. If it looks good, WRKTD turns it into products your audience can actually buy.
+            <p className="text-base md:text-lg font-light leading-relaxed mb-10"
+              style={{ color: "rgba(255,255,255,0.60)", maxWidth: "26rem" }}>
+              Drop one design. See it on rugs, pillows, canvas, metal, and wall tapestries — free, no signup. If it looks good, WRKTD turns it into products your audience can actually buy.
             </p>
 
             {/* Upload box */}
@@ -94,10 +131,10 @@ export default function HeroSection() {
                 padding: "2.5rem 1.5rem",
               }}
             >
-              {(["tl", "tr", "bl", "br"] as const).map((c) => (
+              {(["tl","tr","bl","br"] as const).map((c) => (
                 <span key={c} className="absolute" style={{
                   top: c.startsWith("t") ? 7 : "auto", bottom: c.startsWith("b") ? 7 : "auto",
-                  left: c.endsWith("l") ? 7 : "auto", right: c.endsWith("r") ? 7 : "auto",
+                  left: c.endsWith("l") ? 7 : "auto",  right: c.endsWith("r") ? 7 : "auto",
                   width: 12, height: 12,
                   borderTop:    c.startsWith("t") ? "1.5px solid rgba(184,154,78,0.5)" : "none",
                   borderBottom: c.startsWith("b") ? "1.5px solid rgba(184,154,78,0.5)" : "none",
@@ -105,12 +142,9 @@ export default function HeroSection() {
                   borderRight:  c.endsWith("r")   ? "1.5px solid rgba(184,154,78,0.5)" : "none",
                 }} />
               ))}
-              <input
-                ref={fileRef} type="file"
-                accept=".jpg,.jpeg,.png,.svg,.ai,.psd,.webp"
+              <input ref={fileRef} type="file" accept=".jpg,.jpeg,.png,.svg,.ai,.psd,.webp"
                 className="hidden"
-                onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFile(f); }}
-              />
+                onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFile(f); }} />
 
               {loading ? (
                 <div className="flex flex-col items-center gap-3">
@@ -142,11 +176,8 @@ export default function HeroSection() {
               )}
             </div>
 
-            <p className="text-xs mt-4" style={{ color: "rgba(255,255,255,0.35)" }}>
-              No account. No payment. No commitment.
-            </p>
+            <p className="text-xs mt-4" style={{ color: "rgba(255,255,255,0.35)" }}>No account. No payment. No commitment.</p>
 
-            {/* "Make this real" — appears after upload */}
             {imageUrl && (
               <div className="mt-8 p-6" style={{ border: "1px solid rgba(184,154,78,0.2)", background: "rgba(184,154,78,0.05)" }}>
                 <p className="text-sm mb-1" style={{ color: "rgba(255,255,255,0.50)" }}>
@@ -160,26 +191,16 @@ export default function HeroSection() {
             )}
           </div>
 
-          {/* ── Right column: 3D product grid ── */}
+          {/* ── Right: product preview grid ── */}
           <div className="pt-4 lg:pt-16">
-            {/* 2-column grid for first 4 products */}
-            <div className="grid grid-cols-2 gap-4 mb-4">
+            <div className="grid grid-cols-2 gap-3 mb-3">
               {PRODUCTS.filter((p) => p.type !== "tapestry").map((p) => (
-                <Product3DCard
-                  key={p.type}
-                  type={p.type}
-                  label={p.label}
-                  size={p.size}
-                  imageUrl={loading ? null : displayUrl}
-                />
+                <ProductCard key={p.type} product={p} imageUrl={loading ? null : displayUrl} />
               ))}
             </div>
-            {/* Tapestry centered below */}
-            <div style={{ maxWidth: "52%", margin: "0 auto" }}>
-              <Product3DCard
-                type="tapestry"
-                label="Wall Tapestry"
-                size='36"×48"'
+            <div style={{ maxWidth: "50%", margin: "0 auto" }}>
+              <ProductCard
+                product={PRODUCTS.find((p) => p.type === "tapestry")!}
                 imageUrl={loading ? null : displayUrl}
               />
             </div>
