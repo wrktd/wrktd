@@ -1,7 +1,7 @@
 "use client";
 import React, { useMemo, useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import { RoundedBox, OrbitControls, Environment, ContactShadows } from "@react-three/drei";
+import { OrbitControls, Environment, ContactShadows } from "@react-three/drei";
 import * as THREE from "three";
 
 export type Product3DType = "pillow" | "rug" | "canvas" | "metal" | "tapestry";
@@ -41,34 +41,70 @@ function useDesignTexture(url: string | null) {
   return tex;
 }
 
+/* ─── Pillow geometry helper ──────────────────────────────────────
+   Gaussian-displaced PlaneGeometry creates a realistic dome/puff.
+   Both faces share the same shape; back is rotated 180° on Y.     */
+function usePillowGeo(w: number, h: number): THREE.BufferGeometry {
+  return useMemo(() => {
+    const SEGS = 56;
+    const geo = new THREE.PlaneGeometry(w, h, SEGS, SEGS);
+    const pos = geo.attributes.position as THREE.BufferAttribute;
+    const maxZ = Math.min(w, h) * 0.27; // dome height per face
+    const σ2   = 0.38;                   // tighter = flatter toward edges (more pillow-like)
+
+    for (let i = 0; i < pos.count; i++) {
+      const nx = pos.getX(i) / (w / 2); // normalized -1…1
+      const ny = pos.getY(i) / (h / 2);
+      pos.setZ(i, maxZ * Math.exp(-(nx * nx + ny * ny) / σ2));
+    }
+    geo.computeVertexNormals();
+    return geo;
+  }, [w, h]);
+}
+
 /* ─── Pillow ─────────────────────────────────────────────────────
-   Body: soft RoundedBox (white fabric)
-   Design: overlay plane inset from edges, sits on front surface   */
+   Front face: design texture on Gaussian-domed surface
+   Back face:  same geometry rotated 180° → dome faces backward
+   Seam ring:  thin torus-like border at the equator               */
 function PillowMesh({ tex, aspect }: { tex: THREE.Texture | null; aspect: number }) {
   const MAX = 1.75;
   const pw  = aspect >= 1 ? MAX : MAX * aspect;
   const ph  = aspect >= 1 ? MAX / aspect : MAX;
-  const pd  = Math.min(pw, ph) * 0.46; // thickness proportional to smaller dim
-  const rad = Math.min(pw, ph) * 0.15;
+  const geo = usePillowGeo(pw, ph);
+  useEffect(() => () => { geo.dispose(); }, [geo]);
 
-  // Design plane positioned just above the front face (z = pd/2 + epsilon)
-  const frontZ = pd / 2 + 0.012;
-  const dw = pw * 0.84;
-  const dh = ph * 0.84;
+  // Seam: a flat rectangular tube around the perimeter
+  // Approximated as 4 thin box strips at z≈0
+  const seamH = 0.022;
+  const seamD = 0.003;
 
   return (
     <group>
-      {/* Pillow body — white/cream fabric */}
-      <RoundedBox args={[pw, ph, pd]} radius={rad} smoothness={14}>
-        <meshStandardMaterial color="#f5f3f0" roughness={0.92} metalness={0} />
-      </RoundedBox>
-      {/* Design print on front */}
-      {tex && (
-        <mesh position={[0, 0, frontZ]}>
-          <planeGeometry args={[dw, dh]} />
-          <meshStandardMaterial map={tex} roughness={0.87} metalness={0} />
+      {/* Front face — design printed on the dome */}
+      <mesh geometry={geo}>
+        <meshStandardMaterial
+          map={tex}
+          color={tex ? "#ffffff" : "#f4f2ef"}
+          roughness={0.88}
+          metalness={0}
+        />
+      </mesh>
+      {/* Back face — same dome shape pointing away from viewer */}
+      <mesh geometry={geo} rotation={[0, Math.PI, 0]}>
+        <meshStandardMaterial color="#ece9e4" roughness={0.92} metalness={0} />
+      </mesh>
+      {/* Seam strips — top, bottom, left, right */}
+      {[
+        { pos: [0,  ph / 2, 0] as [number,number,number], args: [pw + seamH, seamH, seamD] as [number,number,number] },
+        { pos: [0, -ph / 2, 0] as [number,number,number], args: [pw + seamH, seamH, seamD] as [number,number,number] },
+        { pos: [-pw / 2, 0, 0] as [number,number,number], args: [seamH, ph, seamD] as [number,number,number] },
+        { pos: [ pw / 2, 0, 0] as [number,number,number], args: [seamH, ph, seamD] as [number,number,number] },
+      ].map(({ pos, args }, i) => (
+        <mesh key={i} position={pos}>
+          <boxGeometry args={args} />
+          <meshStandardMaterial color="#d8d4cd" roughness={0.95} metalness={0} />
         </mesh>
-      )}
+      ))}
     </group>
   );
 }
