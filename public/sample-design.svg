@@ -1,21 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
-  <rect width="500" height="500" fill="#080808"/>
-  <!-- Bold concentric diamonds — clean art-print style -->
-  <polygon points="250,18 482,250 250,482 18,250" fill="none" stroke="white" stroke-width="18" opacity="0.95"/>
-  <polygon points="250,68 432,250 250,432 68,250" fill="none" stroke="white" stroke-width="11" opacity="0.70"/>
-  <polygon points="250,118 382,250 250,382 118,250" fill="none" stroke="white" stroke-width="7" opacity="0.50"/>
-  <!-- Axis lines -->
-  <line x1="250" y1="0" x2="250" y2="500" stroke="white" stroke-width="5" opacity="0.18"/>
-  <line x1="0" y1="250" x2="500" y2="250" stroke="white" stroke-width="5" opacity="0.18"/>
-  <!-- Diagonal accents -->
-  <line x1="0" y1="0" x2="500" y2="500" stroke="white" stroke-width="3" opacity="0.08"/>
-  <line x1="500" y1="0" x2="0" y2="500" stroke="white" stroke-width="3" opacity="0.08"/>
-  <!-- Corner dots -->
-  <circle cx="250" cy="18" r="9" fill="white"/>
-  <circle cx="482" cy="250" r="9" fill="white"/>
-  <circle cx="250" cy="482" r="9" fill="white"/>
-  <circle cx="18" cy="250" r="9" fill="white"/>
-  <!-- Center ring -->
-  <circle cx="250" cy="250" r="22" fill="white"/>
-  <circle cx="250" cy="250" r="11" fill="#080808"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+  <rect width="600" height="600" fill="#F2EDE4"/>
+  <!-- Bold diagonal blocks -->
+  <polygon points="0,0 600,0 600,180 0,420" fill="#1A1A2E"/>
+  <polygon points="0,420 600,180 600,600 0,600" fill="#0F2952"/>
+  <!-- Central graphic: stacked bold type-mark feel -->
+  <rect x="200" y="230" width="200" height="12" fill="#B89A4E"/>
+  <rect x="240" y="258" width="120" height="12" fill="#B89A4E"/>
+  <rect x="220" y="286" width="160" height="12" fill="#B89A4E"/>
+  <!-- Bold outer ring -->
+  <circle cx="300" cy="270" r="130" fill="none" stroke="#ffffff" stroke-width="14" opacity="0.9"/>
+  <circle cx="300" cy="270" r="106" fill="none" stroke="#B89A4E" stroke-width="5" opacity="0.7"/>
+  <!-- Corner accents -->
+  <rect x="30" y="30" width="50" height="6" fill="#B89A4E"/>
+  <rect x="30" y="30" width="6" height="50" fill="#B89A4E"/>
+  <rect x="520" y="30" width="50" height="6" fill="#B89A4E"/>
+  <rect x="564" y="30" width="6" height="50" fill="#B89A4E"/>
+  <rect x="30" y="564" width="50" height="6" fill="#B89A4E"/>
+  <rect x="30" y="520" width="6" height="50" fill="#B89A4E"/>
+  <rect x="520" y="564" width="50" height="6" fill="#B89A4E"/>
+  <rect x="564" y="520" width="6" height="50" fill="#B89A4E"/>
 </svg>

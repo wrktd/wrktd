@@ -1,24 +1,37 @@
 @import "tailwindcss";
 
 @theme {
-  --color-black:   #060606;
-  --color-dark:    #0E0E0E;
-  --color-ash:     #1A1A1A;
-  --color-gray:    #3A3A3A;
-  --color-mid:     #6A6A6A;
-  --color-light:   #A8A8A8;
-  --color-white:   #F2F2F2;
+  --color-black:   #0C0A07;
+  --color-dark:    #1A1712;
+  --color-ash:     #2A2620;
+  --color-gray:    #6B6358;
+  --color-mid:     #9E9589;
+  --color-light:   #C8C2B8;
+  --color-white:   #F8F6F2;
   --color-gold:    #B89A4E;
   --color-gold-lt: #CCAF6A;
+  --color-cream:   #F8F6F2;
+  --color-surface: #FFFFFF;
 }
 
-html { scroll-behavior: smooth; color-scheme: dark; scroll-snap-type: y proximity; }
+/* ── Light section design tokens ────────────────────────────────── */
+:root {
+  --ink:       #111009;
+  --ink-2:     rgba(17,16,9,0.62);
+  --ink-3:     rgba(17,16,9,0.38);
+  --ink-4:     rgba(17,16,9,0.20);
+  --ink-5:     rgba(17,16,9,0.10);
+  --border-lt: rgba(17,16,9,0.09);
+  --card-lt:   rgba(17,16,9,0.04);
+}
+
+html { scroll-behavior: smooth; color-scheme: light dark; scroll-snap-type: y proximity; }
 
 section { scroll-snap-align: start; }
 
 body {
-  background: #060606;
-  color: #F2F2F2;
+  background: #F8F6F2;
+  color: #111009;
   font-family: var(--font-inter), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -38,23 +51,23 @@ body {
   text-transform: uppercase;
 }
 
-/* ── Glass panels ───────────────────────────────────────────────── */
+/* ── Glass panels — dark (nav, hero) ────────────────────────────── */
 .glass {
-  background: rgba(8, 8, 8, 0.78);
+  background: rgba(10, 8, 5, 0.84);
   backdrop-filter: blur(28px) saturate(1.2);
   -webkit-backdrop-filter: blur(28px) saturate(1.2);
-  border-top: 1px solid rgba(255,255,255,0.05);
+  border-top: 1px solid rgba(255,255,255,0.06);
 }
 
 .glass-mid {
-  background: rgba(14, 14, 14, 0.72);
+  background: rgba(14, 11, 7, 0.80);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border-top: 1px solid rgba(255,255,255,0.04);
+  border-top: 1px solid rgba(255,255,255,0.05);
 }
 
 .glass-light {
-  background: rgba(22, 22, 22, 0.65);
+  background: rgba(22, 18, 12, 0.72);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-top: 1px solid rgba(255,255,255,0.06);
@@ -69,10 +82,14 @@ body {
   z-index: 2;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 200px;
-  opacity: 0.025;
+  opacity: 0.018;
 }
 
 /* ── Animations ─────────────────────────────────────────────────── */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 @keyframes wrapDesign {
   0%   { clip-path: circle(0%   at 50% 50%); opacity: 0; transform: scale(0.97); }
   60%  { opacity: 1; }
@@ -92,7 +109,6 @@ body {
   appearance: none;
   width: 100%;
   height: 1px;
-  background: rgba(255,255,255,0.1);
   outline: none;
   cursor: pointer;
 }
@@ -102,14 +118,17 @@ body {
   border-radius: 50%;
   background: #B89A4E;
   cursor: pointer;
-  border: 2px solid #060606;
-  box-shadow: 0 0 12px rgba(184,154,78,0.4);
+  border: 2px solid #F8F6F2;
+  box-shadow: 0 0 12px rgba(184,154,78,0.35);
 }
 .wrktd-range::-moz-range-thumb {
   width: 16px; height: 16px;
   border-radius: 50%;
   background: #B89A4E;
   cursor: pointer;
-  border: 2px solid #060606;
-  box-shadow: 0 0 12px rgba(184,154,78,0.4);
+  border: 2px solid #F8F6F2;
+  box-shadow: 0 0 12px rgba(184,154,78,0.35);
 }
+/* dark-section range thumb */
+.dark-range::-webkit-slider-thumb { border-color: #0C0A07; }
+.dark-range::-moz-range-thumb     { border-color: #0C0A07; }

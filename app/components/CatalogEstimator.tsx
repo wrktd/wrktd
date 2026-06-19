@@ -22,32 +22,37 @@ function fmtHours(h: number) {
   return `${Math.round(h)} hrs`;
 }
 
+const INK  = "#111009";
+const INK2 = "rgba(17,16,9,0.62)";
+const INK3 = "rgba(17,16,9,0.38)";
+const INK4 = "rgba(17,16,9,0.22)";
+const BORDER = "1px solid rgba(17,16,9,0.09)";
+
 export default function CatalogEstimator() {
-  const [pos, setPos] = useState(designsToPos(20)); // default: 20 designs
+  const [pos, setPos] = useState(designsToPos(20));
   const designs = posToDesigns(pos);
 
-  // Math
-  const skus    = designs * 7 * 7;          // 7 product types × 7 sizes
-  const images  = skus * 7;                 // 7 listing images per SKU
-  const hours   = images * (20 / 60);       // 20 min per image manually
+  const skus   = designs * 7 * 7;   // 7 product types × 7 sizes
+  const images = skus * 7;           // 7 listing images per SKU
+  const hours  = designs * 4;        // 4 hours per design done manually
 
   const pct = pos / 100;
 
   return (
-    <section id="estimator" className="glass-mid py-28 px-6">
+    <section id="estimator" className="py-28 px-6" style={{ background: "#F8F6F2" }}>
       <div className="max-w-3xl mx-auto">
         <div className="flex items-center gap-3 mb-5">
           <div className="h-px w-8 bg-gold" />
           <span className="label text-gold">Estimate your catalog</span>
         </div>
 
-        <h2 className="font-display font-extrabold text-white leading-[0.88] mb-5"
-          style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)" }}>
+        <h2 className="font-display font-extrabold leading-[0.88] mb-5"
+          style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)", color: INK }}>
           How many designs<br />
-          <span style={{ color: "rgba(255,255,255,0.22)" }}>do you have?</span>
+          <span style={{ color: INK4 }}>do you have?</span>
         </h2>
 
-        <p className="text-base mb-14 leading-relaxed" style={{ color: "rgba(255,255,255,0.55)", maxWidth: "28rem" }}>
+        <p className="text-base mb-14 leading-relaxed" style={{ color: INK2, maxWidth: "28rem" }}>
           Drag to your design count. See the catalog — and the manual work — that WRKTD builds for you.
         </p>
 
@@ -57,7 +62,7 @@ export default function CatalogEstimator() {
             <span className="font-display font-bold text-gold" style={{ fontSize: "clamp(3rem, 7vw, 5rem)", lineHeight: 1 }}>
               {designs >= 1000 ? `${(designs / 1000).toFixed(designs >= 10000 ? 0 : 1)}K` : designs}
             </span>
-            <span className="label mb-2" style={{ color: "rgba(255,255,255,0.22)" }}>designs</span>
+            <span className="label mb-2" style={{ color: INK4 }}>designs</span>
           </div>
 
           <input
@@ -66,19 +71,19 @@ export default function CatalogEstimator() {
             onChange={(e) => setPos(Number(e.target.value))}
             className="wrktd-range"
             style={{
-              background: `linear-gradient(to right, #B89A4E ${pct * 100}%, rgba(255,255,255,0.1) ${pct * 100}%)`,
+              background: `linear-gradient(to right, #B89A4E ${pct * 100}%, rgba(17,16,9,0.12) ${pct * 100}%)`,
             }}
           />
           <div className="flex justify-between mt-2">
             {["1", "10", "100", "1K", "10K"].map((l) => (
-              <span key={l} className="label" style={{ color: "rgba(255,255,255,0.15)" }}>{l}</span>
+              <span key={l} className="label" style={{ color: INK4 }}>{l}</span>
             ))}
           </div>
         </div>
 
         {/* Output stats */}
         <div className="grid grid-cols-3 gap-px mb-6"
-          style={{ border: "1px solid rgba(255,255,255,0.06)", background: "rgba(255,255,255,0.06)" }}>
+          style={{ border: BORDER, background: "rgba(17,16,9,0.09)" }}>
           {[
             {
               value: fmt(skus),
@@ -94,28 +99,27 @@ export default function CatalogEstimator() {
             {
               value: fmtHours(hours),
               label: "hours avoided",
-              detail: "at 20 min per image manually",
+              detail: "at 4 hrs per design manually",
             },
           ].map((stat) => (
-            <div key={stat.label} className="p-5 lg:p-7"
-              style={{ background: "rgba(8,8,8,0.85)" }}>
+            <div key={stat.label} className="p-5 lg:p-7" style={{ background: "#ffffff" }}>
               <p className="font-display font-bold mb-1"
                 style={{
                   fontSize: "clamp(1.6rem, 3.5vw, 2.6rem)",
                   lineHeight: 1,
-                  color: stat.gold ? "#B89A4E" : "rgba(255,255,255,0.9)",
+                  color: stat.gold ? "#B89A4E" : INK,
                 }}>
                 {stat.value}
               </p>
-              <p className="label mb-2" style={{ color: stat.gold ? "#B89A4E" : "rgba(255,255,255,0.55)" }}>
+              <p className="label mb-2" style={{ color: stat.gold ? "#B89A4E" : INK3 }}>
                 {stat.label}
               </p>
-              <p className="text-xs" style={{ color: "rgba(255,255,255,0.28)" }}>{stat.detail}</p>
+              <p className="text-xs" style={{ color: INK4 }}>{stat.detail}</p>
             </div>
           ))}
         </div>
 
-        <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.38)" }}>
+        <p className="text-xs leading-relaxed" style={{ color: INK3 }}>
           Designs in, catalog out — as a single batch, not one product at a time. Every SKU, every image, every print-ready file.
         </p>
       </div>

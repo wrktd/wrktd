@@ -1,24 +1,27 @@
 "use client";
 import { useState } from "react";
 
+const INK  = "#111009";
+const INK2 = "rgba(17,16,9,0.62)";
+const INK3 = "rgba(17,16,9,0.38)";
+
 const FAQS = [
-  { q: "How long does it take to go live?", a: "About 5–7 days from your first upload. File production (mockups and print files) and store setup run in parallel — so you're not waiting on one before the other starts. After that, orders ship in 5–10 days automatically." },
-  { q: "What file formats do you accept?", a: "JPG, PNG, PSD, SVG, and AI. If your file resolution is on the low side for larger products, we'll flag it and offer to attempt an upscale before it goes to manufacturing." },
-  { q: "What if I already have a Shopify store?", a: "That's the most common setup. We connect directly to your existing store. Your customers never know anything changed on the backend — they just buy, and the order routes automatically." },
-  { q: "Do I need to rename my files a specific way?", a: "No. Upload with whatever filenames you have. Our system renames and organizes everything automatically based on your store name and the products you select for each design." },
-  { q: "What happens if an order fails or gets stuck?", a: "That's exactly what the monthly management plan covers. WRKTD monitors the fulfillment pipeline daily and handles routing issues directly. If something needs your attention, we reach out — you don't have to watch it yourself." },
-  { q: "Do I need to keep a card on file?", a: "Yes. To keep orders shipping automatically, you need a valid payment method on file or a prepaid fulfillment balance. No orders route to manufacturing without cleared funds — if a payment issue comes up, we flag it and reach out before anything is delayed." },
-  { q: "Can I keep selling on Etsy, Redbubble, or other marketplaces?", a: "Yes — WRKTD doesn't require exclusivity. Surface pattern designers and artists often keep their existing marketplace income and add a separate, higher-margin owned catalog through WRKTD alongside it." },
-  { q: "What if the colors don't match my screen exactly?", a: "WRKTD prepares files to manufacturer specifications, but exact color matching depends on the manufacturing process, substrate, and equipment — factors outside our control. We do a test order before your catalog goes live so you can see real output before any customer does." },
+  { q: "Do I need my own designs?", a: "Yes. WRKTD takes your existing artwork, logos, or patterns and turns them into a full product catalog. We don't create original designs — your art is the input; we handle everything from there." },
+  { q: "What if I have a lot of designs?", a: "That's exactly what WRKTD is built for. Whether it's 10 or 10,000 — every design you submit is processed as a single batch, not one at a time. There's no extra per-design work on your end." },
+  { q: "How long until I'm live?", a: "About 5–7 days from your first upload. File production (mockups, print files, listing images) and store setup run in parallel. After that, when a customer buys, orders ship in 5–10 days — designed to run automatically, monitored by WRKTD." },
+  { q: "What payment is required to get started?", a: "A card on file or a prepaid fulfillment balance is required before your account is active. This keeps orders shipping automatically. No payment method on file means orders can't route to manufacturing — we flag any issue before anything gets delayed." },
+  { q: "What file formats do you accept?", a: "JPG, PNG, PSD, SVG, and AI. If your file is below target resolution for larger products, we flag it and offer an upscale attempt before anything goes to manufacturing." },
+  { q: "What if an order fails or gets stuck?", a: "That's what the monthly management plan covers. WRKTD monitors the fulfillment pipeline and handles routing issues directly. If something needs your attention, we reach out — you don't have to watch it yourself." },
+  { q: "Can I keep selling on other platforms?", a: "Yes. WRKTD doesn't require exclusivity. Many clients keep existing marketplace income and add a higher-margin owned catalog through WRKTD alongside it." },
 ];
 
 function Item({ q, a, defaultOpen = false }: { q: string; a: string; defaultOpen?: boolean }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <div style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+    <div style={{ borderBottom: `1px solid rgba(17,16,9,0.09)` }}>
       <button className="w-full text-left py-6 flex items-start justify-between gap-6"
         onClick={() => setOpen(!open)}>
-        <span className="font-display font-bold text-white leading-snug" style={{ fontSize: "1.15rem" }}>{q}</span>
+        <span className="font-display font-bold leading-snug" style={{ fontSize: "1.1rem", color: INK }}>{q}</span>
         <span className="flex-shrink-0 mt-1 transition-transform duration-300"
           style={{ transform: open ? "rotate(45deg)" : "rotate(0deg)", color: "#B89A4E" }}>
           <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -27,7 +30,7 @@ function Item({ q, a, defaultOpen = false }: { q: string; a: string; defaultOpen
         </span>
       </button>
       <div className="overflow-hidden transition-all duration-300" style={{ maxHeight: open ? 400 : 0 }}>
-        <p className="pb-6 text-sm leading-relaxed pr-8" style={{ color: "rgba(255,255,255,0.58)" }}>{a}</p>
+        <p className="pb-6 text-sm leading-relaxed pr-8" style={{ color: INK2 }}>{a}</p>
       </div>
     </div>
   );
@@ -35,7 +38,7 @@ function Item({ q, a, defaultOpen = false }: { q: string; a: string; defaultOpen
 
 export default function FAQSection() {
   return (
-    <section id="faq" className="glass-light py-28 px-6">
+    <section id="faq" className="py-28 px-6" style={{ background: "#F8F6F2" }}>
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center gap-3 mb-5">
           <div className="h-px w-8 bg-gold" />
@@ -44,13 +47,16 @@ export default function FAQSection() {
 
         <div className="grid lg:grid-cols-[1fr_2fr] gap-16 items-start">
           <div>
-            <h2 className="font-display font-extrabold text-white leading-[0.88]"
-              style={{ fontSize: "clamp(2.4rem, 4vw, 3.5rem)" }}>
+            <h2 className="font-display font-extrabold leading-[0.88]"
+              style={{ fontSize: "clamp(2.4rem, 4vw, 3.5rem)", color: INK }}>
               Frequently<br />asked<br />
-              <span style={{ color: "rgba(255,255,255,0.2)" }}>questions.</span>
+              <span style={{ color: "rgba(17,16,9,0.22)" }}>questions.</span>
             </h2>
+            <p className="mt-6 text-sm leading-relaxed" style={{ color: INK3 }}>
+              Everything else gets answered during onboarding.
+            </p>
           </div>
-          <div>
+          <div style={{ borderTop: `1px solid rgba(17,16,9,0.09)` }}>
             {FAQS.map((faq, i) => <Item key={faq.q} q={faq.q} a={faq.a} defaultOpen={i === 0} />)}
           </div>
         </div>

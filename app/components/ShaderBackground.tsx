@@ -6,15 +6,14 @@ attribute vec2 a_pos;
 void main() { gl_Position = vec4(a_pos, 0.0, 1.0); }
 `;
 
-/* ── Shader: chrome Gaussian blobs — neutral silver tones ─────────
-   Pure Gaussian falloff, no hard edges anywhere.
-   Base is neutral near-black (no blue tint). Blobs are silver-gray
-   with very slight warm/cool variation — liquid chrome, not navy.   */
+/* ── Shader: warm amber-gold lava lamp ────────────────────────────
+   Warm near-black base. Blobs are rich amber and molten gold —
+   feels like warm product-photography studio lighting, not cold chrome. */
 const FRAG = `
 precision mediump float;
 
 uniform vec2  u_res;
-uniform vec2  u_mouse;   /* smoothed in JS */
+uniform vec2  u_mouse;
 uniform float u_time;
 uniform vec4  u_clicks[8];
 
@@ -23,35 +22,32 @@ void main() {
   vec2 mouse = vec2(u_mouse.x / u_res.x, 1.0 - u_mouse.y / u_res.y);
   float t    = u_time;
 
-  /* ── neutral dark base — no blue tint ──────────────────────── */
-  vec3 col = vec3(0.030, 0.030, 0.030);
+  /* warm near-black base — no cold gray tint */
+  vec3 col = vec3(0.055, 0.044, 0.028);
 
-  /* ── lava-lamp blob positions ───────────────────────────────
-     Very slow speeds: 0.045 – 0.085. Large vertical swing.      */
   vec2 p0 = vec2(0.32 + 0.16*sin(t*0.055 + 0.0),  0.50 + 0.38*sin(t*0.042 + 1.2));
   vec2 p1 = vec2(0.68 + 0.14*cos(t*0.048 + 2.5),  0.50 + 0.40*cos(t*0.038 + 0.8));
   vec2 p2 = vec2(0.50 + 0.10*sin(t*0.062 + 1.0),  0.32 + 0.30*sin(t*0.051 + 3.5));
   vec2 p3 = vec2(0.20 + 0.13*cos(t*0.045 + 0.5),  0.58 + 0.32*cos(t*0.058 + 2.0));
   vec2 p4 = vec2(0.80 + 0.11*sin(t*0.052 + 1.8),  0.44 + 0.34*sin(t*0.065 + 0.3));
 
-  /* σ = 0.24 in UV space — very soft, large blobs              */
   float s2 = 2.0 * 0.24 * 0.24;
   vec2 dv;
 
-  /* chrome silver tones: neutral grays with very slight warm/cool variation */
-  dv = uv - p0; col += vec3(0.38, 0.38, 0.40) * exp(-dot(dv,dv)/s2) * 0.48;
-  dv = uv - p1; col += vec3(0.32, 0.31, 0.33) * exp(-dot(dv,dv)/(s2*0.9)) * 0.44;
-  dv = uv - p2; col += vec3(0.42, 0.41, 0.42) * exp(-dot(dv,dv)/(s2*0.8)) * 0.40;
-  dv = uv - p3; col += vec3(0.30, 0.30, 0.31) * exp(-dot(dv,dv)/(s2*1.1)) * 0.38;
-  dv = uv - p4; col += vec3(0.36, 0.35, 0.36) * exp(-dot(dv,dv)/s2) * 0.42;
+  /* amber-gold blobs */
+  dv = uv - p0; col += vec3(0.55, 0.36, 0.06) * exp(-dot(dv,dv)/s2) * 0.60;
+  dv = uv - p1; col += vec3(0.45, 0.28, 0.04) * exp(-dot(dv,dv)/(s2*0.9)) * 0.54;
+  dv = uv - p2; col += vec3(0.64, 0.46, 0.09) * exp(-dot(dv,dv)/(s2*0.8)) * 0.50;
+  dv = uv - p3; col += vec3(0.40, 0.24, 0.03) * exp(-dot(dv,dv)/(s2*1.1)) * 0.48;
+  dv = uv - p4; col += vec3(0.52, 0.34, 0.07) * exp(-dot(dv,dv)/s2) * 0.52;
 
-  /* ── mouse: wide soft silver brightening ────────────────────── */
+  /* mouse: warm golden brightening */
   float ms2 = 2.0 * 0.28 * 0.28;
   dv = uv - mouse;
-  float mw = exp(-dot(dv,dv)/ms2) * 0.20;
-  col = col + col * mw + vec3(0.10, 0.10, 0.11) * mw;
+  float mw = exp(-dot(dv,dv)/ms2) * 0.28;
+  col = col + col * mw * 0.7 + vec3(0.22, 0.15, 0.04) * mw;
 
-  /* ── click: small soft glow at cursor, no ring, no hard edge ─ */
+  /* click: warm gold burst */
   for(int i=0;i<8;i++){
     if(u_clicks[i].w > 0.5){
       float age = t - u_clicks[i].z;
@@ -59,16 +55,14 @@ void main() {
         vec2 cp = vec2(u_clicks[i].x/u_res.x, 1.0 - u_clicks[i].y/u_res.y);
         float fade = max(0.0, 1.0 - age/0.9);
         dv = uv - cp;
-        /* σ = 0.032 — small, purely Gaussian, zero hardness */
-        float glow = exp(-dot(dv,dv)/(2.0*0.032*0.032));
-        col += vec3(0.22, 0.22, 0.24) * glow * fade * 0.75;
+        float glow = exp(-dot(dv,dv)/(2.0*0.034*0.034));
+        col += vec3(0.68, 0.50, 0.14) * glow * fade * 0.88;
       }
     }
   }
 
-  /* very gentle vignette — keep corners dark */
-  float vig = 1.0 - dot(uv - 0.5, uv - 0.5) * 0.65;
-  col *= clamp(vig, 0.35, 1.0);
+  float vig = 1.0 - dot(uv - 0.5, uv - 0.5) * 0.62;
+  col *= clamp(vig, 0.28, 1.0);
 
   gl_FragColor = vec4(clamp(col, 0.0, 1.0), 1.0);
 }
@@ -115,10 +109,7 @@ export default function ShaderBackground() {
     const uClicks = gl.getUniformLocation(prog, "u_clicks[0]");
 
     const start = performance.now();
-
-    /* raw target — updated on mouse events */
     const target = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-    /* smoothed position — lerped in render loop for buttery movement */
     const mouse  = { x: target.x, y: target.y };
 
     const MAX_C = 8;
@@ -135,16 +126,13 @@ export default function ShaderBackground() {
     resize();
     window.addEventListener("resize", resize);
 
-    /* update raw target only — smoothing happens in render loop */
-    const onMove = (e: MouseEvent) => { target.x = e.clientX; target.y = e.clientY; };
-
-    const onClick = (e: MouseEvent) => {
+    const onMove     = (e: MouseEvent) => { target.x = e.clientX; target.y = e.clientY; };
+    const onClick    = (e: MouseEvent) => {
       const t = (performance.now() - start) / 1000;
       if (clicks.length >= MAX_C) clicks.shift();
       clicks.push({ x: e.clientX, y: e.clientY, t });
     };
-
-    const onTouch = (e: TouchEvent) => {
+    const onTouch    = (e: TouchEvent) => {
       if (e.touches.length > 0) { target.x = e.touches[0].clientX; target.y = e.touches[0].clientY; }
     };
     const onTouchTap = (e: TouchEvent) => {
@@ -162,8 +150,6 @@ export default function ShaderBackground() {
 
     const render = () => {
       const t = (performance.now() - start) / 1000;
-
-      /* lerp mouse — 0.06 per frame ≈ buttery lag, no jitter */
       mouse.x += (target.x - mouse.x) * 0.06;
       mouse.y += (target.y - mouse.y) * 0.06;
 

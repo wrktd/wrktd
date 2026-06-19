@@ -1,3 +1,7 @@
+const INK  = "#111009";
+const INK2 = "rgba(17,16,9,0.62)";
+const INK3 = "rgba(17,16,9,0.38)";
+
 const POINTS = [
   {
     glyph: "I", title: "Done-for-you, not DIY",
@@ -8,51 +12,51 @@ const POINTS = [
     body: "Manufacturing partners don't review artwork before printing — if a file is wrong, the product prints wrong and ships to your customer. WRKTD adapts and prepares every file before it ever reaches manufacturing.",
   },
   {
-    glyph: "III", title: "Monitored, not abandoned",
-    body: "Your fulfillment pipeline is designed to run automatically after setup, with WRKTD monitoring the system and handling routing issues — not just hosting it and hoping nothing breaks.",
+    glyph: "III", title: "Every listing image, produced",
+    body: "Most sellers spend hours making 5–8 listing photos per product. WRKTD generates every one — white background, lifestyle, room context, detail — for every product at every size. You don't touch a single file.",
   },
   {
     glyph: "IV", title: "Batch-first from day one",
-    body: "One design becomes a full product family in a single batch. Ten designs, five product types, three sizes — 150 SKUs in 1–3 days. Scale your catalog without doing each product one at a time.",
+    body: "One design becomes a full product family in a single batch. Ten designs, seven product types, seven sizes — 490 SKUs in 1–3 days. Scale your catalog without doing each product one at a time.",
   },
 ];
 
 export default function DifferentiatorSection() {
   return (
-    <section className="glass-light py-28 px-6">
+    <section className="py-28 px-6" style={{ background: "#EDE9E3" }}>
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center gap-3 mb-5">
           <div className="h-px w-8 bg-gold" />
           <span className="label text-gold">Why WRKTD</span>
         </div>
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-20 gap-6">
-          <h2 className="font-display font-extrabold text-white leading-[0.88]"
-            style={{ fontSize: "clamp(2.4rem, 5vw, 4rem)" }}>
+          <h2 className="font-display font-extrabold leading-[0.88]"
+            style={{ fontSize: "clamp(2.4rem, 5vw, 4rem)", color: INK }}>
             A different kind<br />
-            <span style={{ color: "rgba(255,255,255,0.2)" }}>of home decor partner.</span>
+            <span style={{ color: "rgba(17,16,9,0.22)" }}>of home decor partner.</span>
           </h2>
-          <p className="text-sm max-w-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
+          <p className="text-sm max-w-xs leading-relaxed" style={{ color: INK2 }}>
             There are other ways to put designs on products. Here's what separates WRKTD.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-px" style={{ background: "rgba(255,255,255,0.04)" }}>
+        <div className="grid md:grid-cols-2 gap-px" style={{ background: "rgba(17,16,9,0.09)" }}>
           {POINTS.map((p, i) => (
             <div key={p.title} className="p-10 flex flex-col gap-6"
-              style={{ background: "rgba(8,8,8,0.6)", minHeight: 280 }}>
+              style={{ background: "#F8F6F2", minHeight: 280 }}>
               <div className="flex items-start justify-between">
                 <span className="font-display font-bold"
-                  style={{ fontSize: "3.5rem", lineHeight: 1, color: "rgba(184,154,78,0.18)" }}>
+                  style={{ fontSize: "3.5rem", lineHeight: 1, color: "rgba(184,154,78,0.22)" }}>
                   {p.glyph}
                 </span>
-                <span className="label" style={{ color: "rgba(255,255,255,0.12)" }}>{String(i + 1).padStart(2, "0")}</span>
+                <span className="label" style={{ color: "rgba(17,16,9,0.18)" }}>{String(i + 1).padStart(2, "0")}</span>
               </div>
               <div>
-                <h3 className="font-display font-bold text-white mb-3"
-                  style={{ fontSize: "clamp(1.3rem, 2vw, 1.7rem)" }}>
+                <h3 className="font-display font-bold mb-3"
+                  style={{ fontSize: "clamp(1.3rem, 2vw, 1.7rem)", color: INK }}>
                   {p.title}
                 </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.58)" }}>{p.body}</p>
+                <p className="text-sm leading-relaxed" style={{ color: INK2 }}>{p.body}</p>
               </div>
             </div>
           ))}
