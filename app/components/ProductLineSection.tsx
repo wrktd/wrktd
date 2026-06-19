@@ -1,3 +1,5 @@
+"use client";
+
 const PRODUCTS = [
   {
     label: "Area Rug",
