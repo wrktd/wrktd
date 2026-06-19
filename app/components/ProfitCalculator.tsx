@@ -1,11 +1,11 @@
-"use client";
+﻿"use client";
 import { useState } from "react";
 
-const INK  = "#111009";
-const INK2 = "rgba(17,16,9,0.60)";
-const INK3 = "rgba(17,16,9,0.38)";
-const INK4 = "rgba(17,16,9,0.22)";
-const BORDER = "1px solid rgba(17,16,9,0.09)";
+const INK  = "#0A0A0F";
+const INK2 = "rgba(10,10,15,0.60)";
+const INK3 = "rgba(10,10,15,0.38)";
+const INK4 = "rgba(10,10,15,0.22)";
+const BORDER = "1px solid rgba(10,10,15,0.09)";
 
 const PRODUCTS = [
   { id: "rug",      label: "Area Rug",       cost: 79,  defaultPrice: 149, defaultOrders: 15, maxPrice: 350, maxOrders: 100 },
@@ -32,7 +32,7 @@ function Slider({ label, value, min, max, step, display, onChange }: {
       </div>
       <input type="range" min={min} max={max} step={step} value={value}
         onChange={(e) => onChange(Number(e.target.value))} className="wrktd-range"
-        style={{ background: `linear-gradient(to right, #B89A4E 0%, #B89A4E ${pct}%, rgba(17,16,9,0.12) ${pct}%, rgba(17,16,9,0.12) 100%)` }} />
+        style={{ background: `linear-gradient(to right, #B89A4E 0%, #B89A4E ${pct}%, rgba(10,10,15,0.12) ${pct}%, rgba(10,10,15,0.12) 100%)` }} />
     </div>
   );
 }
@@ -52,7 +52,7 @@ export default function ProfitCalculator() {
   }
 
   return (
-    <section className="py-28 px-6" style={{ background: "#F8F6F2" }}>
+    <section className="py-28 px-6" style={{ background: "#FFFFFF" }}>
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center gap-3 mb-5">
           <div className="h-px w-8 bg-gold" />
@@ -65,7 +65,7 @@ export default function ProfitCalculator() {
             <span style={{ color: INK4 }}>product line could add.</span>
           </h2>
           <p className="text-sm max-w-xs leading-relaxed" style={{ color: INK2 }}>
-            Pick a product, set your selling price, estimate monthly orders — see a rough revenue potential.
+            Pick a product, set your selling price, estimate monthly orders â€” see a rough revenue potential.
           </p>
         </div>
 
@@ -78,7 +78,7 @@ export default function ProfitCalculator() {
               <div className="relative">
                 <select value={productId} onChange={(e) => handleProductChange(e.target.value)}
                   className="w-full appearance-none font-sans text-base font-medium pr-10 pl-4 py-3 cursor-pointer focus:outline-none"
-                  style={{ background: "#F8F6F2", border: BORDER, color: INK }}>
+                  style={{ background: "#FFFFFF", border: BORDER, color: INK }}>
                   {PRODUCTS.map((p) => (
                     <option key={p.id} value={p.id}>{p.label}</option>
                   ))}
@@ -91,7 +91,7 @@ export default function ProfitCalculator() {
                 </div>
               </div>
               <div className="flex items-center justify-between px-4 py-3"
-                style={{ background: "#F8F6F2", border: BORDER }}>
+                style={{ background: "#FFFFFF", border: BORDER }}>
                 <span className="text-xs" style={{ color: INK3 }}>Product &amp; fulfillment cost</span>
                 <span className="text-sm font-semibold" style={{ color: INK2 }}>quoted at onboarding</span>
               </div>
@@ -114,7 +114,7 @@ export default function ProfitCalculator() {
 
           {/* Result */}
           <div className="p-8 md:p-12 flex flex-col justify-between gap-12"
-            style={{ background: "#111009" }}>
+            style={{ background: "#0A0A0F" }}>
             <div>
               <p className="label mb-6" style={{ color: "rgba(255,255,255,0.45)" }}>Estimated monthly revenue potential</p>
               <p className="font-display font-bold text-gold leading-none"
@@ -134,7 +134,7 @@ export default function ProfitCalculator() {
                   </p>
                 </div>
                 <a href="#preview" className="label bg-gold text-black px-6 py-3 transition-colors hover:bg-gold-lt">
-                  Try it free →
+                  Try it free â†’
                 </a>
               </div>
             </div>
@@ -148,3 +148,4 @@ export default function ProfitCalculator() {
     </section>
   );
 }
+

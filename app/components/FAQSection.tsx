@@ -1,9 +1,9 @@
 "use client";
 import { useState } from "react";
 
-const INK  = "#111009";
-const INK2 = "rgba(17,16,9,0.62)";
-const INK3 = "rgba(17,16,9,0.38)";
+const INK  = "#0A0A0F";
+const INK2 = "rgba(10,10,15,0.62)";
+const INK3 = "rgba(10,10,15,0.38)";
 
 const FAQS = [
   { q: "Do I need my own designs?", a: "Yes. WRKTD takes your existing artwork, logos, or patterns and turns them into a full product catalog. We don't create original designs — your art is the input; we handle everything from there." },
@@ -18,7 +18,7 @@ const FAQS = [
 function Item({ q, a, defaultOpen = false }: { q: string; a: string; defaultOpen?: boolean }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <div style={{ borderBottom: `1px solid rgba(17,16,9,0.09)` }}>
+    <div style={{ borderBottom: `1px solid rgba(10,10,15,0.09)` }}>
       <button className="w-full text-left py-6 flex items-start justify-between gap-6"
         onClick={() => setOpen(!open)}>
         <span className="font-display font-bold leading-snug" style={{ fontSize: "1.1rem", color: INK }}>{q}</span>
@@ -38,7 +38,7 @@ function Item({ q, a, defaultOpen = false }: { q: string; a: string; defaultOpen
 
 export default function FAQSection() {
   return (
-    <section id="faq" className="py-28 px-6" style={{ background: "#F8F6F2" }}>
+    <section id="faq" className="py-28 px-6" style={{ background: "#FFFFFF" }}>
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center gap-3 mb-5">
           <div className="h-px w-8 bg-gold" />
@@ -50,13 +50,13 @@ export default function FAQSection() {
             <h2 className="font-display font-extrabold leading-[0.88]"
               style={{ fontSize: "clamp(2.4rem, 4vw, 3.5rem)", color: INK }}>
               Frequently<br />asked<br />
-              <span style={{ color: "rgba(17,16,9,0.22)" }}>questions.</span>
+              <span style={{ color: "rgba(10,10,15,0.22)" }}>questions.</span>
             </h2>
             <p className="mt-6 text-sm leading-relaxed" style={{ color: INK3 }}>
               Everything else gets answered during onboarding.
             </p>
           </div>
-          <div style={{ borderTop: `1px solid rgba(17,16,9,0.09)` }}>
+          <div style={{ borderTop: `1px solid rgba(10,10,15,0.09)` }}>
             {FAQS.map((faq, i) => <Item key={faq.q} q={faq.q} a={faq.a} defaultOpen={i === 0} />)}
           </div>
         </div>

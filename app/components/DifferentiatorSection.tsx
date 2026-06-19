@@ -1,4 +1,4 @@
-const INK  = "#111009";
+const INK  = "#0A0A0F";
 const INK2 = "rgba(17,16,9,0.62)";
 const INK3 = "rgba(17,16,9,0.38)";
 
@@ -23,7 +23,7 @@ const POINTS = [
 
 export default function DifferentiatorSection() {
   return (
-    <section className="py-28 px-6" style={{ background: "#EDE9E3" }}>
+    <section className="py-28 px-6" style={{ background: "#F5F5F8" }}>
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center gap-3 mb-5">
           <div className="h-px w-8 bg-gold" />
@@ -43,7 +43,7 @@ export default function DifferentiatorSection() {
         <div className="grid md:grid-cols-2 gap-px" style={{ background: "rgba(17,16,9,0.09)" }}>
           {POINTS.map((p, i) => (
             <div key={p.title} className="p-10 flex flex-col gap-6"
-              style={{ background: "#F8F6F2", minHeight: 280 }}>
+              style={{ background: "#FFFFFF", minHeight: 280 }}>
               <div className="flex items-start justify-between">
                 <span className="font-display font-bold"
                   style={{ fontSize: "3.5rem", lineHeight: 1, color: "rgba(184,154,78,0.22)" }}>

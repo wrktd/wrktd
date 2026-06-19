@@ -10,7 +10,7 @@ export default function StatStrip() {
     <section
       className="py-16 px-6"
       style={{
-        background:   "#111009",
+        background:   "#080810",
         borderTop:    "1px solid rgba(255,255,255,0.05)",
         borderBottom: "1px solid rgba(255,255,255,0.05)",
       }}

@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 
-// Logarithmic slider mapping: position 0-100 → 1-10,000 designs
 function posToDesigns(pos: number): number {
   return Math.max(1, Math.round(Math.pow(10, (pos / 100) * 4)));
 }
@@ -22,24 +21,24 @@ function fmtHours(h: number) {
   return `${Math.round(h)} hrs`;
 }
 
-const INK  = "#111009";
-const INK2 = "rgba(17,16,9,0.62)";
-const INK3 = "rgba(17,16,9,0.38)";
-const INK4 = "rgba(17,16,9,0.22)";
-const BORDER = "1px solid rgba(17,16,9,0.09)";
+const INK  = "#0A0A0F";
+const INK2 = "rgba(10,10,15,0.62)";
+const INK3 = "rgba(10,10,15,0.38)";
+const INK4 = "rgba(10,10,15,0.22)";
+const BORDER = "1px solid rgba(10,10,15,0.09)";
 
 export default function CatalogEstimator() {
   const [pos, setPos] = useState(designsToPos(20));
   const designs = posToDesigns(pos);
 
-  const skus   = designs * 7 * 7;   // 7 product types × 7 sizes
-  const images = skus * 7;           // 7 listing images per SKU
-  const hours  = designs * 4;        // 4 hours per design done manually
+  const skus   = designs * 7 * 7;
+  const images = skus * 7;
+  const hours  = designs * 4;
 
   const pct = pos / 100;
 
   return (
-    <section id="estimator" className="py-28 px-6" style={{ background: "#F8F6F2" }}>
+    <section id="estimator" className="py-28 px-6" style={{ background: "#FFFFFF" }}>
       <div className="max-w-3xl mx-auto">
         <div className="flex items-center gap-3 mb-5">
           <div className="h-px w-8 bg-gold" />
@@ -71,7 +70,7 @@ export default function CatalogEstimator() {
             onChange={(e) => setPos(Number(e.target.value))}
             className="wrktd-range"
             style={{
-              background: `linear-gradient(to right, #B89A4E ${pct * 100}%, rgba(17,16,9,0.12) ${pct * 100}%)`,
+              background: `linear-gradient(to right, #B89A4E ${pct * 100}%, rgba(10,10,15,0.12) ${pct * 100}%)`,
             }}
           />
           <div className="flex justify-between mt-2">
@@ -83,26 +82,13 @@ export default function CatalogEstimator() {
 
         {/* Output stats */}
         <div className="grid grid-cols-3 gap-px mb-6"
-          style={{ border: BORDER, background: "rgba(17,16,9,0.09)" }}>
+          style={{ border: BORDER, background: "rgba(10,10,15,0.09)" }}>
           {[
-            {
-              value: fmt(skus),
-              label: "total SKUs",
-              detail: `${designs} × 7 products × 7 sizes`,
-            },
-            {
-              value: fmt(images),
-              label: "listing images",
-              detail: `${fmt(skus)} SKUs × 7 images each`,
-              gold: true,
-            },
-            {
-              value: fmtHours(hours),
-              label: "hours avoided",
-              detail: "at 4 hrs per design manually",
-            },
+            { value: fmt(skus),        label: "total SKUs",      detail: `${designs} × 7 products × 7 sizes`, gold: false },
+            { value: fmt(images),      label: "listing images",  detail: `${fmt(skus)} SKUs × 7 images each`,  gold: true  },
+            { value: fmtHours(hours),  label: "hours avoided",   detail: "at 4 hrs per design manually",       gold: false },
           ].map((stat) => (
-            <div key={stat.label} className="p-5 lg:p-7" style={{ background: "#ffffff" }}>
+            <div key={stat.label} className="p-5 lg:p-7" style={{ background: "#FFFFFF" }}>
               <p className="font-display font-bold mb-1"
                 style={{
                   fontSize: "clamp(1.6rem, 3.5vw, 2.6rem)",

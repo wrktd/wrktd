@@ -1,4 +1,4 @@
-const INK  = "#111009";
+const INK  = "#0A0A0F";
 const INK2 = "rgba(17,16,9,0.60)";
 const INK3 = "rgba(17,16,9,0.35)";
 const INK4 = "rgba(17,16,9,0.18)";
@@ -20,7 +20,7 @@ const STEPS = [
 
 export default function HowItWorksSection() {
   return (
-    <section id="how-it-works" className="py-28 px-6 overflow-hidden" style={{ background: "#F8F6F2" }}>
+    <section id="how-it-works" className="py-28 px-6 overflow-hidden" style={{ background: "#FFFFFF" }}>
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="flex items-center gap-3 mb-5">
           <div className="h-px w-8 bg-gold" />

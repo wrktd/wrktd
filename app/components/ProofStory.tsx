@@ -1,12 +1,12 @@
-const INK  = "#111009";
-const INK2 = "rgba(17,16,9,0.62)";
-const INK3 = "rgba(17,16,9,0.38)";
-const INK4 = "rgba(17,16,9,0.22)";
-const CARD = { background: "#ffffff", border: "1px solid rgba(17,16,9,0.08)" };
+﻿const INK  = "#0A0A0F";
+const INK2 = "rgba(10,10,15,0.62)";
+const INK3 = "rgba(10,10,15,0.38)";
+const INK4 = "rgba(10,10,15,0.22)";
+const CARD = { background: "#ffffff", border: "1px solid rgba(10,10,15,0.08)" };
 
 const details = [
   { title: "One design provided by the client",
-    desc:  "Existing artwork they already owned — no new creative commissioned." },
+    desc:  "Existing artwork they already owned â€” no new creative commissioned." },
   { title: "WRKTD built the full catalog",
     desc:  "Mockups, print-ready files, product listings, and fulfillment setup." },
   { title: "Orders shipped automatically",
@@ -15,7 +15,7 @@ const details = [
 
 export default function ProofStory() {
   return (
-    <section className="py-28 px-6" style={{ background: "#F8F6F2" }}>
+    <section className="py-28 px-6" style={{ background: "#FFFFFF" }}>
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center gap-3 mb-16">
           <div className="h-px w-8 bg-gold" />
@@ -23,7 +23,7 @@ export default function ProofStory() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-          {/* Left — story + stat */}
+          {/* Left â€” story + stat */}
           <div>
             <h2
               className="font-display font-extrabold leading-[0.9] mb-8"
@@ -43,12 +43,12 @@ export default function ProofStory() {
                 $25K
               </p>
               <p className="label mt-3" style={{ color: "rgba(184,154,78,0.55)" }}>
-                first-month revenue — from designs they already owned
+                first-month revenue â€” from designs they already owned
               </p>
             </div>
           </div>
 
-          {/* Right — breakdown */}
+          {/* Right â€” breakdown */}
           <div className="flex flex-col gap-4 lg:pt-8">
             {details.map(({ title, desc }) => (
               <div key={title} className="p-6" style={CARD}>
@@ -65,3 +65,4 @@ export default function ProofStory() {
     </section>
   );
 }
+

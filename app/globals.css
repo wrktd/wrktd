@@ -1,28 +1,27 @@
 @import "tailwindcss";
 
 @theme {
-  --color-black:   #0C0A07;
-  --color-dark:    #1A1712;
-  --color-ash:     #2A2620;
-  --color-gray:    #6B6358;
-  --color-mid:     #9E9589;
-  --color-light:   #C8C2B8;
-  --color-white:   #F8F6F2;
+  --color-black:   #080810;
+  --color-dark:    #10101A;
+  --color-ash:     #1A1A28;
+  --color-gray:    #3A3A4A;
+  --color-mid:     #6A6A7A;
+  --color-light:   #A8A8B8;
+  --color-white:   #FFFFFF;
   --color-gold:    #B89A4E;
   --color-gold-lt: #CCAF6A;
-  --color-cream:   #F8F6F2;
   --color-surface: #FFFFFF;
 }
 
 /* ── Light section design tokens ────────────────────────────────── */
 :root {
-  --ink:       #111009;
-  --ink-2:     rgba(17,16,9,0.62);
-  --ink-3:     rgba(17,16,9,0.38);
-  --ink-4:     rgba(17,16,9,0.20);
-  --ink-5:     rgba(17,16,9,0.10);
-  --border-lt: rgba(17,16,9,0.09);
-  --card-lt:   rgba(17,16,9,0.04);
+  --ink:       #0A0A0F;
+  --ink-2:     rgba(10,10,15,0.62);
+  --ink-3:     rgba(10,10,15,0.40);
+  --ink-4:     rgba(10,10,15,0.22);
+  --ink-5:     rgba(10,10,15,0.10);
+  --border-lt: rgba(10,10,15,0.09);
+  --card-lt:   rgba(10,10,15,0.04);
 }
 
 html { scroll-behavior: smooth; color-scheme: light dark; scroll-snap-type: y proximity; }
@@ -30,8 +29,8 @@ html { scroll-behavior: smooth; color-scheme: light dark; scroll-snap-type: y pr
 section { scroll-snap-align: start; }
 
 body {
-  background: #F8F6F2;
-  color: #111009;
+  background: #FFFFFF;
+  color: #0A0A0F;
   font-family: var(--font-inter), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -51,23 +50,23 @@ body {
   text-transform: uppercase;
 }
 
-/* ── Glass panels — dark (nav, hero) ────────────────────────────── */
+/* ── Glass panels — dark (nav, hero, finalcta) ──────────────────── */
 .glass {
-  background: rgba(10, 8, 5, 0.84);
-  backdrop-filter: blur(28px) saturate(1.2);
-  -webkit-backdrop-filter: blur(28px) saturate(1.2);
+  background: rgba(6, 6, 14, 0.86);
+  backdrop-filter: blur(28px) saturate(1.4);
+  -webkit-backdrop-filter: blur(28px) saturate(1.4);
   border-top: 1px solid rgba(255,255,255,0.06);
 }
 
 .glass-mid {
-  background: rgba(14, 11, 7, 0.80);
+  background: rgba(8, 8, 18, 0.82);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border-top: 1px solid rgba(255,255,255,0.05);
 }
 
 .glass-light {
-  background: rgba(22, 18, 12, 0.72);
+  background: rgba(10, 10, 22, 0.75);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-top: 1px solid rgba(255,255,255,0.06);
@@ -118,7 +117,7 @@ body {
   border-radius: 50%;
   background: #B89A4E;
   cursor: pointer;
-  border: 2px solid #F8F6F2;
+  border: 2px solid #FFFFFF;
   box-shadow: 0 0 12px rgba(184,154,78,0.35);
 }
 .wrktd-range::-moz-range-thumb {
@@ -126,9 +125,9 @@ body {
   border-radius: 50%;
   background: #B89A4E;
   cursor: pointer;
-  border: 2px solid #F8F6F2;
+  border: 2px solid #FFFFFF;
   box-shadow: 0 0 12px rgba(184,154,78,0.35);
 }
 /* dark-section range thumb */
-.dark-range::-webkit-slider-thumb { border-color: #0C0A07; }
-.dark-range::-moz-range-thumb     { border-color: #0C0A07; }
+.dark-range::-webkit-slider-thumb { border-color: #080810; }
+.dark-range::-moz-range-thumb     { border-color: #080810; }
