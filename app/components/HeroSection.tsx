@@ -204,6 +204,19 @@ export default function HeroSection() {
                 imageUrl={loading ? null : displayUrl}
               />
             </div>
+
+            {/* Scale callout */}
+            <div className="mt-6 flex items-center justify-between px-1">
+              <p className="text-xs" style={{ color: "rgba(255,255,255,0.22)" }}>
+                7 products · 7 sizes · 7 listing images
+              </p>
+              <p className="font-display font-bold text-gold" style={{ fontSize: "0.95rem" }}>
+                343 files
+              </p>
+            </div>
+            <p className="text-xs mt-1 px-1" style={{ color: "rgba(255,255,255,0.18)" }}>
+              per design — produced by WRKTD
+            </p>
           </div>
 
         </div>
