@@ -1,7 +1,7 @@
-const INK  = "#0A0A0F";
-const INK2 = "rgba(17,16,9,0.60)";
-const INK3 = "rgba(17,16,9,0.35)";
-const INK4 = "rgba(17,16,9,0.18)";
+const FG  = "#F0F0F0";
+const FG2 = "rgba(240,240,240,0.58)";
+const FG3 = "rgba(240,240,240,0.34)";
+const FG4 = "rgba(240,240,240,0.14)";
 
 const STEPS = [
   {
@@ -20,45 +20,42 @@ const STEPS = [
 
 export default function HowItWorksSection() {
   return (
-    <section id="how-it-works" className="py-28 px-6 overflow-hidden" style={{ background: "#FFFFFF" }}>
-      <div className="relative z-10 max-w-7xl mx-auto">
-        <div className="flex items-center gap-3 mb-5">
-          <div className="h-px w-8 bg-gold" />
-          <span className="label text-gold">Process</span>
+    <section id="how-it-works" className="py-32 px-6" style={{ background: "#000000", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+      <div className="max-w-6xl mx-auto">
+
+        <div className="mb-14">
+          <span className="pill"><span className="pill-dot" />Process</span>
         </div>
+
         <h2 className="font-display font-extrabold leading-[0.88] mb-20"
-          style={{ fontSize: "clamp(2.4rem, 5vw, 4rem)", color: INK }}>
+          style={{ fontSize: "clamp(2.8rem, 6vw, 5rem)", color: FG }}>
           From upload to live orders<br />
-          <span style={{ color: INK4 }}>in about 5–7 days.</span>
+          <span style={{ color: FG4 }}>in about 5–7 days.</span>
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-0">
-          {STEPS.map((step, i) => (
-            <div key={step.n} className="relative"
-              style={{
-                borderLeft:  i === 0 ? "1px solid rgba(184,154,78,0.25)" : "none",
-                borderRight: "1px solid rgba(184,154,78,0.25)",
-                padding: "0 2.5rem 0 2.5rem",
-              }}>
-              <div className="font-display font-bold mb-8 leading-none select-none"
-                style={{ fontSize: "clamp(4rem, 8vw, 7rem)", color: "rgba(184,154,78,0.10)", lineHeight: 1 }}>
+        <div className="grid md:grid-cols-3 gap-5">
+          {STEPS.map((step) => (
+            <div key={step.n} className="p-8 flex flex-col"
+              style={{ background: "#0C0C0C", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, minHeight: 280 }}>
+              <div className="font-display font-extrabold mb-10 leading-none select-none"
+                style={{ fontSize: "5rem", color: "rgba(184,154,78,0.08)", lineHeight: 1 }}>
                 {step.n}
               </div>
-              <span className="label block mb-3" style={{ color: "rgba(184,154,78,0.6)" }}>{step.time}</span>
+              <span className="label block mb-4" style={{ color: "rgba(184,154,78,0.55)" }}>{step.time}</span>
               <h3 className="font-display font-bold mb-4"
-                style={{ fontSize: "clamp(1.4rem, 2.5vw, 2rem)", color: INK }}>
+                style={{ fontSize: "clamp(1.3rem, 2vw, 1.6rem)", color: FG }}>
                 {step.title}
               </h3>
-              <p className="text-sm leading-relaxed" style={{ color: INK2 }}>{step.body}</p>
+              <p className="text-sm leading-relaxed mt-auto" style={{ color: FG2 }}>{step.body}</p>
             </div>
           ))}
         </div>
 
-        <div className="mt-20 py-8 px-10 flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-16"
-          style={{ borderTop: "1px solid rgba(184,154,78,0.18)" }}>
-          <p className="label flex-shrink-0" style={{ color: "rgba(184,154,78,0.5)" }}>Client-facing language</p>
-          <p className="font-display font-light text-lg md:text-xl"
-            style={{ color: INK3, lineHeight: 1.5 }}>
+        <div className="mt-12 p-8 flex flex-col md:flex-row items-start gap-6 md:gap-16"
+          style={{ background: "#0C0C0C", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16 }}>
+          <p className="label flex-shrink-0" style={{ color: "rgba(184,154,78,0.45)" }}>What we tell clients</p>
+          <p className="text-base font-light"
+            style={{ color: FG3, lineHeight: 1.7 }}>
             "We'll have your catalog ready and your store connected in about 5–7 days. After that, when your customers buy something, it's designed to ship automatically in 5–10 days — and we monitor the system to catch and fix anything that needs attention."
           </p>
         </div>

@@ -14,31 +14,30 @@ const PLANS = [
   { name: "Enterprise", size: "500+ products",       fee: "Custom"        },
 ];
 
-const borderMid = "1px solid rgba(255,255,255,0.05)";
+const borderMid = "1px solid rgba(255,255,255,0.07)";
 const borderGold = "1px solid rgba(184,154,78,0.15)";
 
 export default function PricingSection() {
   return (
-    <section id="pricing" className="glass-mid py-28 px-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex items-center gap-3 mb-5">
-          <div className="h-px w-8 bg-gold" />
-          <span className="label text-gold">Pricing</span>
+    <section id="pricing" className="py-32 px-6" style={{ background: "#000000", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+      <div className="max-w-6xl mx-auto">
+        <div className="mb-14">
+          <span className="pill"><span className="pill-dot" />Pricing</span>
         </div>
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-20 gap-6">
           <h2 className="font-display font-extrabold text-white leading-[0.88]"
-            style={{ fontSize: "clamp(2.4rem, 5vw, 4rem)" }}>
+            style={{ fontSize: "clamp(2.8rem, 6vw, 5rem)" }}>
             Simple, transparent<br />
-            <span style={{ color: "rgba(255,255,255,0.2)" }}>pricing.</span>
+            <span style={{ color: "rgba(255,255,255,0.14)" }}>pricing.</span>
           </h2>
-          <p className="text-sm max-w-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
+          <p className="text-base max-w-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.50)" }}>
             A one-time batch fee to build your catalog, a monthly fee to keep everything running, and a per-order product cost when sales come in.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 mb-8">
+        <div className="grid lg:grid-cols-2 gap-5 mb-5">
           {/* Batch fee */}
-          <div style={{ border: borderMid }}>
+          <div style={{ border: borderMid, borderRadius: 16, background: "#0C0C0C", overflow: "hidden" }}>
             <div className="px-8 py-7" style={{ borderBottom: borderMid, background: "rgba(255,255,255,0.02)" }}>
               <span className="label text-gold block mb-2">One-time</span>
               <h3 className="font-display font-bold text-white" style={{ fontSize: "1.9rem" }}>Mockup Batch Fee</h3>
@@ -72,8 +71,8 @@ export default function PricingSection() {
           </div>
 
           {/* Monthly + Manufacturing */}
-          <div className="flex flex-col gap-8">
-            <div style={{ border: borderMid }}>
+          <div className="flex flex-col gap-5">
+            <div style={{ border: borderMid, borderRadius: 16, background: "#0C0C0C", overflow: "hidden" }}>
               <div className="px-8 py-7" style={{ borderBottom: borderMid, background: "rgba(255,255,255,0.02)" }}>
                 <span className="label text-gold block mb-2">Monthly recurring</span>
                 <h3 className="font-display font-bold text-white" style={{ fontSize: "1.9rem" }}>Hosting + Management</h3>
@@ -102,7 +101,7 @@ export default function PricingSection() {
             </div>
 
             <div className="px-8 py-7 flex flex-col gap-3"
-              style={{ border: borderMid, background: "rgba(255,255,255,0.02)" }}>
+              style={{ border: borderMid, background: "#0C0C0C", borderRadius: 16 }}>
               <span className="label text-gold">Per order</span>
               <h3 className="font-display font-bold text-white" style={{ fontSize: "1.9rem" }}>Manufacturing Cost</h3>
               <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.28)" }}>
@@ -112,7 +111,7 @@ export default function PricingSection() {
           </div>
         </div>
 
-        <div className="px-8 py-6 flex items-start gap-4" style={{ border: borderMid, background: "rgba(255,255,255,0.01)" }}>
+        <div className="px-8 py-6 flex items-start gap-4" style={{ border: borderMid, background: "#0C0C0C", borderRadius: 14 }}>
           <div className="w-1.5 h-1.5 rounded-full bg-gold mt-1.5 flex-shrink-0" />
           <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.28)" }}>
             <span className="font-semibold text-white">Payment on file required.</span>{" "}

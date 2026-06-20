@@ -6,10 +6,9 @@ attribute vec2 a_pos;
 void main() { gl_Position = vec4(a_pos, 0.0, 1.0); }
 `;
 
-/* ── Shader: deep navy — cool, trustworthy, premium ──────────────────
-   Near-black base with a subtle blue tint. Blobs are electric deep blue
-   and indigo — think midnight sky, premium financial product, Stripe.
-   Completely different temperature from the content sections. */
+/* ── Shader: neutral charcoal — premium, minimal, agency ─────────────
+   Near-true-black base. Barely-visible neutral blobs breathe slowly.
+   Mouse hover lifts brightness slightly. Click bursts gold. */
 const FRAG = `
 precision mediump float;
 
@@ -23,8 +22,8 @@ void main() {
   vec2 mouse = vec2(u_mouse.x / u_res.x, 1.0 - u_mouse.y / u_res.y);
   float t    = u_time;
 
-  /* deep navy-black base — cool, not warm */
-  vec3 col = vec3(0.022, 0.022, 0.048);
+  /* near-true-black charcoal base */
+  vec3 col = vec3(0.030, 0.030, 0.030);
 
   vec2 p0 = vec2(0.32 + 0.16*sin(t*0.055 + 0.0),  0.50 + 0.38*sin(t*0.042 + 1.2));
   vec2 p1 = vec2(0.68 + 0.14*cos(t*0.048 + 2.5),  0.50 + 0.40*cos(t*0.038 + 0.8));
@@ -32,32 +31,32 @@ void main() {
   vec2 p3 = vec2(0.20 + 0.13*cos(t*0.045 + 0.5),  0.58 + 0.32*cos(t*0.058 + 2.0));
   vec2 p4 = vec2(0.80 + 0.11*sin(t*0.052 + 1.8),  0.44 + 0.34*sin(t*0.065 + 0.3));
 
-  float s2 = 2.0 * 0.24 * 0.24;
+  float s2 = 2.0 * 0.26 * 0.26;
   vec2 dv;
 
-  /* deep blue / indigo blobs */
-  dv = uv - p0; col += vec3(0.06, 0.12, 0.52) * exp(-dot(dv,dv)/s2) * 0.70;
-  dv = uv - p1; col += vec3(0.04, 0.08, 0.42) * exp(-dot(dv,dv)/(s2*0.9)) * 0.62;
-  dv = uv - p2; col += vec3(0.10, 0.18, 0.58) * exp(-dot(dv,dv)/(s2*0.8)) * 0.55;
-  dv = uv - p3; col += vec3(0.03, 0.06, 0.38) * exp(-dot(dv,dv)/(s2*1.1)) * 0.58;
-  dv = uv - p4; col += vec3(0.08, 0.14, 0.48) * exp(-dot(dv,dv)/s2) * 0.60;
+  /* very subtle neutral-charcoal blobs — barely visible, slow drift */
+  dv = uv - p0; col += vec3(0.07, 0.07, 0.07) * exp(-dot(dv,dv)/s2) * 0.80;
+  dv = uv - p1; col += vec3(0.06, 0.06, 0.06) * exp(-dot(dv,dv)/(s2*0.9)) * 0.70;
+  dv = uv - p2; col += vec3(0.08, 0.08, 0.08) * exp(-dot(dv,dv)/(s2*0.8)) * 0.60;
+  dv = uv - p3; col += vec3(0.05, 0.05, 0.06) * exp(-dot(dv,dv)/(s2*1.1)) * 0.65;
+  dv = uv - p4; col += vec3(0.07, 0.07, 0.07) * exp(-dot(dv,dv)/s2) * 0.65;
 
-  /* mouse: electric blue brightening */
-  float ms2 = 2.0 * 0.28 * 0.28;
+  /* mouse: very subtle lift */
+  float ms2 = 2.0 * 0.30 * 0.30;
   dv = uv - mouse;
-  float mw = exp(-dot(dv,dv)/ms2) * 0.30;
-  col = col + col * mw * 0.8 + vec3(0.08, 0.18, 0.60) * mw;
+  float mw = exp(-dot(dv,dv)/ms2) * 0.22;
+  col = col + col * mw * 0.6 + vec3(0.06, 0.06, 0.06) * mw;
 
-  /* click: electric blue burst */
+  /* click: gold burst */
   for(int i=0;i<8;i++){
     if(u_clicks[i].w > 0.5){
       float age = t - u_clicks[i].z;
-      if(age >= 0.0 && age < 0.9){
+      if(age >= 0.0 && age < 1.1){
         vec2 cp = vec2(u_clicks[i].x/u_res.x, 1.0 - u_clicks[i].y/u_res.y);
-        float fade = max(0.0, 1.0 - age/0.9);
+        float fade = max(0.0, 1.0 - age/1.1);
         dv = uv - cp;
-        float glow = exp(-dot(dv,dv)/(2.0*0.034*0.034));
-        col += vec3(0.20, 0.45, 1.00) * glow * fade * 0.85;
+        float glow = exp(-dot(dv,dv)/(2.0*0.040*0.040));
+        col += vec3(0.72, 0.60, 0.31) * glow * fade * 0.70;
       }
     }
   }

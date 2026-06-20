@@ -1,9 +1,9 @@
 "use client";
 import { useState } from "react";
 
-const INK  = "#0A0A0F";
-const INK2 = "rgba(10,10,15,0.62)";
-const INK3 = "rgba(10,10,15,0.38)";
+const FG  = "#F0F0F0";
+const FG2 = "rgba(240,240,240,0.58)";
+const FG3 = "rgba(240,240,240,0.34)";
 
 const FAQS = [
   { q: "Do I need my own designs?", a: "Yes. WRKTD takes your existing artwork, logos, or patterns and turns them into a full product catalog. We don't create original designs — your art is the input; we handle everything from there." },
@@ -18,10 +18,10 @@ const FAQS = [
 function Item({ q, a, defaultOpen = false }: { q: string; a: string; defaultOpen?: boolean }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <div style={{ borderBottom: `1px solid rgba(10,10,15,0.09)` }}>
-      <button className="w-full text-left py-6 flex items-start justify-between gap-6"
+    <div style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+      <button className="w-full text-left py-7 flex items-start justify-between gap-6"
         onClick={() => setOpen(!open)}>
-        <span className="font-display font-bold leading-snug" style={{ fontSize: "1.1rem", color: INK }}>{q}</span>
+        <span className="font-display font-bold leading-snug" style={{ fontSize: "1.1rem", color: FG }}>{q}</span>
         <span className="flex-shrink-0 mt-1 transition-transform duration-300"
           style={{ transform: open ? "rotate(45deg)" : "rotate(0deg)", color: "#B89A4E" }}>
           <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -30,7 +30,7 @@ function Item({ q, a, defaultOpen = false }: { q: string; a: string; defaultOpen
         </span>
       </button>
       <div className="overflow-hidden transition-all duration-300" style={{ maxHeight: open ? 400 : 0 }}>
-        <p className="pb-6 text-sm leading-relaxed pr-8" style={{ color: INK2 }}>{a}</p>
+        <p className="pb-7 text-sm leading-relaxed pr-8" style={{ color: FG2 }}>{a}</p>
       </div>
     </div>
   );
@@ -38,25 +38,25 @@ function Item({ q, a, defaultOpen = false }: { q: string; a: string; defaultOpen
 
 export default function FAQSection() {
   return (
-    <section id="faq" className="py-28 px-6" style={{ background: "#FFFFFF" }}>
-      <div className="max-w-7xl mx-auto">
-        <div className="flex items-center gap-3 mb-5">
-          <div className="h-px w-8 bg-gold" />
-          <span className="label text-gold">FAQ</span>
+    <section id="faq" className="py-32 px-6" style={{ background: "#050505", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+      <div className="max-w-6xl mx-auto">
+
+        <div className="mb-14">
+          <span className="pill"><span className="pill-dot" />FAQ</span>
         </div>
 
-        <div className="grid lg:grid-cols-[1fr_2fr] gap-16 items-start">
+        <div className="grid lg:grid-cols-[1fr_2fr] gap-20 items-start">
           <div>
             <h2 className="font-display font-extrabold leading-[0.88]"
-              style={{ fontSize: "clamp(2.4rem, 4vw, 3.5rem)", color: INK }}>
+              style={{ fontSize: "clamp(2.6rem, 5vw, 4rem)", color: FG }}>
               Frequently<br />asked<br />
-              <span style={{ color: "rgba(10,10,15,0.22)" }}>questions.</span>
+              <span style={{ color: "rgba(240,240,240,0.14)" }}>questions.</span>
             </h2>
-            <p className="mt-6 text-sm leading-relaxed" style={{ color: INK3 }}>
+            <p className="mt-8 text-sm leading-relaxed" style={{ color: FG3 }}>
               Everything else gets answered during onboarding.
             </p>
           </div>
-          <div style={{ borderTop: `1px solid rgba(10,10,15,0.09)` }}>
+          <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
             {FAQS.map((faq, i) => <Item key={faq.q} q={faq.q} a={faq.a} defaultOpen={i === 0} />)}
           </div>
         </div>

@@ -69,10 +69,8 @@ export default function FinalCTA() {
         }} />
 
         <div className="relative text-center mb-16">
-          <div className="flex items-center justify-center gap-4 mb-8">
-            <div className="h-px w-10" style={{ background: "rgba(184,154,78,0.25)" }} />
-            <span className="label" style={{ color: "rgba(184,154,78,0.4)" }}>Ready when you are</span>
-            <div className="h-px w-10" style={{ background: "rgba(184,154,78,0.25)" }} />
+          <div className="flex justify-center mb-10">
+            <span className="pill"><span className="pill-dot" />Ready when you are</span>
           </div>
           <h2 className="font-display font-extrabold text-white leading-[0.88] mb-5"
             style={{ fontSize: "clamp(2.8rem, 6vw, 5rem)" }}>

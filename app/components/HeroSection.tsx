@@ -97,9 +97,8 @@ export default function HeroSection() {
 
           {/* ── Left: headline + upload ── */}
           <div>
-            <div className="flex items-center gap-4 mb-10">
-              <div className="h-px w-8 bg-gold" />
-              <span className="label text-gold">Done-for-you home decor</span>
+            <div className="mb-10">
+              <span className="pill"><span className="pill-dot" />Done-for-you home decor</span>
             </div>
 
             <h1
