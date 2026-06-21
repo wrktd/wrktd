@@ -1,10 +1,14 @@
+import Image from "next/image";
+
 export default function Footer() {
   return (
     <footer className="py-16 px-6 md:px-10"
       style={{ background: "var(--bg-soft)", borderTop: "1px solid var(--bd)" }}>
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
         <div>
-          <p className="font-display font-bold tracking-[0.18em] text-2xl mb-3" style={{ color: "var(--fg)" }}>WRKTD</p>
+          <div className="mb-3">
+            <Image src="/logo.png" alt="WRKTD" width={120} height={36} style={{ objectFit: "contain", filter: "var(--logo-filter, none)" }} />
+          </div>
           <p className="text-xs leading-relaxed max-w-xs" style={{ color: "var(--fg-4)" }}>
             Done-for-you home decor products for brands, creators, and artists with existing designs and audiences.
           </p>
