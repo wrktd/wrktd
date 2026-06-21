@@ -12,70 +12,57 @@ const PATTERNS: PatternDef[] = [
       "linear-gradient(45deg,  transparent 75%, rgba(255,255,255,.12) 75%)",
       "linear-gradient(-45deg, transparent 75%, rgba(255,255,255,.12) 75%)",
     ].join(","),
-    size: "24px 24px",
-    pos: "0 0, 0 12px, 12px -12px, -12px 0px",
+    size: "40px 40px",
   },
   {
-    id: "stripe", label: "Diagonal", bg: "#141414",
-    img: "repeating-linear-gradient(-45deg, rgba(255,255,255,.1) 0px, rgba(255,255,255,.1) 5px, transparent 5px, transparent 22px)",
-    size: "auto",
+    id: "stripe", label: "Stripe", bg: "#111",
+    img: "repeating-linear-gradient(0deg, rgba(255,255,255,0.08) 0px, rgba(255,255,255,0.08) 2px, transparent 2px, transparent 18px)",
+    size: "100% 100%",
   },
   {
-    id: "dot", label: "Dot Grid", bg: "#181818",
-    img: "radial-gradient(circle at 50% 50%, rgba(255,255,255,.18) 28%, transparent 28%)",
-    size: "18px 18px",
-  },
-  {
-    id: "grid", label: "Woven", bg: "#141414",
+    id: "geo", label: "Geometric", bg: "#161616",
     img: [
-      "linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px)",
-      "linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)",
+      "linear-gradient(30deg,  rgba(255,255,255,.07) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,.07) 87.5%)",
+      "linear-gradient(150deg, rgba(255,255,255,.07) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,.07) 87.5%)",
+      "linear-gradient(30deg,  rgba(255,255,255,.07) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,.07) 87.5%)",
+      "linear-gradient(150deg, rgba(255,255,255,.07) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,.07) 87.5%)",
     ].join(","),
+    size: "40px 70px",
+    pos: "0 0, 0 0, 20px 35px, 20px 35px",
+  },
+  {
+    id: "dot", label: "Dot grid", bg: "#0E0E0E",
+    img: "radial-gradient(circle, rgba(255,255,255,.14) 1px, transparent 1px)",
     size: "20px 20px",
   },
-  {
-    id: "cross", label: "Lattice", bg: "#161616",
-    img: [
-      "linear-gradient(45deg,  rgba(255,255,255,.1) 1.5px, transparent 1.5px)",
-      "linear-gradient(-45deg, rgba(255,255,255,.1) 1.5px, transparent 1.5px)",
-    ].join(","),
-    size: "18px 18px",
-  },
-  {
-    id: "ring", label: "Circles", bg: "#141414",
-    img: [
-      "radial-gradient(circle at 50% 50%, transparent 7px, rgba(255,255,255,.12) 7px, rgba(255,255,255,.12) 9px, transparent 9px)",
-      "radial-gradient(circle at 0   0,   transparent 7px, rgba(255,255,255,.07) 7px, rgba(255,255,255,.07) 9px, transparent 9px)",
-    ].join(","),
-    size: "28px 28px",
-  },
 ];
 
-type ProductDef = { id: string; label: string; ratio: string; radius: string; shadow: string };
-
-const PRODUCTS: ProductDef[] = [
-  { id: "rug",      label: "Area Rug",    ratio: "4/3", radius: "6px",  shadow: "0 16px 64px rgba(0,0,0,0.7)" },
-  { id: "pillow",   label: "Pillow",      ratio: "1/1", radius: "28px", shadow: "0 20px 72px rgba(0,0,0,0.7), inset 0 -4px 16px rgba(0,0,0,0.4)" },
-  { id: "tapestry", label: "Tapestry",    ratio: "3/4", radius: "2px",  shadow: "0 8px 40px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.08)" },
-  { id: "blanket",  label: "Blanket",     ratio: "5/4", radius: "6px",  shadow: "0 12px 48px rgba(0,0,0,0.65)" },
+type ProductMockDef = { id: string; label: string; bg: string; w: number; h: number; extra?: React.CSSProperties };
+const PRODUCTS: ProductMockDef[] = [
+  { id: "rug",      label: "Area Rug",      bg: "#ede8de", w: 5, h: 7 },
+  { id: "pillow",   label: "Woven Pillow",  bg: "#f4f2ef", w: 1, h: 1, extra: { borderRadius: 12 } },
+  { id: "tapestry", label: "Wall Tapestry", bg: "#ede8de", w: 3, h: 4 },
+  { id: "blanket",  label: "Blanket",       bg: "#e8e2d5", w: 5, h: 4 },
 ];
 
-function Thumb({ p, selected, onClick }: { p: PatternDef; selected: boolean; onClick: () => void }) {
+function PatternButton({ p, selected, onSelect }: { p: PatternDef; selected: boolean; onSelect: () => void }) {
   return (
-    <button onClick={onClick} className="flex flex-col items-center gap-2 group">
-      <div
-        className="w-full transition-all duration-200"
-        style={{
-          aspectRatio: "1",
-          backgroundColor: p.bg,
-          backgroundImage: p.img,
-          backgroundSize: p.size,
-          backgroundPosition: p.pos ?? "0 0",
-          outline: selected ? "1.5px solid #2E5BFF" : "1px solid rgba(255,255,255,0.06)",
-          outlineOffset: selected ? "3px" : "0px",
-        }}
-      />
-      <span className="label transition-colors" style={{ color: selected ? "#2E5BFF" : "rgba(255,255,255,0.25)" }}>
+    <button
+      onClick={onSelect}
+      className="flex flex-col items-center gap-2 p-0"
+      style={{ background: "none", border: "none", cursor: "pointer" }}
+    >
+      <div style={{
+        width: 48, height: 48, borderRadius: 8,
+        backgroundColor: p.bg,
+        backgroundImage: p.img,
+        backgroundSize: p.size,
+        backgroundPosition: p.pos ?? "0 0",
+        outline: selected ? "1.5px solid var(--blue)" : "1px solid var(--bd)",
+        outlineOffset: selected ? "3px" : "0px",
+        transition: "outline 0.15s",
+      }} />
+      <span className="label transition-colors" style={{ color: selected ? "var(--blue)" : "var(--fg-4)" }}>
         {p.label}
       </span>
     </button>
@@ -100,78 +87,71 @@ export default function DesignVisualizer() {
     backgroundPosition: pattern.pos ?? "0 0",
   };
 
+  const aspect = product.w / product.h;
+
   return (
-    <section className="glass relative py-28 px-6 overflow-hidden">
+    <section className="py-40 px-6" style={{ background: "var(--bg-soft)" }}>
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="flex items-center gap-3 mb-5">
-          <div className="h-px w-8" style={{ background: "#2E5BFF" }} />
-          <span className="label" style={{ color: "#2E5BFF" }}>Design Visualizer</span>
+        <div className="mb-14">
+          <span className="pill"><span className="pill-dot" />Design Visualizer</span>
         </div>
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16 gap-4">
-          <h2 className="font-display font-extrabold text-white leading-[0.88] tracking-[-0.02em]"
-            style={{ fontSize: "clamp(2.4rem, 5vw, 4rem)" }}>
+          <h2 className="font-display font-extrabold leading-[0.88] tracking-[-0.02em]"
+            style={{ fontSize: "clamp(2.4rem, 5vw, 4rem)", color: "var(--fg)" }}>
             Pick a pattern.<br />
-            <span style={{ color: "rgba(255,255,255,0.2)" }}>See it on any product.</span>
+            <span style={{ color: "var(--fg-ghost-h)" }}>See it on any product.</span>
           </h2>
-          <p className="text-sm max-w-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.28)" }}>
-            Sample patterns — your own artwork replaces these in your real catalog.
+          <p className="text-sm max-w-xs leading-relaxed" style={{ color: "var(--fg-3)" }}>
+            Every pattern below is a mockup of what a real woven product would look like — produced as part of your catalog.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-[180px_1fr] gap-12 items-start">
-          {/* Thumbnails */}
-          <div>
-            <p className="label mb-4" style={{ color: "rgba(255,255,255,0.18)" }}>Pattern</p>
-            <div className="grid grid-cols-3 lg:grid-cols-2 gap-3">
-              {PATTERNS.map((p, i) => (
-                <Thumb key={p.id} p={p} selected={i === pi} onClick={() => pickPattern(i)} />
-              ))}
+        <div className="grid lg:grid-cols-[1fr_2fr] gap-12 items-start">
+          {/* Controls */}
+          <div className="flex flex-col gap-10">
+            <div>
+              <p className="label mb-5" style={{ color: "var(--fg-4)" }}>Pattern</p>
+              <div className="flex flex-wrap gap-5">
+                {PATTERNS.map((p, i) => (
+                  <PatternButton key={p.id} p={p} selected={pi === i} onSelect={() => pickPattern(i)} />
+                ))}
+              </div>
+            </div>
+            <div>
+              <p className="label mb-4" style={{ color: "var(--fg-4)" }}>Product</p>
+              <div className="flex flex-col gap-2">
+                {PRODUCTS.map((p, i) => (
+                  <button key={p.id} onClick={() => pickProduct(i)}
+                    className="text-left px-5 py-3 transition-all label"
+                    style={{
+                      background: qi === i ? "rgba(46,91,255,0.10)" : "var(--fg-ghost)",
+                      border: qi === i ? "1px solid var(--blue)" : "1px solid var(--bd)",
+                      color: qi === i ? "var(--blue)" : "var(--fg-3)",
+                      borderRadius: 999, cursor: "pointer",
+                    }}>
+                    {p.label}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* Mockup */}
-          <div className="flex flex-col items-center gap-8">
-            <div className="relative overflow-hidden w-full"
-              style={{
-                maxWidth: product.id === "tapestry" ? 300 : product.id === "pillow" ? 340 : 460,
-                aspectRatio: product.ratio,
-                borderRadius: product.radius,
-                boxShadow: product.shadow,
-              }}
-            >
-              <div className="absolute inset-0" style={{ backgroundColor: pattern.bg }} />
-              <div
-                key={`${pi}-${qi}-${key}`}
-                className="absolute inset-0"
-                style={{ ...patStyle, animation: "wrapDesign 0.65s cubic-bezier(0.16,1,0.3,1) forwards" }}
-              />
-              {/* depth overlay */}
-              <div className="absolute inset-0 pointer-events-none"
-                style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 50%, rgba(0,0,0,0.2) 100%)" }} />
-              {/* edge lines */}
-              {(product.id === "rug" || product.id === "blanket") && (
-                <>
-                  <div className="absolute left-0 right-0 top-0 h-1.5"
-                    style={{ background: "repeating-linear-gradient(90deg,transparent,transparent 3px,rgba(255,255,255,0.04) 3px,rgba(255,255,255,0.04) 4px)" }} />
-                  <div className="absolute left-0 right-0 bottom-0 h-1.5"
-                    style={{ background: "repeating-linear-gradient(90deg,transparent,transparent 3px,rgba(255,255,255,0.04) 3px,rgba(255,255,255,0.04) 4px)" }} />
-                </>
-              )}
-            </div>
-
-            {/* Product selector */}
-            <div className="flex flex-wrap gap-2 justify-center">
-              {PRODUCTS.map((p, i) => (
-                <button key={p.id} onClick={() => pickProduct(i)}
-                  className="label px-5 py-2.5 transition-all duration-200"
-                  style={{
-                    background: i === qi ? "rgba(255,255,255,0.1)" : "transparent",
-                    color: i === qi ? "#fff" : "rgba(255,255,255,0.3)",
-                    border: i === qi ? "1px solid rgba(255,255,255,0.2)" : "1px solid rgba(255,255,255,0.07)",
-                  }}>
-                  {p.label}
-                </button>
-              ))}
+          {/* Mockup preview */}
+          <div key={key} style={{ animation: "wrapDesign 0.5s ease both" }}>
+            <div className="relative mx-auto" style={{ maxWidth: aspect >= 1 ? 480 : 360 }}>
+              <div style={{
+                width: "100%",
+                paddingBottom: `${(1 / aspect) * 100}%`,
+                position: "relative",
+                overflow: "hidden",
+                borderRadius: 12,
+                ...patStyle,
+                ...product.extra,
+              }} />
+              <div className="mt-4 flex items-center justify-between">
+                <p className="text-sm font-semibold" style={{ color: "var(--fg)" }}>{product.label}</p>
+                <p className="label" style={{ color: "var(--fg-4)" }}>mockup preview</p>
+              </div>
             </div>
           </div>
         </div>

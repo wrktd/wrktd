@@ -1,10 +1,6 @@
 "use client";
 import { useState } from "react";
 
-const FG  = "#F0F0F0";
-const FG3 = "rgba(240,240,240,0.34)";
-const FG4 = "rgba(240,240,240,0.16)";
-
 const PRODUCTS = [
   { id: "rug",      label: "Area Rug",       cost: 79,  defaultPrice: 149, defaultOrders: 15, maxPrice: 350, maxOrders: 100 },
   { id: "pillow",   label: "Woven Pillow",   cost: 34,  defaultPrice: 65,  defaultOrders: 25, maxPrice: 150, maxOrders: 200 },
@@ -25,12 +21,12 @@ function Slider({ label, value, min, max, step, display, onChange }: {
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between">
-        <span className="text-sm" style={{ color: FG3 }}>{label}</span>
-        <span className="font-display font-bold" style={{ fontSize: "1.5rem", color: FG }}>{display}</span>
+        <span className="text-sm" style={{ color: "var(--fg-3)" }}>{label}</span>
+        <span className="font-display font-bold" style={{ fontSize: "1.5rem", color: "var(--fg)" }}>{display}</span>
       </div>
       <input type="range" min={min} max={max} step={step} value={value}
         onChange={(e) => onChange(Number(e.target.value))} className="wrktd-range"
-        style={{ background: `linear-gradient(to right, #B89A4E 0%, #B89A4E ${pct}%, rgba(255,255,255,0.08) ${pct}%, rgba(255,255,255,0.08) 100%)` }} />
+        style={{ background: `linear-gradient(to right, var(--blue) 0%, var(--blue) ${pct}%, var(--bd) ${pct}%, var(--bd) 100%)` }} />
     </div>
   );
 }
@@ -50,49 +46,48 @@ export default function ProfitCalculator() {
   }
 
   return (
-    <section className="py-32 px-6" style={{ background: "#000000", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+    <section className="py-40 px-6" style={{ background: "var(--bg)" }}>
       <div className="max-w-6xl mx-auto">
 
         <div className="mb-14">
-          <span className="pill"><span className="pill-dot" />Profit Calculator</span>
+          <span className="pill"><span className="pill-dot" />Profit calculator</span>
         </div>
 
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16 gap-4">
           <h2 className="font-display font-extrabold leading-[0.88]"
-            style={{ fontSize: "clamp(2.8rem, 6vw, 5rem)", color: FG }}>
+            style={{ fontSize: "clamp(2.8rem, 6vw, 5rem)", color: "var(--fg)" }}>
             Estimate what a<br />
-            <span style={{ color: FG4 }}>product line could add.</span>
+            <span style={{ color: "var(--fg-ghost-h)" }}>product line could add.</span>
           </h2>
-          <p className="text-base max-w-xs leading-relaxed" style={{ color: "rgba(240,240,240,0.50)" }}>
+          <p className="text-base max-w-xs leading-relaxed" style={{ color: "var(--fg-2)" }}>
             Pick a product, set your selling price, estimate monthly orders — see a rough revenue potential.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-5">
+        <div className="grid lg:grid-cols-2 gap-4">
           {/* Controls */}
-          <div className="p-10 flex flex-col gap-10"
-            style={{ background: "#0C0C0C", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16 }}>
+          <div className="p-10 flex flex-col gap-10 card">
             <div className="flex flex-col gap-4">
-              <span className="text-sm" style={{ color: FG3 }}>Pick a product</span>
+              <span className="text-sm" style={{ color: "var(--fg-3)" }}>Pick a product</span>
               <div className="relative">
                 <select value={productId} onChange={(e) => handleProductChange(e.target.value)}
                   className="w-full appearance-none font-sans text-base font-medium pr-10 pl-4 py-4 cursor-pointer focus:outline-none"
-                  style={{ background: "#141414", border: "1px solid rgba(255,255,255,0.08)", color: FG, borderRadius: 10 }}>
+                  style={{ background: "var(--bg-input)", border: "1px solid var(--bd)", color: "var(--fg)", borderRadius: 10 }}>
                   {PRODUCTS.map((p) => (
                     <option key={p.id} value={p.id}>{p.label}</option>
                   ))}
                 </select>
                 <div className="pointer-events-none absolute inset-y-0 right-4 flex items-center">
                   <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                    style={{ color: FG3 }} strokeWidth={2}>
+                    style={{ color: "var(--fg-3)" }} strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                   </svg>
                 </div>
               </div>
               <div className="flex items-center justify-between px-4 py-3"
-                style={{ background: "#141414", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 10 }}>
-                <span className="text-xs" style={{ color: FG3 }}>Product &amp; fulfillment cost</span>
-                <span className="text-sm font-semibold" style={{ color: "rgba(240,240,240,0.45)" }}>quoted at onboarding</span>
+                style={{ background: "var(--bg-input)", border: "1px solid var(--bd)", borderRadius: 10 }}>
+                <span className="text-xs" style={{ color: "var(--fg-3)" }}>Product &amp; fulfillment cost</span>
+                <span className="text-sm font-semibold" style={{ color: "var(--fg-4)" }}>quoted at onboarding</span>
               </div>
             </div>
 
@@ -101,47 +96,42 @@ export default function ProfitCalculator() {
             <Slider label="Estimate monthly orders" value={orders} min={1}
               max={product.maxOrders} step={1} display={`${orders} orders`} onChange={(v) => setOrders(v)} />
 
-            <div className="flex items-center justify-between pt-6"
-              style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
-              <span className="text-sm" style={{ color: FG3 }}>Your margin per unit</span>
-              <span className="font-semibold text-sm" style={{ color: FG }}>
+            <div className="flex items-center justify-between pt-6" style={{ borderTop: "1px solid var(--bd)" }}>
+              <span className="text-sm" style={{ color: "var(--fg-3)" }}>Your margin per unit</span>
+              <span className="font-semibold text-sm" style={{ color: "var(--fg)" }}>
                 {formatDollar(margin)}{" "}
-                <span style={{ color: FG3, fontWeight: 400 }}>({Math.round((margin / price) * 100)}%)</span>
+                <span style={{ color: "var(--fg-3)", fontWeight: 400 }}>({Math.round((margin / price) * 100)}%)</span>
               </span>
             </div>
           </div>
 
           {/* Result */}
-          <div className="p-10 flex flex-col justify-between gap-10"
-            style={{ background: "#050505", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16 }}>
+          <div className="p-10 flex flex-col justify-between gap-10 card-raised">
             <div>
-              <p className="label mb-8" style={{ color: "rgba(255,255,255,0.28)" }}>Estimated monthly revenue potential</p>
-              <p className="font-display font-extrabold text-gold leading-none"
-                style={{ fontSize: "clamp(4rem, 10vw, 7rem)" }}>
+              <p className="label mb-8" style={{ color: "var(--fg-4)" }}>Estimated monthly revenue potential</p>
+              <p className="font-display font-extrabold leading-none"
+                style={{ fontSize: "clamp(4rem, 10vw, 7rem)", color: "var(--blue)" }}>
                 {formatDollar(profit)}
               </p>
-              <p className="text-sm mt-6 leading-relaxed" style={{ color: "rgba(255,255,255,0.40)" }}>
+              <p className="text-sm mt-6 leading-relaxed" style={{ color: "var(--fg-3)" }}>
                 Based on {orders} {product.label.toLowerCase()}{orders !== 1 ? "s" : ""} at {formatDollar(price)} each. Actual margin depends on your product cost, set during onboarding.
               </p>
             </div>
-            <div className="pt-8" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+            <div className="pt-8" style={{ borderTop: "1px solid var(--bd)" }}>
               <div className="flex items-end justify-between">
                 <div>
-                  <p className="label mb-2" style={{ color: "rgba(255,255,255,0.16)" }}>Annualised</p>
-                  <p className="font-display font-bold" style={{ fontSize: "clamp(2rem, 4vw, 3rem)", color: "rgba(255,255,255,0.35)" }}>
+                  <p className="label mb-2" style={{ color: "var(--fg-4)" }}>Annualised</p>
+                  <p className="font-display font-bold" style={{ fontSize: "clamp(2rem, 4vw, 3rem)", color: "var(--fg-2)" }}>
                     {formatDollar(profit * 12)}
                   </p>
                 </div>
-                <a href="#preview" className="label bg-gold text-black px-6 py-3 transition-colors hover:bg-gold-lt"
-                  style={{ borderRadius: 999 }}>
-                  Try it free →
-                </a>
+                <a href="#preview" className="btn-primary">Try it free →</a>
               </div>
             </div>
           </div>
         </div>
 
-        <p className="text-xs mt-5 text-center" style={{ color: FG3 }}>
+        <p className="text-xs mt-5 text-center" style={{ color: "var(--fg-4)" }}>
           Estimates only. Actual results depend on your audience, pricing strategy, and market demand.
         </p>
       </div>

@@ -22,8 +22,8 @@ void main() {
   vec2 mouse = vec2(u_mouse.x / u_res.x, 1.0 - u_mouse.y / u_res.y);
   float t    = u_time;
 
-  /* near-true-black charcoal base */
-  vec3 col = vec3(0.030, 0.030, 0.030);
+  /* deep cool dark base — matches #06080D */
+  vec3 col = vec3(0.024, 0.031, 0.051);
 
   vec2 p0 = vec2(0.32 + 0.16*sin(t*0.055 + 0.0),  0.50 + 0.38*sin(t*0.042 + 1.2));
   vec2 p1 = vec2(0.68 + 0.14*cos(t*0.048 + 2.5),  0.50 + 0.40*cos(t*0.038 + 0.8));
@@ -31,23 +31,23 @@ void main() {
   vec2 p3 = vec2(0.20 + 0.13*cos(t*0.045 + 0.5),  0.58 + 0.32*cos(t*0.058 + 2.0));
   vec2 p4 = vec2(0.80 + 0.11*sin(t*0.052 + 1.8),  0.44 + 0.34*sin(t*0.065 + 0.3));
 
-  float s2 = 2.0 * 0.26 * 0.26;
+  float s2 = 2.0 * 0.28 * 0.28;
   vec2 dv;
 
-  /* very subtle neutral-charcoal blobs — barely visible, slow drift */
-  dv = uv - p0; col += vec3(0.07, 0.07, 0.07) * exp(-dot(dv,dv)/s2) * 0.80;
-  dv = uv - p1; col += vec3(0.06, 0.06, 0.06) * exp(-dot(dv,dv)/(s2*0.9)) * 0.70;
-  dv = uv - p2; col += vec3(0.08, 0.08, 0.08) * exp(-dot(dv,dv)/(s2*0.8)) * 0.60;
-  dv = uv - p3; col += vec3(0.05, 0.05, 0.06) * exp(-dot(dv,dv)/(s2*1.1)) * 0.65;
-  dv = uv - p4; col += vec3(0.07, 0.07, 0.07) * exp(-dot(dv,dv)/s2) * 0.65;
+  /* subtle deep cobalt blobs — barely visible, slow drift */
+  dv = uv - p0; col += vec3(0.04, 0.08, 0.28) * exp(-dot(dv,dv)/s2) * 0.55;
+  dv = uv - p1; col += vec3(0.03, 0.06, 0.22) * exp(-dot(dv,dv)/(s2*0.9)) * 0.48;
+  dv = uv - p2; col += vec3(0.05, 0.09, 0.32) * exp(-dot(dv,dv)/(s2*0.8)) * 0.42;
+  dv = uv - p3; col += vec3(0.02, 0.05, 0.18) * exp(-dot(dv,dv)/(s2*1.1)) * 0.45;
+  dv = uv - p4; col += vec3(0.04, 0.07, 0.25) * exp(-dot(dv,dv)/s2) * 0.45;
 
-  /* mouse: very subtle lift */
+  /* mouse: cobalt lift */
   float ms2 = 2.0 * 0.30 * 0.30;
   dv = uv - mouse;
-  float mw = exp(-dot(dv,dv)/ms2) * 0.22;
-  col = col + col * mw * 0.6 + vec3(0.06, 0.06, 0.06) * mw;
+  float mw = exp(-dot(dv,dv)/ms2) * 0.20;
+  col = col + col * mw * 0.5 + vec3(0.05, 0.10, 0.40) * mw;
 
-  /* click: gold burst */
+  /* click: cobalt burst */
   for(int i=0;i<8;i++){
     if(u_clicks[i].w > 0.5){
       float age = t - u_clicks[i].z;
@@ -55,8 +55,8 @@ void main() {
         vec2 cp = vec2(u_clicks[i].x/u_res.x, 1.0 - u_clicks[i].y/u_res.y);
         float fade = max(0.0, 1.0 - age/1.1);
         dv = uv - cp;
-        float glow = exp(-dot(dv,dv)/(2.0*0.040*0.040));
-        col += vec3(0.72, 0.60, 0.31) * glow * fade * 0.70;
+        float glow = exp(-dot(dv,dv)/(2.0*0.038*0.038));
+        col += vec3(0.18, 0.36, 1.00) * glow * fade * 0.75;
       }
     }
   }
