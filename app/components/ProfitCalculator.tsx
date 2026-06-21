@@ -50,7 +50,7 @@ export default function ProfitCalculator() {
       <div className="max-w-6xl mx-auto">
 
         <div className="mb-14">
-          <span className="pill"><span className="pill-dot" />Profit calculator</span>
+          <span className="pill"><span className="pill-dot" />Revenue Scenario</span>
         </div>
 
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16 gap-4">
@@ -96,13 +96,6 @@ export default function ProfitCalculator() {
             <Slider label="Estimate monthly orders" value={orders} min={1}
               max={product.maxOrders} step={1} display={`${orders} orders`} onChange={(v) => setOrders(v)} />
 
-            <div className="flex items-center justify-between pt-6" style={{ borderTop: "1px solid var(--bd)" }}>
-              <span className="text-sm" style={{ color: "var(--fg-3)" }}>Your margin per unit</span>
-              <span className="font-semibold text-sm" style={{ color: "var(--fg)" }}>
-                {formatDollar(margin)}{" "}
-                <span style={{ color: "var(--fg-3)", fontWeight: 400 }}>({Math.round((margin / price) * 100)}%)</span>
-              </span>
-            </div>
           </div>
 
           {/* Result */}

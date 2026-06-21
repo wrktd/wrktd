@@ -1,68 +1,72 @@
 @import "tailwindcss";
 
 @theme {
-  --color-black:    #06080D;
-  --color-dark:     #0A0E14;
-  --color-ash:      #101621;
-  --color-gray:     #1E2733;
-  --color-mid:      #8D99AA;
-  --color-light:    #C3CDD8;
-  --color-white:    #F5F7FA;
-  --color-blue:     #2E5BFF;
+  --color-black:    #05070A;
+  --color-dark:     #080B10;
+  --color-ash:      #0E131B;
+  --color-gray:     #141B26;
+  --color-mid:      #8C98A8;
+  --color-light:    #C5CFDC;
+  --color-white:    #F7F9FC;
+  --color-blue:     #2F5BFF;
   --color-blue-lt:  #5578FF;
-  --color-blue-dk:  #1F49E0;
-  --color-blue-dim: rgba(46,91,255,0.14);
+  --color-blue-dk:  #1E46D8;
 }
 
 /* ── Dark mode tokens (default) ─────────────────────────────── */
 :root {
-  --bg:          #06080D;
-  --bg-soft:     #0A0E14;
-  --bg-card:     #101621;
-  --bg-raised:   #151C28;
-  --bg-input:    #0C1118;
+  --bg:          #05070A;
+  --bg-soft:     #080B10;
+  --bg-card:     #0E131B;
+  --bg-raised:   #141B26;
+  --bg-input:    #101722;
 
-  --bd:          rgba(255,255,255,0.08);
-  --bd-strong:   rgba(255,255,255,0.14);
+  --bd:          #202A37;
+  --bd-strong:   #2A3545;
   --bd-subtle:   rgba(255,255,255,0.05);
+  --bd-active:   #3B65FF;
 
-  --fg:          #F5F7FA;
-  --fg-2:        #C3CDD8;
-  --fg-3:        #8D99AA;
-  --fg-4:        #667284;
-  --fg-5:        rgba(255,255,255,0.28);
+  --fg:          #F7F9FC;
+  --fg-2:        #C5CFDC;
+  --fg-3:        #8C98A8;
+  --fg-4:        #5E6A78;
+  --fg-5:        #3A4452;
   --fg-ghost:    rgba(255,255,255,0.04);
-  --fg-ghost-h:  rgba(255,255,255,0.10);
+  --fg-ghost-h:  rgba(255,255,255,0.14);
 
-  --blue:        #2E5BFF;
+  --blue:        #2F5BFF;
   --blue-lt:     #5578FF;
-  --blue-dk:     #1F49E0;
-  --blue-dim:    rgba(46,91,255,0.14);
-  --blue-surf:   #12234F;
+  --blue-dk:     #1E46D8;
+  --blue-dim:    rgba(47,91,255,0.18);
+  --blue-surf:   #0E1B40;
+
+  --success:     #34D67A;
 }
 
-/* ── Light mode token overrides ─────────────────────────────── */
+/* ── Light mode overrides ────────────────────────────────────── */
 html[data-theme="light"] {
   color-scheme: light;
 
-  --bg:          #FFFFFF;
-  --bg-soft:     #F8F8F8;
-  --bg-card:     #F2F2F2;
-  --bg-raised:   #EBEBEB;
-  --bg-input:    #F0F0F0;
+  --bg:          #F4F7FB;
+  --bg-soft:     #EEF3F8;
+  --bg-card:     #FFFFFF;
+  --bg-raised:   #F8FAFC;
+  --bg-input:    #FFFFFF;
 
-  --bd:          rgba(0,0,0,0.08);
-  --bd-strong:   rgba(0,0,0,0.14);
-  --bd-subtle:   rgba(0,0,0,0.05);
+  --bd:          #D8E1EC;
+  --bd-strong:   #C0CEDF;
+  --bd-subtle:   rgba(12,17,26,0.06);
+  --bd-active:   #2F5BFF;
 
-  --fg:          #0A0A0A;
-  --fg-2:        #2D2D2D;
-  --fg-3:        #5A5A5A;
-  --fg-4:        #888888;
-  --fg-5:        rgba(0,0,0,0.50);
-  --fg-ghost:    rgba(0,0,0,0.04);
-  --fg-ghost-h:  rgba(0,0,0,0.10);
+  --fg:          #0C111A;
+  --fg-2:        #3D4858;
+  --fg-3:        #6E7A8A;
+  --fg-4:        #9AAAB8;
+  --fg-5:        #C0CEDF;
+  --fg-ghost:    rgba(12,17,26,0.04);
+  --fg-ghost-h:  rgba(12,17,26,0.10);
 
+  --blue-dim:    rgba(47,91,255,0.10);
   --blue-surf:   #E8EDFF;
 }
 
@@ -78,7 +82,7 @@ body {
   font-family: var(--font-inter), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background 0.25s, color 0.25s;
+  transition: background 0.3s, color 0.3s;
 }
 
 /* ── Typography ─────────────────────────────────────────────── */
@@ -109,6 +113,7 @@ body {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--fg-3);
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
 }
 .pill-dot {
   width: 6px;
@@ -123,44 +128,27 @@ body {
   background: var(--bg-card);
   border: 1px solid var(--bd);
   border-radius: 16px;
-  transition: background 0.25s, border-color 0.25s;
+  transition: background 0.3s, border-color 0.3s;
 }
 .card-raised {
   background: var(--bg-raised);
   border: 1px solid var(--bd);
   border-radius: 16px;
-  transition: background 0.25s, border-color 0.25s;
+  transition: background 0.3s, border-color 0.3s;
 }
 
-/* ── Glass panels ────────────────────────────────────────────── */
+/* ── Glass panels — nav, overlays ───────────────────────────── */
 .glass {
-  background: rgba(6,8,13,0.90);
-  backdrop-filter: blur(28px) saturate(1.2);
-  -webkit-backdrop-filter: blur(28px) saturate(1.2);
-  border-top: 1px solid var(--bd-subtle);
-  transition: background 0.25s;
-}
-.glass-mid {
-  background: rgba(10,14,20,0.86);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border-top: 1px solid var(--bd-subtle);
-}
-.glass-light {
-  background: rgba(16,22,33,0.80);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-top: 1px solid var(--bd-subtle);
+  background: rgba(5,7,10,0.92);
+  backdrop-filter: blur(28px) saturate(1.3);
+  -webkit-backdrop-filter: blur(28px) saturate(1.3);
+  border-bottom: 1px solid var(--bd-subtle);
+  transition: background 0.3s;
 }
 
-/* Glass in light mode */
-html[data-theme="light"] .glass,
-html[data-theme="light"] .glass-mid,
-html[data-theme="light"] .glass-light {
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(28px);
-  -webkit-backdrop-filter: blur(28px);
-  border-top: 1px solid var(--bd-subtle);
+html[data-theme="light"] .glass {
+  background: rgba(244,247,251,0.94);
+  border-bottom-color: var(--bd-subtle);
 }
 
 /* ── Buttons ─────────────────────────────────────────────────── */
@@ -177,10 +165,11 @@ html[data-theme="light"] .glass-light {
   transition: opacity 0.18s, transform 0.15s;
   cursor: pointer;
   border: none;
+  white-space: nowrap;
 }
-.btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
 
-.btn-secondary {
+.btn-ghost {
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -191,24 +180,55 @@ html[data-theme="light"] .glass-light {
   padding: 12px 24px;
   border-radius: 999px;
   border: 1px solid var(--bd-strong);
-  transition: border-color 0.18s, background 0.18s;
+  transition: border-color 0.18s, background 0.18s, color 0.18s;
   cursor: pointer;
 }
-.btn-secondary:hover { border-color: var(--blue); background: var(--blue-dim); }
+.btn-ghost:hover { border-color: var(--blue); background: var(--blue-dim); color: var(--fg); }
+
+/* ── Angled CTA (logo-derived geometry) ─────────────────────── */
+.btn-angled {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--fg);
+  color: var(--bg);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 14px 28px;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  transition: opacity 0.18s;
+  cursor: pointer;
+  border: none;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.btn-angled:hover { opacity: 0.88; }
+
+/* ── Upload zone ────────────────────────────────────────────── */
+.upload-zone {
+  border: 1px solid var(--bd);
+  background: var(--bg-card);
+  border-radius: 12px;
+  transition: border-color 0.2s, background 0.2s;
+  cursor: pointer;
+}
+.upload-zone:hover,
+.upload-zone.active {
+  border-color: var(--bd-active);
+  background: var(--blue-dim);
+}
 
 /* ── Animations ──────────────────────────────────────────────── */
-@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes spin    { to { transform: rotate(360deg); } }
 @keyframes shimmer { to { background-position: 400px 0; } }
+@keyframes fadeUp  {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 @keyframes wrapDesign {
   0%   { clip-path: circle(0% at 50% 50%); opacity: 0; transform: scale(0.97); }
   60%  { opacity: 1; }
   100% { clip-path: circle(150% at 50% 50%); opacity: 1; transform: scale(1); }
-}
-@keyframes scrollLine {
-  0%   { transform: scaleY(0); transform-origin: top;    opacity: 1; }
-  50%  { transform: scaleY(1); transform-origin: top;    opacity: 1; }
-  51%  { transform-origin: bottom; }
-  100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
 }
 
 /* ── Custom range slider ──────────────────────────────────────── */
@@ -227,7 +247,7 @@ html[data-theme="light"] .glass-light {
   background: var(--blue);
   cursor: pointer;
   border: 2px solid var(--bg);
-  box-shadow: 0 0 14px rgba(46,91,255,0.45);
+  box-shadow: 0 0 14px rgba(47,91,255,0.45);
 }
 .wrktd-range::-moz-range-thumb {
   width: 16px; height: 16px;
@@ -235,5 +255,5 @@ html[data-theme="light"] .glass-light {
   background: var(--blue);
   cursor: pointer;
   border: 2px solid var(--bg);
-  box-shadow: 0 0 14px rgba(46,91,255,0.45);
+  box-shadow: 0 0 14px rgba(47,91,255,0.45);
 }

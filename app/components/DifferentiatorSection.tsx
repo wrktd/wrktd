@@ -37,22 +37,54 @@ export default function DifferentiatorSection() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-4">
-          {POINTS.map((p) => (
-            <div key={p.title} className="p-10 flex flex-col gap-5 card" style={{ minHeight: 260 }}>
-              <span className="font-display font-extrabold"
-                style={{ fontSize: "3rem", lineHeight: 1, color: "rgba(46,91,255,0.18)" }}>
-                {p.n}
-              </span>
-              <div>
-                <h3 className="font-display font-bold mb-4"
-                  style={{ fontSize: "clamp(1.3rem, 2vw, 1.7rem)", color: "var(--fg)" }}>
-                  {p.title}
-                </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "var(--fg-3)" }}>{p.body}</p>
-              </div>
+        {/* Bento: large left + 2 small right + full-width bottom */}
+        <div className="grid lg:grid-cols-[3fr_2fr] gap-4 mb-4">
+          {/* Large left card */}
+          <div className="p-10 flex flex-col gap-5 card" style={{ minHeight: 320 }}>
+            <span className="font-display font-extrabold"
+              style={{ fontSize: "4rem", lineHeight: 1, color: "rgba(46,91,255,0.18)" }}>
+              {POINTS[0].n}
+            </span>
+            <div>
+              <h3 className="font-display font-bold mb-4"
+                style={{ fontSize: "clamp(1.5rem, 2.5vw, 2rem)", color: "var(--fg)" }}>
+                {POINTS[0].title}
+              </h3>
+              <p className="text-sm leading-relaxed" style={{ color: "var(--fg-3)" }}>{POINTS[0].body}</p>
             </div>
-          ))}
+          </div>
+          {/* Two small right cards */}
+          <div className="flex flex-col gap-4">
+            {POINTS.slice(1, 3).map((p) => (
+              <div key={p.title} className="p-8 flex flex-col gap-4 card" style={{ flex: 1 }}>
+                <span className="font-display font-extrabold"
+                  style={{ fontSize: "2.5rem", lineHeight: 1, color: "rgba(46,91,255,0.18)" }}>
+                  {p.n}
+                </span>
+                <div>
+                  <h3 className="font-display font-bold mb-3"
+                    style={{ fontSize: "clamp(1.1rem, 1.8vw, 1.4rem)", color: "var(--fg)" }}>
+                    {p.title}
+                  </h3>
+                  <p className="text-xs leading-relaxed" style={{ color: "var(--fg-3)" }}>{p.body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        {/* Full-width bottom card */}
+        <div className="p-10 flex flex-col md:flex-row gap-8 items-start card">
+          <span className="font-display font-extrabold flex-shrink-0"
+            style={{ fontSize: "3rem", lineHeight: 1, color: "rgba(46,91,255,0.18)" }}>
+            {POINTS[3].n}
+          </span>
+          <div>
+            <h3 className="font-display font-bold mb-3"
+              style={{ fontSize: "clamp(1.2rem, 2vw, 1.6rem)", color: "var(--fg)" }}>
+              {POINTS[3].title}
+            </h3>
+            <p className="text-sm leading-relaxed" style={{ color: "var(--fg-3)" }}>{POINTS[3].body}</p>
+          </div>
         </div>
       </div>
     </section>

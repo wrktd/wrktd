@@ -1,15 +1,19 @@
 const STEPS = [
   {
-    n: "01", time: "Day 1", title: "Upload your designs",
+    n: "01", time: "Before you upload", title: "Choose your products",
+    body: "Browse available product types — rugs, pillows, canvas art, wall tapestries, blankets. Pick which products you want for each design before uploading anything. This locks in the correct specs.",
+  },
+  {
+    n: "02", time: "Day 1", title: "Upload your designs",
     body: "Drop in your existing artwork, logos, or patterns. No special file prep — we accept JPG, PNG, SVG, AI, and PSD. We handle everything from here.",
   },
   {
-    n: "02", time: "Days 1–7", title: "WRKTD builds your catalog",
+    n: "03", time: "Days 1–7", title: "WRKTD builds your catalog",
     body: "We adapt each design to every product, generate all mockup angles and listing images, prepare manufacturing-ready print files, and connect your store. Total time to live is about 5–7 days.",
   },
   {
-    n: "03", time: "Ongoing", title: "Orders ship automatically",
-    body: "Your store is connected and live. When a customer buys, the order routes to manufacturing and ships in 5–10 days. WRKTD monitors the system and handles any issues — you don't have to watch it.",
+    n: "04", time: "Ongoing", title: "Orders ship automatically",
+    body: "Your store is connected and live. When a customer buys, the order routes to manufacturing and ships in 5–10 days. Designed to run automatically, monitored by WRKTD.",
   },
 ];
 
@@ -24,11 +28,11 @@ export default function HowItWorksSection() {
 
         <h2 className="font-display font-extrabold leading-[0.88] mb-20"
           style={{ fontSize: "clamp(2.8rem, 6vw, 5rem)", color: "var(--fg)" }}>
-          From upload to live orders<br />
-          <span style={{ color: "var(--fg-ghost-h)" }}>in about 5–7 days.</span>
+          From design files to live products<br />
+          <span style={{ color: "var(--fg-ghost-h)" }}>in 5–7 days.</span>
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-4">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {STEPS.map((step) => (
             <div key={step.n} className="p-8 flex flex-col card" style={{ minHeight: 280 }}>
               <div className="font-display font-extrabold mb-10 select-none"

@@ -9,6 +9,9 @@ const FAQS = [
   { q: "What file formats do you accept?", a: "JPG, PNG, PSD, SVG, and AI. If your file is below target resolution for larger products, we flag it and offer an upscale attempt before anything goes to manufacturing." },
   { q: "What if an order fails or gets stuck?", a: "That's what the monthly management plan covers. WRKTD monitors the fulfillment pipeline and handles routing issues directly. If something needs your attention, we reach out — you don't have to watch it yourself." },
   { q: "Can I keep selling on other platforms?", a: "Yes. WRKTD doesn't require exclusivity. Many clients keep existing marketplace income and add a higher-margin owned catalog through WRKTD alongside it." },
+  { q: "Can I approve products before they go live?", a: "Yes. After WRKTD builds your catalog, you review and approve mockups before anything is connected to your store or submitted to manufacturing. Nothing goes live without your sign-off." },
+  { q: "Do I need inventory?", a: "No. Every product is made to order — manufactured when a customer purchases, then shipped directly to them. You never hold stock, pack boxes, or manage a warehouse." },
+  { q: "Do you create original designs?", a: "No. WRKTD takes your existing artwork and turns it into products. Your designs are the input. If you need original artwork created, that's outside what we do." },
 ];
 
 function Item({ q, a, defaultOpen = false }: { q: string; a: string; defaultOpen?: boolean }) {

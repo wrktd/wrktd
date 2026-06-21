@@ -37,7 +37,7 @@ export default function PricingSection() {
           <div className="card overflow-hidden">
             <div className="px-8 py-7" style={{ borderBottom: "1px solid var(--bd)", background: "var(--fg-ghost)" }}>
               <span className="label block mb-2" style={{ color: "var(--blue)" }}>One-time</span>
-              <h3 className="font-display font-bold" style={{ fontSize: "1.9rem", color: "var(--fg)" }}>Mockup Batch Fee</h3>
+              <h3 className="font-display font-bold" style={{ fontSize: "1.9rem", color: "var(--fg)" }}>Catalog Build Fee</h3>
               <p className="text-xs mt-2 leading-relaxed" style={{ color: "var(--fg-4)" }}>
                 We build your designs into full product mockups and print-ready files. First 1–2 items are free.
               </p>
@@ -73,7 +73,7 @@ export default function PricingSection() {
             <div className="card overflow-hidden">
               <div className="px-8 py-7" style={{ borderBottom: "1px solid var(--bd)", background: "var(--fg-ghost)" }}>
                 <span className="label block mb-2" style={{ color: "var(--blue)" }}>Monthly recurring</span>
-                <h3 className="font-display font-bold" style={{ fontSize: "1.9rem", color: "var(--fg)" }}>Hosting + Management</h3>
+                <h3 className="font-display font-bold" style={{ fontSize: "1.9rem", color: "var(--fg)" }}>Monthly Management</h3>
                 <p className="text-xs mt-2 leading-relaxed" style={{ color: "var(--fg-4)" }}>
                   Covers hosting, daily fulfillment monitoring, fulfillment connection maintenance, and WRKTD actively resolving issues.
                 </p>
@@ -100,7 +100,7 @@ export default function PricingSection() {
 
             <div className="px-8 py-7 flex flex-col gap-3 card">
               <span className="label" style={{ color: "var(--blue)" }}>Per order</span>
-              <h3 className="font-display font-bold" style={{ fontSize: "1.9rem", color: "var(--fg)" }}>Manufacturing Cost</h3>
+              <h3 className="font-display font-bold" style={{ fontSize: "1.9rem", color: "var(--fg)" }}>Product Cost</h3>
               <p className="text-xs leading-relaxed" style={{ color: "var(--fg-4)" }}>
                 A single bundled manufacturing cost per product is billed automatically when an order ships. Included in your product pricing setup during onboarding — no surprises.
               </p>
