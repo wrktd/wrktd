@@ -44,7 +44,7 @@ export default function Nav() {
               {l.label}
             </a>
           ))}
-          <a href="#preview" className="label px-6 py-3 bg-white text-black hover:bg-gold hover:text-black transition-colors">
+          <a href="#preview" className="label px-6 py-3 bg-white text-black hover:bg-white/90 hover:text-black transition-colors">
             Try it free
           </a>
         </div>
@@ -69,7 +69,7 @@ export default function Nav() {
               {l.label}
             </a>
           ))}
-          <a href="#preview" onClick={() => setOpen(false)} className="label bg-white text-black px-6 py-3 text-center hover:bg-gold transition-colors">
+          <a href="#preview" onClick={() => setOpen(false)} className="label bg-white text-black px-6 py-3 text-center hover:bg-white/90 transition-colors">
             Try it free
           </a>
         </div>

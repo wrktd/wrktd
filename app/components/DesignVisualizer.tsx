@@ -71,11 +71,11 @@ function Thumb({ p, selected, onClick }: { p: PatternDef; selected: boolean; onC
           backgroundImage: p.img,
           backgroundSize: p.size,
           backgroundPosition: p.pos ?? "0 0",
-          outline: selected ? "1.5px solid #B89A4E" : "1px solid rgba(255,255,255,0.06)",
+          outline: selected ? "1.5px solid #2E5BFF" : "1px solid rgba(255,255,255,0.06)",
           outlineOffset: selected ? "3px" : "0px",
         }}
       />
-      <span className="label transition-colors" style={{ color: selected ? "#B89A4E" : "rgba(255,255,255,0.25)" }}>
+      <span className="label transition-colors" style={{ color: selected ? "#2E5BFF" : "rgba(255,255,255,0.25)" }}>
         {p.label}
       </span>
     </button>
@@ -104,8 +104,8 @@ export default function DesignVisualizer() {
     <section className="glass relative py-28 px-6 overflow-hidden">
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex items-center gap-3 mb-5">
-          <div className="h-px w-8 bg-gold" />
-          <span className="label text-gold">Design Visualizer</span>
+          <div className="h-px w-8" style={{ background: "#2E5BFF" }} />
+          <span className="label" style={{ color: "#2E5BFF" }}>Design Visualizer</span>
         </div>
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16 gap-4">
           <h2 className="font-display font-extrabold text-white leading-[0.88] tracking-[-0.02em]"

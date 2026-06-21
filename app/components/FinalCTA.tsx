@@ -65,7 +65,7 @@ export default function FinalCTA() {
         {/* Ambient glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none" style={{
           width: "70vw", height: "50vw", maxWidth: 800, maxHeight: 600, borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(184,154,78,0.06) 0%, transparent 65%)",
+          background: "radial-gradient(circle, rgba(46,91,255,0.06) 0%, transparent 65%)",
         }} />
 
         <div className="relative text-center mb-16">
@@ -75,7 +75,7 @@ export default function FinalCTA() {
           <h2 className="font-display font-extrabold text-white leading-[0.88] mb-5"
             style={{ fontSize: "clamp(2.8rem, 6vw, 5rem)" }}>
             See what your designs<br />
-            <span className="text-gold">could become.</span>
+            <span style={{ color: "#2E5BFF" }}>could become.</span>
           </h2>
           <p className="text-base max-w-sm mx-auto" style={{ color: "rgba(255,255,255,0.25)" }}>
             No account, no card, no commitment. Drop in a design — see it on real products in seconds.
@@ -92,8 +92,8 @@ export default function FinalCTA() {
           onDrop={onDrop}
           className="relative mb-14 cursor-pointer select-none transition-all duration-300 text-center"
           style={{
-            border: `1px solid ${dragging ? "#B89A4E" : "rgba(255,255,255,0.08)"}`,
-            background: dragging ? "rgba(184,154,78,0.06)" : "rgba(255,255,255,0.02)",
+            border: `1px solid ${dragging ? "#2E5BFF" : "rgba(255,255,255,0.08)"}`,
+            background: dragging ? "rgba(46,91,255,0.06)" : "rgba(255,255,255,0.02)",
             padding: "3.5rem 2rem",
           }}>
           {(["tl","tr","bl","br"] as const).map((c) => (
@@ -101,10 +101,10 @@ export default function FinalCTA() {
               top: c.startsWith("t") ? 8 : "auto", bottom: c.startsWith("b") ? 8 : "auto",
               left: c.endsWith("l") ? 8 : "auto", right: c.endsWith("r") ? 8 : "auto",
               width: 14, height: 14,
-              borderTop:    c.startsWith("t") ? "1.5px solid rgba(184,154,78,0.5)" : "none",
-              borderBottom: c.startsWith("b") ? "1.5px solid rgba(184,154,78,0.5)" : "none",
-              borderLeft:   c.endsWith("l")   ? "1.5px solid rgba(184,154,78,0.5)" : "none",
-              borderRight:  c.endsWith("r")   ? "1.5px solid rgba(184,154,78,0.5)" : "none",
+              borderTop:    c.startsWith("t") ? "1.5px solid rgba(46,91,255,0.45)" : "none",
+              borderBottom: c.startsWith("b") ? "1.5px solid rgba(46,91,255,0.45)" : "none",
+              borderLeft:   c.endsWith("l")   ? "1.5px solid rgba(46,91,255,0.45)" : "none",
+              borderRight:  c.endsWith("r")   ? "1.5px solid rgba(46,91,255,0.45)" : "none",
             }} />
           ))}
           <input ref={fileRef} type="file" accept=".jpg,.jpeg,.png,.svg,.ai,.psd,.webp" className="hidden"
@@ -112,13 +112,13 @@ export default function FinalCTA() {
 
           {loading ? (
             <div className="flex flex-col items-center gap-4">
-              <div className="w-9 h-9 rounded-full border-2" style={{ borderColor: "rgba(184,154,78,0.2)", borderTopColor: "#B89A4E", animation: "spin 0.9s linear infinite" }} />
-              <p className="label text-gold">Placing your design on products…</p>
+              <div className="w-9 h-9 rounded-full border-2" style={{ borderColor: "rgba(46,91,255,0.2)", borderTopColor: "#2E5BFF", animation: "spin 0.9s linear infinite" }} />
+              <p className="label" style={{ color: "#2E5BFF" }}>Placing your design on products…</p>
             </div>
           ) : imageUrl ? (
             <div className="flex flex-col items-center gap-2">
-              <div className="w-9 h-9 rounded-full flex items-center justify-center" style={{ background: "rgba(184,154,78,0.12)" }}>
-                <svg className="w-4 h-4 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <div className="w-9 h-9 rounded-full flex items-center justify-center" style={{ background: "rgba(46,91,255,0.12)" }}>
+                <svg className="w-4 h-4" style={{ color: "#2E5BFF" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
               </div>
@@ -127,8 +127,8 @@ export default function FinalCTA() {
             </div>
           ) : (
             <div className="flex flex-col items-center gap-4">
-              <div className="w-14 h-14 flex items-center justify-center" style={{ background: "rgba(184,154,78,0.08)" }}>
-                <svg className="w-6 h-6 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <div className="w-14 h-14 flex items-center justify-center" style={{ background: "rgba(46,91,255,0.08)" }}>
+                <svg className="w-6 h-6" style={{ color: "#2E5BFF" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
                 </svg>
               </div>
@@ -147,12 +147,12 @@ export default function FinalCTA() {
         </div>
 
         {imageUrl && (
-          <div className="p-8 text-center" style={{ border: "1px solid rgba(184,154,78,0.18)", background: "rgba(184,154,78,0.05)" }}>
+          <div className="p-8 text-center card" style={{ border: "1px solid rgba(46,91,255,0.18)", background: "rgba(46,91,255,0.04)" }}>
             <p className="text-sm mb-1" style={{ color: "rgba(255,255,255,0.28)" }}>
               This is a quick preview. A real batch includes every angle, size variation, and a print-ready manufacturing file per product.
             </p>
             <p className="font-semibold text-white text-base mb-6">Ready to turn this into a real catalog?</p>
-            <a href="#pricing" className="label inline-block bg-gold text-black px-8 py-4 transition-colors hover:bg-gold-lt">
+            <a href="#pricing" className="btn-primary">
               See pricing and get started
             </a>
           </div>

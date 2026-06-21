@@ -15,7 +15,7 @@ const PLANS = [
 ];
 
 const borderMid = "1px solid rgba(255,255,255,0.07)";
-const borderGold = "1px solid rgba(184,154,78,0.15)";
+const borderGold = "1px solid rgba(46,91,255,0.15)";
 
 export default function PricingSection() {
   return (
@@ -37,9 +37,9 @@ export default function PricingSection() {
 
         <div className="grid lg:grid-cols-2 gap-5 mb-5">
           {/* Batch fee */}
-          <div style={{ border: borderMid, borderRadius: 16, background: "#0C0C0C", overflow: "hidden" }}>
+          <div style={{ border: borderMid, borderRadius: 16, background: "#101621", overflow: "hidden" }}>
             <div className="px-8 py-7" style={{ borderBottom: borderMid, background: "rgba(255,255,255,0.02)" }}>
-              <span className="label text-gold block mb-2">One-time</span>
+              <span className="label block mb-2" style={{ color: "#2E5BFF" }}>One-time</span>
               <h3 className="font-display font-bold text-white" style={{ fontSize: "1.9rem" }}>Mockup Batch Fee</h3>
               <p className="text-xs mt-2 leading-relaxed" style={{ color: "rgba(255,255,255,0.28)" }}>
                 We build your designs into full product mockups and print-ready files. First 1–2 items are free.
@@ -57,13 +57,13 @@ export default function PricingSection() {
                   <tr key={row.vol} style={{ borderBottom: i < BATCH.length - 1 ? borderMid : "none" }}>
                     <td className="px-8 py-3 text-xs" style={{ color: "rgba(255,255,255,0.5)" }}>{row.vol}</td>
                     <td className="px-8 py-3 text-right text-xs font-semibold"
-                      style={{ color: row.free ? "#4CAF50" : "rgba(255,255,255,0.7)" }}>{row.fee}</td>
+                      style={{ color: row.free ? "#2CCF74" : "rgba(245,247,250,0.7)" }}>{row.fee}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
-            <div className="px-8 py-4 flex items-start gap-3" style={{ borderTop: borderGold, background: "rgba(184,154,78,0.04)" }}>
-              <span className="text-gold mt-0.5 flex-shrink-0">+</span>
+            <div className="px-8 py-4 flex items-start gap-3" style={{ borderTop: "1px solid rgba(46,91,255,0.12)", background: "rgba(46,91,255,0.03)" }}>
+              <span style={{ color: "#2E5BFF" }} className="mt-0.5 flex-shrink-0">+</span>
               <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.28)" }}>
                 $30 per custom template if you need a presentation style not in our existing blank library. Batch fee applies on top.
               </p>
@@ -72,9 +72,9 @@ export default function PricingSection() {
 
           {/* Monthly + Manufacturing */}
           <div className="flex flex-col gap-5">
-            <div style={{ border: borderMid, borderRadius: 16, background: "#0C0C0C", overflow: "hidden" }}>
+            <div style={{ border: borderMid, borderRadius: 16, background: "#101621", overflow: "hidden" }}>
               <div className="px-8 py-7" style={{ borderBottom: borderMid, background: "rgba(255,255,255,0.02)" }}>
-                <span className="label text-gold block mb-2">Monthly recurring</span>
+                <span className="label block mb-2" style={{ color: "#2E5BFF" }}>Monthly recurring</span>
                 <h3 className="font-display font-bold text-white" style={{ fontSize: "1.9rem" }}>Hosting + Management</h3>
                 <p className="text-xs mt-2 leading-relaxed" style={{ color: "rgba(255,255,255,0.28)" }}>
                   Covers hosting, daily fulfillment monitoring, fulfillment connection maintenance, and WRKTD actively resolving issues.
@@ -101,8 +101,8 @@ export default function PricingSection() {
             </div>
 
             <div className="px-8 py-7 flex flex-col gap-3"
-              style={{ border: borderMid, background: "#0C0C0C", borderRadius: 16 }}>
-              <span className="label text-gold">Per order</span>
+              style={{ border: borderMid, background: "#101621", borderRadius: 16 }}>
+              <span className="label" style={{ color: "#2E5BFF" }}>Per order</span>
               <h3 className="font-display font-bold text-white" style={{ fontSize: "1.9rem" }}>Manufacturing Cost</h3>
               <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.28)" }}>
                 A single bundled manufacturing cost per product is billed automatically when an order ships. Included in your product pricing setup during onboarding — no surprises.
@@ -111,8 +111,8 @@ export default function PricingSection() {
           </div>
         </div>
 
-        <div className="px-8 py-6 flex items-start gap-4" style={{ border: borderMid, background: "#0C0C0C", borderRadius: 14 }}>
-          <div className="w-1.5 h-1.5 rounded-full bg-gold mt-1.5 flex-shrink-0" />
+        <div className="px-8 py-6 flex items-start gap-4" style={{ border: borderMid, background: "#101621", borderRadius: 14 }}>
+          <div className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style={{ background: "#2E5BFF" }} />
           <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.28)" }}>
             <span className="font-semibold text-white">Payment on file required.</span>{" "}
             To keep your orders shipping automatically, you'll keep a valid card on file or maintain a prepaid balance. If a payment issue comes up, we flag it and reach out before anything is delayed.

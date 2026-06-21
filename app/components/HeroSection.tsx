@@ -111,7 +111,7 @@ export default function HeroSection() {
             </h1>
 
             <p className="text-base md:text-lg font-light leading-relaxed mb-10"
-              style={{ color: "rgba(255,255,255,0.60)", maxWidth: "26rem" }}>
+              style={{ color: "#C3CDD8", maxWidth: "26rem" }}>
               Drop one design. See it on rugs, pillows, canvas, metal, and wall tapestries — free, no signup. If it looks good, WRKTD turns it into products your audience can actually buy.
             </p>
 
@@ -125,8 +125,8 @@ export default function HeroSection() {
               onDrop={onDrop}
               className="relative cursor-pointer select-none transition-all duration-300 text-center"
               style={{
-                border: `1px solid ${dragging ? "#B89A4E" : "rgba(255,255,255,0.09)"}`,
-                background: dragging ? "rgba(184,154,78,0.06)" : "rgba(255,255,255,0.02)",
+                border: `1px solid ${dragging ? "#2E5BFF" : "rgba(255,255,255,0.09)"}`,
+                background: dragging ? "rgba(46,91,255,0.06)" : "rgba(255,255,255,0.02)",
                 padding: "2.5rem 1.5rem",
               }}
             >
@@ -135,10 +135,10 @@ export default function HeroSection() {
                   top: c.startsWith("t") ? 7 : "auto", bottom: c.startsWith("b") ? 7 : "auto",
                   left: c.endsWith("l") ? 7 : "auto",  right: c.endsWith("r") ? 7 : "auto",
                   width: 12, height: 12,
-                  borderTop:    c.startsWith("t") ? "1.5px solid rgba(184,154,78,0.5)" : "none",
-                  borderBottom: c.startsWith("b") ? "1.5px solid rgba(184,154,78,0.5)" : "none",
-                  borderLeft:   c.endsWith("l")   ? "1.5px solid rgba(184,154,78,0.5)" : "none",
-                  borderRight:  c.endsWith("r")   ? "1.5px solid rgba(184,154,78,0.5)" : "none",
+                  borderTop:    c.startsWith("t") ? "1.5px solid rgba(46,91,255,0.5)" : "none",
+                  borderBottom: c.startsWith("b") ? "1.5px solid rgba(46,91,255,0.5)" : "none",
+                  borderLeft:   c.endsWith("l")   ? "1.5px solid rgba(46,91,255,0.5)" : "none",
+                  borderRight:  c.endsWith("r")   ? "1.5px solid rgba(46,91,255,0.5)" : "none",
                 }} />
               ))}
               <input ref={fileRef} type="file" accept=".jpg,.jpeg,.png,.svg,.ai,.psd,.webp"
@@ -147,13 +147,13 @@ export default function HeroSection() {
 
               {loading ? (
                 <div className="flex flex-col items-center gap-3">
-                  <div className="w-8 h-8 rounded-full border-2" style={{ borderColor: "rgba(184,154,78,0.2)", borderTopColor: "#B89A4E", animation: "spin 0.9s linear infinite" }} />
-                  <p className="label text-gold">Placing your design on products…</p>
+                  <div className="w-8 h-8 rounded-full border-2" style={{ borderColor: "rgba(46,91,255,0.2)", borderTopColor: "#2E5BFF", animation: "spin 0.9s linear infinite" }} />
+                  <p className="label" style={{ color: "#2E5BFF" }}>Placing your design on products…</p>
                 </div>
               ) : imageUrl ? (
                 <div className="flex flex-col items-center gap-2">
-                  <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: "rgba(184,154,78,0.12)" }}>
-                    <svg className="w-4 h-4 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: "rgba(46,91,255,0.12)" }}>
+                    <svg className="w-4 h-4" style={{ color: "#2E5BFF" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
@@ -162,8 +162,8 @@ export default function HeroSection() {
                 </div>
               ) : (
                 <div className="flex flex-col items-center gap-3">
-                  <div className="w-12 h-12 flex items-center justify-center" style={{ background: "rgba(184,154,78,0.08)" }}>
-                    <svg className="w-5 h-5 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <div className="w-12 h-12 flex items-center justify-center" style={{ background: "rgba(46,91,255,0.08)" }}>
+                    <svg className="w-5 h-5" style={{ color: "#2E5BFF" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
                     </svg>
                   </div>
@@ -178,12 +178,12 @@ export default function HeroSection() {
             <p className="text-xs mt-4" style={{ color: "rgba(255,255,255,0.35)" }}>No account. No payment. No commitment.</p>
 
             {imageUrl && (
-              <div className="mt-8 p-6" style={{ border: "1px solid rgba(184,154,78,0.2)", background: "rgba(184,154,78,0.05)" }}>
+              <div className="mt-8 p-6" className="card" style={{ border: "1px solid rgba(46,91,255,0.18)", background: "rgba(46,91,255,0.04)" }}>
                 <p className="text-sm mb-1" style={{ color: "rgba(255,255,255,0.50)" }}>
                   A real batch includes every angle, size variation, and a print-ready file per product.
                 </p>
                 <p className="font-semibold text-white text-sm mb-5">Ready to turn this into a real catalog?</p>
-                <a href="#pricing" className="label inline-block bg-gold text-black px-7 py-3.5 hover:bg-gold-lt transition-colors">
+                <a href="#pricing" className="btn-primary">
                   Make this real →
                 </a>
               </div>
@@ -209,7 +209,7 @@ export default function HeroSection() {
               <p className="text-xs" style={{ color: "rgba(255,255,255,0.22)" }}>
                 7 products · 7 sizes · 7 listing images
               </p>
-              <p className="font-display font-bold text-gold" style={{ fontSize: "0.95rem" }}>
+              <p className="font-display font-bold" style={{ fontSize: "0.95rem", color: "#2E5BFF" }}>
                 343 files
               </p>
             </div>
