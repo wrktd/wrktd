@@ -30,8 +30,7 @@ export default function TestimonialsSection() {
             </div>
 
             <div style={{ borderLeft: "2px solid #2E5BFF", paddingLeft: "1.5rem" }}>
-              <p className="font-display font-bold leading-none" style={{ color: "#2E5BFF" }}
-                style={{ fontSize: "clamp(3rem, 7vw, 5.5rem)" }}>$25K</p>
+              <p className="font-display font-bold leading-none" style={{ color: "#2E5BFF", fontSize: "clamp(3rem, 7vw, 5.5rem)" }}>$25K</p>
               <p className="label mt-2" style={{ color: "rgba(46,91,255,0.4)" }}>avg. first-month revenue · rugs only</p>
             </div>
 

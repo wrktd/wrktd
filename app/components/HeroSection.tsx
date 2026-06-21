@@ -178,7 +178,7 @@ export default function HeroSection() {
             <p className="text-xs mt-4" style={{ color: "rgba(255,255,255,0.35)" }}>No account. No payment. No commitment.</p>
 
             {imageUrl && (
-              <div className="mt-8 p-6" className="card" style={{ border: "1px solid rgba(46,91,255,0.18)", background: "rgba(46,91,255,0.04)" }}>
+              <div className="mt-8 p-6 card" style={{ border: "1px solid rgba(46,91,255,0.18)", background: "rgba(46,91,255,0.04)" }}>
                 <p className="text-sm mb-1" style={{ color: "rgba(255,255,255,0.50)" }}>
                   A real batch includes every angle, size variation, and a print-ready file per product.
                 </p>
